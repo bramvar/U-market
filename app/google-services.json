@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "744495512698",
+    "project_id": "u-market-58349",
+    "storage_bucket": "u-market-58349.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744495512698:android:8c8d4b91a40a9896ba8fc3",
+        "android_client_info": {
+          "package_name": "com.icesi.umarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744495512698-pvmprc634638jeihinp3nqm8tiqtks8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFoECsC7EgAMEwV9VuhzWgValjW5k5DyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744495512698-pvmprc634638jeihinp3nqm8tiqtks8m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

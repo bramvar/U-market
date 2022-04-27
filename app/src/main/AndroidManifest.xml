@@ -10,6 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Umarket">
         <activity
+            android:name=".ConsumerHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SellerHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdditionalSellerInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdditionalConsumerInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SellerSignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConsumerSignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

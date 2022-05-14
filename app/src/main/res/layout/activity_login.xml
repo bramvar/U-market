@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/brand_logov2" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/logInUserNameTextField"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:layout_marginTop="48dp"
@@ -42,17 +42,17 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/logInPasswdTextField"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Constraseña"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/logInUserNameTextField"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="@+id/logInUserNameTextField"
+        app:layout_constraintTop_toBottomOf="@+id/logInUserNameTextField" />
 
     <TextView
         android:id="@+id/textView3"
@@ -64,12 +64,12 @@
         android:textColor="#FFFFFF"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/signUpHyperLink"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/loginBtn" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/signUpHyperLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrate"

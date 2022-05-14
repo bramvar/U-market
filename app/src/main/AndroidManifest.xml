@@ -28,7 +28,7 @@
             android:name=".ConsumerSignupActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".SellerLoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -4,8 +4,7 @@
     <stroke
         android:width="1sp"
         android:color="@color/white"/>
-    //////Need to create a color
-        <solid android:color="#66FFFFFF"/>
+        <solid android:color="@color/pale_white"/>
 
     <padding
         android:left="10dp"
@@ -13,5 +12,5 @@
         android:bottom="10dp"
         android:top="10dp"/>
 
-    <corners android:radius="10dp"/>
+    <corners android:radius="12dp"/>
 </shape>

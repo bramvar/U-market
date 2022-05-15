@@ -8,12 +8,12 @@
     tools:context=".AdditionalSellerInfoActivity">
 
     <Button
-        android:id="@+id/sellerInfoContinueBtn"
+        android:id="@+id/sellerSignupBtn"
         android:layout_width="247dp"
         android:layout_height="57dp"
         android:layout_marginBottom="92dp"
         android:backgroundTint="#FAB057"
-        android:text="Continuar"
+        android:text="Registrarme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.518"

@@ -7,11 +7,29 @@
     android:background="#5A51CE"
     tools:context=".SellerSignupActivity">
 
+    <Button
+        android:id="@+id/sellerSignupGoBackBtn"
+        android:layout_width="40dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#FAB057"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:isScrollContainer="false"
+        app:cornerRadius="24dp"
+        app:icon="@drawable/back_arrow_icon"
+        app:iconGravity="top"
+        app:iconPadding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,12 +40,12 @@
         android:id="@+id/signUpSellerMarketNameTextField"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Nombre del emprendimiento"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -35,13 +53,12 @@
         android:id="@+id/signUpSellerBtn"
         android:layout_width="247dp"
         android:layout_height="57dp"
-        android:layout_marginBottom="124dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#FAB057"
         android:text="Registrarme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerRepPasswdTextField" />
 
     <TextView
         android:id="@+id/sellerLogInHyperLink"
@@ -58,13 +75,12 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
+        android:layout_marginTop="20dp"
         android:text="¿Ya tienes cuenta?"
         android:textColor="#FFFFFF"
         android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sellerLogInHyperLink"
-        app:layout_constraintHorizontal_bias="0.987"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpSellerBtn" />
 
@@ -85,7 +101,7 @@
         android:id="@+id/signUpSellerRepPasswdTextField"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Repetir contraseña"
         android:inputType="textPersonName"
@@ -111,7 +127,7 @@
         android:id="@+id/signUpSellerEmailTextField"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Correo"
         android:inputType="textPersonName"

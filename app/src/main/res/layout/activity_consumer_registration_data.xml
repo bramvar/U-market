@@ -53,7 +53,7 @@
                 android:background="@drawable/shaping_plain_text"
                 android:ems="10"
                 android:hint="Confirmar Contraseña"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textPassword"
                 android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
@@ -80,7 +80,7 @@
                 android:background="@drawable/shaping_plain_text"
                 android:ems="10"
                 android:hint="Contraseña"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textPassword"
                 android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.507"
@@ -109,12 +109,33 @@
                 android:background="@drawable/shaping_plain_text"
                 android:ems="10"
                 android:hint="Correo"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textEmailSubject"
                 android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/consumerNameText" />
+
+            <TextView
+                android:id="@+id/passwordMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="No coincide con la contraseña"
+                android:textColor="@color/orange_main"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/consumerRepasswordText"
+                app:layout_constraintTop_toBottomOf="@+id/consumerRepasswordText" />
+
+            <TextView
+                android:id="@+id/emailMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escribe un correo valido"
+                android:textColor="@color/orange_main"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/consumerEmailText"
+                app:layout_constraintTop_toBottomOf="@+id/consumerEmailText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

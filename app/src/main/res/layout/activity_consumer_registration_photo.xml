@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button3" />
+        app:layout_constraintTop_toTopOf="@+id/ConsumerBackPhotoButtom" />
 
     <TextView
         android:id="@+id/textView3"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/ConsumerPhoneText"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/consumerFinishRegistButtom"
         android:layout_width="250dp"
         android:layout_height="43dp"
         android:background="@drawable/style_bottom"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/ConsumerPhoneText"
         app:layout_constraintVertical_bias="0.506" />
 
     <androidx.cardview.widget.CardView
@@ -74,15 +74,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" >
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/consumerProfileImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/profile_icon" />
 
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/ConsumerBackPhotoButtom"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -96,10 +96,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="@+id/ConsumerBackPhotoButtom"
+        app:layout_constraintEnd_toEndOf="@+id/ConsumerBackPhotoButtom"
+        app:layout_constraintStart_toStartOf="@+id/ConsumerBackPhotoButtom"
+        app:layout_constraintTop_toTopOf="@+id/ConsumerBackPhotoButtom"
         app:srcCompat="@drawable/back_arrow_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

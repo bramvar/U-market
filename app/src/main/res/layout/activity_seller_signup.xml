@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5A51CE"
+    tools:context=".SellerSignupActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/brand_logov2" />
+
+    <EditText
+        android:id="@+id/signUpSellerMarketNameTextField"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Nombre del emprendimiento"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <Button
+        android:id="@+id/signUpSellerBtn"
+        android:layout_width="247dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="124dp"
+        android:backgroundTint="#FAB057"
+        android:text="Registrarme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/logInHyperLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="76dp"
+        android:text="Inicia sesión"
+        android:textColor="#FAB057"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:text="¿Ya tienes cuenta?"
+        android:textColor="#FFFFFF"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logInHyperLink"
+        app:layout_constraintHorizontal_bias="0.987"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerBtn" />
+
+    <EditText
+        android:id="@+id/signUpSellerPasswdTextField"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerEmailTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerEmailTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerEmailTextField" />
+
+    <EditText
+        android:id="@+id/signUpSellerRepPasswdTextField"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Repetir contraseña"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerPasswdTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerPasswdTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerPasswdTextField" />
+
+    <EditText
+        android:id="@+id/signUpSellerNameTextFiedl"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Nombre del  propietario"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerMarketNameTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerMarketNameTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerMarketNameTextField" />
+
+    <EditText
+        android:id="@+id/signUpSellerEmailTextField"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Correo"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerNameTextFiedl"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerNameTextFiedl"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerNameTextFiedl" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

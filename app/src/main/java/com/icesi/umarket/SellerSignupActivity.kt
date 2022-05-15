@@ -50,7 +50,7 @@ class SellerSignupActivity : AppCompatActivity() {
 
                         startActivity(i)
                     }.addOnFailureListener {
-
+                        Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()
                     }
             }else{
                 Toast.makeText(this.baseContext,"Las contraseñas no coinciden", Toast.LENGTH_LONG).show()

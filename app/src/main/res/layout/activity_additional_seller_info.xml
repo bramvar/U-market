@@ -71,22 +71,4 @@
         app:layout_constraintStart_toStartOf="@+id/sellerInfoPhoneTextField"
         app:layout_constraintTop_toBottomOf="@+id/sellerInfoPhoneTextField" />
 
-    <Button
-        android:id="@+id/sellerInfoGoBackBtn"
-        android:layout_width="40dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="#FAB057"
-        android:foregroundGravity="center"
-        android:gravity="center"
-        android:isScrollContainer="false"
-        app:cornerRadius="24dp"
-        app:icon="@drawable/back_arrow_icon"
-        app:iconGravity="top"
-        app:iconPadding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

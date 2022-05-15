@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/valen/AndroidStudioProjects/U-market/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/Users/valen/AndroidStudioProjects/U-market/app/src/main/res/layout/activity_consumer_registration_data.xml" value="0.21" />
-        <entry key="..\:/Users/valen/AndroidStudioProjects/U-market/app/src/main/res/layout/activity_consumer_registration_photo.xml" value="0.5" />
-        <entry key="..\:/Users/valen/AndroidStudioProjects/U-market/app/src/main/res/layout/activity_main.xml" value="0.15443840579710144" />
+        <entry key="..\:/Users/Valentina/AndroidStudioProjects/U-market/app/src/main/res/drawable/shape_circle.xml" value="0.1" />
+        <entry key="..\:/Users/Valentina/AndroidStudioProjects/U-market/app/src/main/res/drawable/shaping_plain_text.xml" value="0.1" />
+        <entry key="..\:/Users/Valentina/AndroidStudioProjects/U-market/app/src/main/res/drawable/style_bottom.xml" value="0.1" />
+        <entry key="..\:/Users/Valentina/AndroidStudioProjects/U-market/app/src/main/res/layout/activity_consumer_registration_data.xml" value="0.22" />
+        <entry key="..\:/Users/Valentina/AndroidStudioProjects/U-market/app/src/main/res/layout/activity_consumer_registration_photo.xml" value="0.2" />
+        <entry key="..\:/Users/Valentina/AndroidStudioProjects/U-market/app/src/main/res/layout/shaping_plain_text.xml" value="0.17074275362318841" />
       </map>
     </option>
   </component>

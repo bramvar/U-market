@@ -21,7 +21,12 @@ class SellerLoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signUpHyperLink.setOnClickListener {
-            startActivity(Intent(this,SellerSignupActivity::class.java))
+            var userType = intent.extras?.getString("userType","")
+            if(userType=="consumer"){
+                startActivity(Intent(this,ConsumerRegistrationActivityData::class.java))
+            }else{
+                startActivity(Intent(this,SellerSignupActivity::class.java))
+            }
         }
         binding.sellerLoginGoBackBtn.setOnClickListener {
             finish()

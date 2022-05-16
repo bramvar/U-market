@@ -10,14 +10,14 @@
     <Button
         android:id="@+id/sellerSignupGoBackBtn"
         android:layout_width="40dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_circle"
         android:backgroundTint="#FAB057"
         android:foregroundGravity="center"
         android:gravity="center"
         android:isScrollContainer="false"
         app:cornerRadius="24dp"
-        app:icon="@drawable/back_arrow_icon"
         app:iconGravity="top"
         app:iconPadding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,72 +39,30 @@
     <EditText
         android:id="@+id/signUpSellerMarketNameTextField"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Nombre del emprendimiento"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <Button
-        android:id="@+id/nextSellerBtn"
-        android:layout_width="247dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#FAB057"
-        android:text="Siguiente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpSellerRepPasswdTextField" />
-
-    <TextView
-        android:id="@+id/sellerLogInHyperLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
-        android:text="Inicia sesión"
-        android:textColor="#FAB057"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="¿Ya tienes cuenta?"
-        android:textColor="#FFFFFF"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toStartOf="@+id/sellerLogInHyperLink"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nextSellerBtn" />
-
-    <EditText
-        android:id="@+id/signUpSellerPasswdTextField"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/signUpSellerEmailTextField"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/signUpSellerEmailTextField"
-        app:layout_constraintTop_toBottomOf="@+id/signUpSellerEmailTextField" />
-
     <EditText
         android:id="@+id/signUpSellerRepPasswdTextField"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Repetir contraseña"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/signUpSellerPasswdTextField"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/signUpSellerPasswdTextField"
@@ -113,11 +71,14 @@
     <EditText
         android:id="@+id/signUpSellerNameTextField"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Nombre del  propietario"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/signUpSellerMarketNameTextField"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/signUpSellerMarketNameTextField"
@@ -126,14 +87,82 @@
     <EditText
         android:id="@+id/signUpSellerEmailTextField"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Correo"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/signUpSellerNameTextField"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/signUpSellerNameTextField"
         app:layout_constraintTop_toBottomOf="@+id/signUpSellerNameTextField" />
+
+    <EditText
+        android:id="@+id/signUpSellerPasswdTextField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerEmailTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerEmailTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerEmailTextField" />
+
+    <Button
+        android:id="@+id/nextSellerBtn"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/style_bottom"
+        android:backgroundTint="#FAB057"
+        android:text="Siguiente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerRepPasswdTextField" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/manrope_semibold"
+        android:text="¿Ya tienes cuenta?"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/nextSellerBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nextSellerBtn" />
+
+    <TextView
+        android:id="@+id/sellerLogInHyperLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="18dp"
+        android:fontFamily="@font/manrope_semibold"
+        android:text="Inicia sesión"
+        android:textColor="#FAB057"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/nextSellerBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nextSellerBtn" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sellerSignupGoBackBtn"
+        app:layout_constraintEnd_toEndOf="@+id/sellerSignupGoBackBtn"
+        app:layout_constraintStart_toStartOf="@+id/sellerSignupGoBackBtn"
+        app:layout_constraintTop_toTopOf="@+id/sellerSignupGoBackBtn"
+        app:srcCompat="@drawable/back_arrow_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

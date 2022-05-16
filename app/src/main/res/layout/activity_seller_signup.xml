@@ -1,180 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5A51CE"
-    tools:context=".ConsumerSignupActivity">
+    tools:context=".SellerSignupActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/sellerSignupGoBackBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_circle"
+        android:backgroundTint="#FAB057"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:isScrollContainer="false"
+        app:cornerRadius="24dp"
+        app:iconGravity="top"
+        app:iconPadding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:srcCompat="@drawable/brand_logov2" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/signUpSellerMarketNameTextField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Nombre del emprendimiento"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/button"
-                app:srcCompat="@drawable/brand_logov2" />
+    <EditText
+        android:id="@+id/signUpSellerRepPasswdTextField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Repetir contraseña"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerPasswdTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerPasswdTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerPasswdTextField" />
 
-            <EditText
-                android:id="@+id/consumerNameText"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
-                android:background="@drawable/shaping_plain_text"
-                android:ems="10"
-                android:fontFamily="@font/manrope_semibold"
-                android:hint="Nombre de Usuario"
-                android:inputType="textPersonName"
-                android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    <EditText
+        android:id="@+id/signUpSellerNameTextField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Nombre del  propietario"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerMarketNameTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerMarketNameTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerMarketNameTextField" />
 
-            <EditText
-                android:id="@+id/consumerRepasswordText"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shaping_plain_text"
-                android:ems="10"
-                android:fontFamily="@font/manrope_semibold"
-                android:hint="Confirmar Contraseña"
-                android:inputType="textPersonName|textPassword"
-                android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/consumerPasswordText" />
+    <EditText
+        android:id="@+id/signUpSellerEmailTextField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Correo"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerNameTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerNameTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerNameTextField" />
 
-            <Button
-                android:id="@+id/consumerRegistButtom"
-                android:layout_width="250dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/style_bottom"
-                android:backgroundTint="@color/orange_main"
-                android:fontFamily="@font/manrope_semibold"
-                android:text="Registrarme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.503"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/consumerRepasswordText" />
+    <EditText
+        android:id="@+id/signUpSellerPasswdTextField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerEmailTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerEmailTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerEmailTextField" />
 
-            <EditText
-                android:id="@+id/consumerPasswordText"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/shaping_plain_text"
-                android:ems="10"
-                android:fontFamily="@font/manrope_semibold"
-                android:hint="Contraseña"
-                android:inputType="textPersonName|textPassword"
-                android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.507"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailMsg" />
+    <Button
+        android:id="@+id/nextSellerBtn"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/style_bottom"
+        android:backgroundTint="#FAB057"
+        android:text="Siguiente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerRepPasswdTextField" />
 
-            <TextView
-                android:id="@+id/consumerCreateAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="28dp"
-                android:fontFamily="@font/manrope_semibold"
-                android:text="Inicia Sesión "
-                android:textColor="@color/orange_main"
-                app:layout_constraintEnd_toEndOf="@+id/consumerRegistButtom"
-                app:layout_constraintTop_toBottomOf="@+id/consumerRegistButtom" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/manrope_semibold"
+        android:text="¿Ya tienes cuenta?"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/nextSellerBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nextSellerBtn" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/manrope_semibold"
-                android:text="¿Ya tienes cuenta?"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/consumerRegistButtom"
-                app:layout_constraintTop_toBottomOf="@+id/consumerRegistButtom" />
+    <TextView
+        android:id="@+id/sellerLogInHyperLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="18dp"
+        android:fontFamily="@font/manrope_semibold"
+        android:text="Inicia sesión"
+        android:textColor="#FAB057"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/nextSellerBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nextSellerBtn" />
 
-            <EditText
-                android:id="@+id/consumerEmailText"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shaping_plain_text"
-                android:ems="10"
-                android:fontFamily="@font/manrope_semibold"
-                android:hint="Correo"
-                android:inputType="textPersonName|textEmailSubject"
-                android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/consumerNameText" />
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sellerSignupGoBackBtn"
+        app:layout_constraintEnd_toEndOf="@+id/sellerSignupGoBackBtn"
+        app:layout_constraintStart_toStartOf="@+id/sellerSignupGoBackBtn"
+        app:layout_constraintTop_toTopOf="@+id/sellerSignupGoBackBtn"
+        app:srcCompat="@drawable/back_arrow_icon" />
 
-            <TextView
-                android:id="@+id/passwordMsg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="No coincide con la contraseña"
-                android:textColor="@color/orange_main"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/consumerRepasswordText"
-                app:layout_constraintTop_toBottomOf="@+id/consumerRepasswordText" />
-
-            <TextView
-                android:id="@+id/emailMsg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Escribe un correo valido"
-                android:textColor="@color/orange_main"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/consumerEmailText"
-                app:layout_constraintTop_toBottomOf="@+id/consumerEmailText" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/shape_circle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="100dp"
-                app:layout_constraintBottom_toBottomOf="@+id/button"
-                app:layout_constraintEnd_toEndOf="@+id/button"
-                app:layout_constraintStart_toStartOf="@+id/button"
-                app:layout_constraintTop_toTopOf="@+id/button"
-                app:layout_constraintVertical_bias="0.529"
-                app:srcCompat="@drawable/back_arrow_icon" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

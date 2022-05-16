@@ -10,15 +10,15 @@ import androidx.core.view.isVisible
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
-import com.icesi.umarket.databinding.ActivityConsumerRegistrationDataBinding
+import com.icesi.umarket.databinding.ActivityConsumerSignupBinding
 import com.icesi.umarket.model.User
 
 class ConsumerSignupActivity : AppCompatActivity() {
-    private lateinit var  binding: ActivityConsumerRegistrationDataBinding
+    private lateinit var  binding: ActivityConsumerSignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityConsumerRegistrationDataBinding.inflate(layoutInflater)
+        binding = ActivityConsumerSignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onResult)

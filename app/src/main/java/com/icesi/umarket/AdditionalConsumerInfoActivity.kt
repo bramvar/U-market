@@ -10,18 +10,18 @@ import androidx.core.view.isVisible
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
-import com.icesi.umarket.databinding.ActivityConsumerRegistrationPhotoBinding
+import com.icesi.umarket.databinding.ActivityAdditionalConsumerInfoBinding
 import com.icesi.umarket.model.User
 import com.icesi.umarket.util.UtilDomi
 
 class AdditionalConsumerInfoActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityConsumerRegistrationPhotoBinding
+    private lateinit var binding: ActivityAdditionalConsumerInfoBinding
     private var changeImage: Boolean = false
     private lateinit var userObj: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityConsumerRegistrationPhotoBinding.inflate(layoutInflater)
+        binding = ActivityAdditionalConsumerInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val launcher =
@@ -49,6 +49,7 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
             i.type = "image/*"
             galLauncher.launch(i)
         }
+
 
         binding.ConsumerPhoneText.setOnClickListener {
             changeToNormalText(binding.ConsumerPhoneText)

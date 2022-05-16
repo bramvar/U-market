@@ -40,6 +40,10 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
                 Toast.makeText(this.baseContext,"Faltan campos por diligenciar", Toast.LENGTH_LONG).show()
             }
         }
+
+        binding.sellerAdditionalInfoBackBtn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun verifyBlankAdditionalInfoFields(

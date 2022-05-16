@@ -8,12 +8,17 @@ import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityConsumerRegistrationPhotoBinding
+import com.icesi.umarket.model.User
 import com.icesi.umarket.util.UtilDomi
 
 class ConsumerRegistrationActivityPhoto : AppCompatActivity() {
     private lateinit var binding: ActivityConsumerRegistrationPhotoBinding
     private var changeImage: Boolean = false
+    private lateinit var userObj: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +30,7 @@ class ConsumerRegistrationActivityPhoto : AppCompatActivity() {
 
         binding.consumerFinishRegistButtom.setOnClickListener {
             if (validateData()) {
+                sendDataToDB()
                 val intent = Intent(this, ConsumerHomeActivity::class.java)
                 launcher.launch(intent)
             }
@@ -51,12 +57,26 @@ class ConsumerRegistrationActivityPhoto : AppCompatActivity() {
         }
     }
 
+    private fun sendDataToDB() {
+        Firebase.firestore.collection("users")
+            .document(userObj.id)
+            .set(userObj)
+    }
+
     private fun validateData(): Boolean {
         var isCorrect: Boolean = true;
-        if (binding.ConsumerPhoneText.text.toString() == "" || binding.ConsumerPhoneText.text.toString().length < 10) {
+        var phone = binding.ConsumerPhoneText.text.toString()
+        if ( phone == "" || phone.length < 10) {
             changeToErrorText(binding.ConsumerPhoneText)
             binding.phoneMsg.isVisible = true
             isCorrect = false
+        }else{
+            var gson = Gson()
+            /*
+            Create method to save img in the Storage
+             */
+            userObj = gson.fromJson<User>(intent.extras?.getString("userObj","").toString(),User::class.java)
+            userObj.phone = phone
         }
 
         return isCorrect

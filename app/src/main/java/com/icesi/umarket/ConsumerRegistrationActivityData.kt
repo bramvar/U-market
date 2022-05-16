@@ -8,7 +8,10 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityConsumerRegistrationDataBinding
+import com.icesi.umarket.model.User
+import java.util.*
 
 class ConsumerRegistrationActivityData : AppCompatActivity() {
     private lateinit var  binding: ActivityConsumerRegistrationDataBinding
@@ -21,16 +24,16 @@ class ConsumerRegistrationActivityData : AppCompatActivity() {
         val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onResult)
         binding.consumerRegistButtom.setOnClickListener {
             if(validateData()){
+                var gson = Gson()
                 /*
                 Create the user class and use it to send the data
                  */
                 var name: String = binding.consumerNameText.text.toString()
                 var email: String = binding.consumerEmailText.text.toString()
                 var password: String= binding.consumerPasswordText.text.toString()
+
                 val intent = Intent(this, ConsumerRegistrationActivityPhoto::class.java).apply{
-                    putExtra("name", name)
-                    putExtra("email",email)
-                    putExtra("password", password)
+                    putExtra("userObj", gson.toJson(User(UUID.randomUUID().toString(), name, email, password,"","","consumer")))
                 }
                 launcher.launch(intent)
             }

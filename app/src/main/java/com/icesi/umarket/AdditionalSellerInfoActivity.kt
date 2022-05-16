@@ -33,6 +33,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
             if(verifyBlankAdditionalInfoFields(sellerPhone,marketDescription)){
                 val seller = Seller(id!!,marketName!!,sellerName!!,email!!,password!!,sellerPhone,marketDescription,"Seller")
                 Firebase.firestore.collection("users").document(id).set(seller).addOnSuccessListener {
+                    Toast.makeText(this.baseContext,"Usuario registrado. Inicie sesión", Toast.LENGTH_LONG).show()
                     startActivity(i)
                 }
             }else {

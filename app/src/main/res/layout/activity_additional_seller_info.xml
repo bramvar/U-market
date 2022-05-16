@@ -8,12 +8,12 @@
     tools:context=".AdditionalSellerInfoActivity">
 
     <Button
-        android:id="@+id/sellerInfoContinueBtn"
+        android:id="@+id/sellerSignupBtn"
         android:layout_width="247dp"
         android:layout_height="57dp"
         android:layout_marginBottom="92dp"
         android:backgroundTint="#FAB057"
-        android:text="Continuar"
+        android:text="Registrarme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.518"
@@ -70,23 +70,5 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/sellerInfoPhoneTextField"
         app:layout_constraintTop_toBottomOf="@+id/sellerInfoPhoneTextField" />
-
-    <Button
-        android:id="@+id/sellerInfoGoBackBtn"
-        android:layout_width="40dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="#FAB057"
-        android:foregroundGravity="center"
-        android:gravity="center"
-        android:isScrollContainer="false"
-        app:cornerRadius="24dp"
-        app:icon="@drawable/back_arrow_icon"
-        app:iconGravity="top"
-        app:iconPadding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

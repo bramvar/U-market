@@ -66,11 +66,13 @@
                 android:id="@+id/consumerRegistButtom"
                 android:layout_width="250dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/style_bottom"
                 android:backgroundTint="@color/orange_main"
                 android:fontFamily="@font/manrope_semibold"
                 android:text="Registrarme"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/consumerRepasswordText" />
 
@@ -94,15 +96,23 @@
                 android:id="@+id/consumerCreateAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="28dp"
                 android:fontFamily="@font/manrope_semibold"
-                android:text="¿No tienes cuenta?"
+                android:text="Inicia Sesión "
+                android:textColor="@color/orange_main"
+                app:layout_constraintEnd_toEndOf="@+id/consumerRegistButtom"
+                app:layout_constraintTop_toBottomOf="@+id/consumerRegistButtom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/manrope_semibold"
+                android:text="¿Ya tienes cuenta?"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/consumerRegistButtom"
                 app:layout_constraintTop_toBottomOf="@+id/consumerRegistButtom" />
 
             <EditText

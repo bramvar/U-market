@@ -37,10 +37,10 @@
             android:name=".SellerLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ConsumerRegistrationActivityPhoto"
+            android:name=".AdditionalConsumerInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".ConsumerRegistrationActivityData"
+            android:name=".ConsumerSignupActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

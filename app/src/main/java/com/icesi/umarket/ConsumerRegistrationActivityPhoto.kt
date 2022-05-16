@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import com.icesi.umarket.databinding.ActivityConsumerRegistrationPhotoBinding
+import com.icesi.umarket.util.UtilDomi
 
 class ConsumerRegistrationActivityPhoto : AppCompatActivity() {
     private lateinit var binding: ActivityConsumerRegistrationPhotoBinding

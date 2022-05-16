@@ -96,17 +96,16 @@ class ConsumerRegistrationActivityData : AppCompatActivity() {
             }
         }else{
             incorrectDataVisualChanges()
-            Toast.makeText(applicationContext, "Rellena los datos", Toast.LENGTH_SHORT).show()
         }
         return isDataCorrect
     }
 
     private fun incorrectDataVisualChanges() {
-        Log.e("<<<", ""+binding.consumerEmailText.text.toString().contains("@"))
+
         if(binding.consumerNameText.text.toString()==""){
             changeToErrorText(binding.consumerNameText)
         }
-        if(binding.consumerEmailText.text.toString()=="" && !(binding.consumerEmailText.text.toString().contains("@"))){
+        if(binding.consumerEmailText.text.toString()=="" || !(binding.consumerEmailText.text.toString().contains("@"))){
             changeToErrorText(binding.consumerEmailText)
             binding.emailMsg.isVisible = true
         }

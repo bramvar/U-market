@@ -16,6 +16,7 @@
         app:menu="@menu/menu_seller_home" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sellerFragmentContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/sellerNavigator"

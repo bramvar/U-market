@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.Umarket" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_bckg</item>
-        <item name="colorPrimaryVariant">@color/purple_titles</item>
+        <item name="colorPrimary">@color/orange_main</item>
+        <item name="colorPrimaryVariant">#ABFAB057</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/orange_main</item>
-        <item name="colorSecondaryVariant">@color/orange_main</item>
+        <item name="colorSecondary">@color/purple_bckg</item>
+        <item name="colorSecondaryVariant">@color/purple_titles</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="buttonTint">@color/orange_main</item>

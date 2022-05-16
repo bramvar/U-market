@@ -52,6 +52,7 @@
         android:layout_width="250dp"
         android:layout_height="43dp"
         android:background="@drawable/style_bottom"
+        android:backgroundTint="@color/orange_main"
         android:text="Continuar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +88,8 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/shape_circle"
+        android:background="@drawable/style_bottom"
+        android:backgroundTint="@color/orange_main"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

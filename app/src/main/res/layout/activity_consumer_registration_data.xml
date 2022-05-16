@@ -65,7 +65,6 @@
                 android:layout_width="250dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="52dp"
-                android:background="@drawable/style_bottom"
                 android:backgroundTint="@color/orange_main"
                 android:text="Registrarme"
                 app:layout_constraintEnd_toEndOf="parent"

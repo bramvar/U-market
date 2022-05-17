@@ -60,7 +60,7 @@
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Repetir contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/signUpSellerPasswdTextField"

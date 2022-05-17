@@ -20,6 +20,9 @@ class SellerHomeActivity : AppCompatActivity() {
         newProductFragment = NewProductFragment.newInstance()
         sellerMainOverviewFragment = SellerMainOverviewFragment.newInstance()
 
+        newProductFragment.listener = sellerMainOverviewFragment
+        showFragment(sellerMainOverviewFragment)
+
         binding.sellerNavigator.setOnItemSelectedListener { menuItem->
             if(menuItem.itemId == R.id.homeItem){
                 showFragment(sellerMainOverviewFragment)

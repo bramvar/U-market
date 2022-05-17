@@ -31,6 +31,10 @@ class ProductAdapter: RecyclerView.Adapter<ProductViewHolder>() {
         return products.size
     }
 
+    fun addProduct(product: Product){
+        products.add(product)
+    }
+
     private fun setImageBitmap(image: String?): Bitmap? {
         val file = image?.let { File(it) }
         val bitmap = BitmapFactory.decodeFile(file?.path)

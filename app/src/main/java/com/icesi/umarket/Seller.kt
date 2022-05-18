@@ -1,5 +1,7 @@
 package com.icesi.umarket
 
+import java.io.Serializable
+
 data class Seller(
     val id: String="",
     val marketName: String="",
@@ -9,4 +11,4 @@ data class Seller(
     val phone: String="",
     val marketDescription: String="",
     val role:String=""
-)
+) : Serializable

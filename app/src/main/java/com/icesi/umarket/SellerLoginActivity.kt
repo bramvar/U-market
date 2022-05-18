@@ -45,7 +45,7 @@ class SellerLoginActivity : AppCompatActivity() {
                             val user = it.toObject(Seller::class.java)
 
                             saveUser(user!!)
-                            startActivity(Intent(this,SellerHomeActivity::class.java))
+                            startActivity(Intent(this,SellerHomeActivity::class.java).apply { putExtra("user", user) })
                             finish()
                         }.addOnFailureListener{
                             Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()

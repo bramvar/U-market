@@ -10,33 +10,45 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="342dp"
+        android:background="@drawable/profile_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="48dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#FAB057"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:isScrollContainer="false"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/back_arrow_icon"
+            app:iconGravity="top"
+            app:iconPadding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
             android:id="@+id/settingsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="31dp"
-            android:minHeight="48dp"
+            android:layout_width="48dp"
+            android:layout_height="49dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="#FAB057"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:isScrollContainer="false"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/setting_icon"
+            app:iconGravity="top"
+            app:iconPadding="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/backBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/backBtn"
-            app:srcCompat="@drawable/setting_icon"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="39dp"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back_arrow_icon"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.cardview.widget.CardView
@@ -60,8 +72,9 @@
             android:id="@+id/nameConsumer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:layout_marginTop="8dp"
+            android:text="Nombre"
+            android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Correo"
-            android:textSize="19sp"
+            android:textColor="@color/purple_titles"
+            android:textSize="23sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,7 +110,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="mariana_toro15@gmail.com"
-            android:textSize="16sp"
+            android:textColor="@color/purple_titles"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -118,7 +133,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Celular"
-            android:textSize="19dp"
+            android:textColor="@color/purple_titles"
+            android:textSize="23sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -128,7 +144,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="315-458-7945"
-            android:textSize="16sp"
+            android:textColor="@color/purple_titles"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -139,7 +156,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="32dp"
         android:text="Cerrar Sesión"
         app:layout_constraintEnd_toEndOf="parent"

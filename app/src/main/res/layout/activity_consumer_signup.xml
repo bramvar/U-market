@@ -82,7 +82,7 @@
                 android:id="@+id/consumerPasswordText"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="23dp"
                 android:background="@drawable/shaping_plain_text"
                 android:ems="10"
                 android:fontFamily="@font/manrope_semibold"
@@ -92,14 +92,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.507"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailMsg" />
+                app:layout_constraintTop_toBottomOf="@+id/consumerEmailText" />
 
             <TextView
                 android:id="@+id/consumerCreateAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="28dp"
+                android:layout_marginEnd="15dp"
                 android:fontFamily="@font/manrope_semibold"
                 android:text="Inicia Sesión "
                 android:textColor="@color/orange_main"
@@ -148,6 +148,7 @@
                 android:id="@+id/emailMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="Escribe un correo valido"
                 android:textColor="@color/orange_main"
                 android:visibility="invisible"

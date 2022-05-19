@@ -19,6 +19,9 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.google.firebase.firestore.auth.User
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.databinding.FragmentNewProductBinding
 import com.icesi.umarket.util.UtilDomi
 import java.io.File
@@ -32,6 +35,7 @@ class NewProductFragment : Fragment() {
 
     private var _binding: FragmentNewProductBinding? = null
     private val binding get() = _binding!!
+
 
     private var file: File? = null
 
@@ -94,6 +98,8 @@ class NewProductFragment : Fragment() {
                     Toast.makeText(activity,"Faltan campos por completar", Toast.LENGTH_LONG).show()
                 }else{
                     it.onNewProduct(UUID.randomUUID().toString(),productName,productPrice.toInt(),productDescription,productImage!!)
+
+
                     Toast.makeText(activity,"producto publicado", Toast.LENGTH_LONG).show()
                 }
             }

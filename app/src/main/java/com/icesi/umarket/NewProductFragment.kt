@@ -7,6 +7,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -17,13 +18,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentNewProductBinding
+import com.icesi.umarket.model.Product
 import com.icesi.umarket.util.UtilDomi
 import java.io.File
 import java.util.*
-
 
 class NewProductFragment : Fragment() {
 
@@ -34,6 +40,8 @@ class NewProductFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var file: File? = null
+    private lateinit var productImageUri: Uri
+    private lateinit var user: Seller
 
     var listener: OnNewProductListener? = null
 
@@ -46,6 +54,8 @@ class NewProductFragment : Fragment() {
 
         val camLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onCameraResult)
         val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
+
+        user = loadUser()!!
 
         requestPermissions(arrayOf(
             Manifest.permission.CAMERA,
@@ -75,7 +85,6 @@ class NewProductFragment : Fragment() {
                     file = File("${activity?.getExternalFilesDir(null)}/"+randomString+".png")
                     val uri = FileProvider.getUriForFile(requireActivity(), "com.icesi.umarket", file!!)            //i.putExtra(MediaStore.EXTRA_OUTPUT,uri)
                     i.putExtra(MediaStore.EXTRA_OUTPUT,uri)
-                    Log.e(">>>",file?.path.toString())
                     camLauncher.launch(i)
                 }
             myAlertDialog.show()
@@ -83,20 +92,31 @@ class NewProductFragment : Fragment() {
 
         binding.postNewProductBtn.setOnClickListener {
 
-            listener?.let {
-                Toast.makeText(activity,"product", Toast.LENGTH_LONG).show()
-                val productName = binding.nameNewProductTextFiled.text.toString()
-                val productPrice = binding.priceNewProductTextField.text.toString()
-                val productDescription = binding.descriptionNewProductTextField.toString()
-                val productImage = file?.path
+            val productID = UUID.randomUUID().toString()
+            val productName = binding.nameNewProductTextFiled.text.toString()
+            val productPrice = binding.priceNewProductTextField.text.toString()
+            val productDescription = binding.descriptionNewProductTextField.toString()
+            val ImageID = UUID.randomUUID().toString()
 
-                if( productName.isBlank() or productPrice.isBlank() or productDescription.isBlank()){
-                    Toast.makeText(activity,"Faltan campos por completar", Toast.LENGTH_LONG).show()
-                }else{
-                    it.onNewProduct(UUID.randomUUID().toString(),productName,productPrice.toInt(),productDescription,productImage!!)
-                    Toast.makeText(activity,"producto publicado", Toast.LENGTH_LONG).show()
-                }
+            if( productName.isBlank() or productPrice.isBlank() or productDescription.isBlank()){
+                Toast.makeText(activity,"Faltan campos por completar", Toast.LENGTH_LONG).show()
+            }else{
+                //it.onNewProduct(UUID.randomUUID().toString(),productName,productPrice.toInt(),productDescription,productImage!!)
+                val product = Product(productID,productName,productPrice.toInt(),productDescription,ImageID)
+                Firebase.firestore.collection("markets").document(user.marketID).collection("products").document(productID).set(product)
+                    .addOnSuccessListener {
+                        Firebase.storage.getReference().child("product-images").child(ImageID).putFile(productImageUri)
+                            .addOnSuccessListener {
+                                Toast.makeText(activity,"producto publicado", Toast.LENGTH_LONG).show()
+                            }.addOnFailureListener{
+                                Toast.makeText(activity,it.message, Toast.LENGTH_LONG).show()
+                            }
+                    }.addOnFailureListener{
+                        Toast.makeText(activity,it.message, Toast.LENGTH_LONG).show()
+                    }
+
             }
+
 
         }
 
@@ -113,13 +133,21 @@ class NewProductFragment : Fragment() {
     }
 
     private fun onGalleryResult(activityResult: ActivityResult){
-        val uri = activityResult.data?.data
-        binding.newProductImage.setImageURI(uri)
-        val path = UtilDomi.getPath(requireActivity(), uri!!)
-        Log.e(">>>", uri.toString())
-        Log.e(">>>", path!!)
+        if(activityResult.resultCode == AppCompatActivity.RESULT_OK){
+            productImageUri = activityResult.data?.data!!
+            binding.newProductImage.setImageURI(productImageUri)
+        }
+    }
 
-        file = File(path)
+    fun loadUser(): Seller?{
+        val sp = this.context?.getSharedPreferences("u-market", AppCompatActivity.MODE_PRIVATE)
+        val json = sp?.getString("user","NO_USER")
+
+        if(json == "NO_USER"){
+            return null
+        } else{
+            return Gson().fromJson(json, Seller::class.java)
+        }
     }
 
     override fun onDestroyView() {

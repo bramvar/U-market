@@ -42,7 +42,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
             val fileName = UUID.randomUUID().toString()
 
             if(verifyBlankAdditionalInfoFields(marketName,marketDescription)){
-                val seller = Seller(id!!,sellerName!!,email!!,password!!,phone!!,"Seller")
+                val seller = Seller(id!!,sellerName!!,email!!,password!!,phone!!,"Seller",marketID)
 
                 val market = Market(marketID,id,marketName,marketDescription,fileName)
 

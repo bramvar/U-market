@@ -22,17 +22,23 @@ class ProductAdapter: RecyclerView.Adapter<ProductViewHolder>() {
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val productn = products[position]
-        holder.productNameRow.text = productn.name
-        holder.productPriceRow.text = productn.price.toString()
-        holder.producImageRow.setImageBitmap(setImageBitmap(productn.image))
+
+        holder.bindProduct(productn)
     }
 
     override fun getItemCount(): Int {
         return products.size
     }
 
+    fun clear() {
+        val size = products.size
+        products.clear()
+        notifyItemRangeRemoved(0,size)
+    }
+
     fun addProduct(product: Product){
         products.add(product)
+        notifyItemInserted(products.size-1)
     }
 
     private fun setImageBitmap(image: String?): Bitmap? {

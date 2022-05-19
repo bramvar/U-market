@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/marketProfileImage"
         android:layout_width="82dp"
         android:layout_height="73dp"
         android:layout_marginTop="40dp"
@@ -24,8 +24,8 @@
         android:text="Hola,"
         android:textColor="#17226C"
         android:textSize="19sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        app:layout_constraintStart_toEndOf="@+id/marketProfileImage"
+        app:layout_constraintTop_toTopOf="@+id/marketProfileImage" />
 
     <TextView
         android:id="@+id/marketNameTextView"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+        app:layout_constraintTop_toBottomOf="@+id/marketProfileImage">
 
         <TextView
             android:id="@+id/textView8"

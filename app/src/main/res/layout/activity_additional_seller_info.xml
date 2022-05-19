@@ -7,6 +7,22 @@
     android:background="#5A51CE"
     tools:context=".AdditionalSellerInfoActivity">
 
+    <EditText
+        android:id="@+id/signUpMarketNameTextField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Nombre del emprendimiento"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
     <Button
         android:id="@+id/sellerAdditionalInfoBackBtn"
         android:layout_width="40dp"
@@ -29,14 +45,13 @@
         android:id="@+id/sellerSignupBtn"
         android:layout_width="247dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/style_bottom"
         android:backgroundTint="#FAB057"
         android:text="Registrarme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sellerInfoDescriptionTextField" />
 
     <TextView
         android:id="@+id/textView4"
@@ -52,38 +67,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/sellerInfoImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <EditText
-        android:id="@+id/sellerInfoPhoneTextField"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/shaping_plain_text"
-        android:ems="10"
-        android:hint="Celular"
-        android:inputType="phone"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sellerInfoImage" />
-
     <EditText
         android:id="@+id/sellerInfoDescriptionTextField"
         android:layout_width="0dp"
         android:layout_height="127dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:gravity="start|top"
@@ -91,9 +79,27 @@
         android:inputType="textMultiLine"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/sellerInfoPhoneTextField"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/sellerInfoPhoneTextField"
-        app:layout_constraintTop_toBottomOf="@+id/sellerInfoPhoneTextField" />
+        app:layout_constraintEnd_toEndOf="@+id/signUpMarketNameTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpMarketNameTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpMarketNameTextField" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="75dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <ImageView
+            android:id="@+id/newMarketImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

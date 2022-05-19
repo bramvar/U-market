@@ -30,20 +30,20 @@ class SellerSignupActivity : AppCompatActivity() {
 
     private fun registerSeller(view: View){
         val i = Intent(this, AdditionalSellerInfoActivity::class.java)
-        val marketName = binding.signUpSellerMarketNameTextField.text.toString()
+        val phone = binding.signUpSellerPhoneTextField.text.toString()
         val sellerName = binding.signUpSellerNameTextField.text.toString()
         val email = binding.signUpSellerEmailTextField.text.toString()
         val password = binding.signUpSellerPasswdTextField.text.toString()
         val rePassword = binding.signUpSellerRepPasswdTextField.text.toString()
 
-        if(verifyBlankSignupFields(marketName,sellerName,email,password,rePassword)){
+        if(verifyBlankSignupFields(phone,sellerName,email,password,rePassword)){
             if(password == rePassword){
                 Firebase.auth.createUserWithEmailAndPassword(email,password)
                     .addOnSuccessListener {
                         val id = Firebase.auth.currentUser?.uid
 
                         i.putExtra("ID",id)
-                        i.putExtra("MARKET_NAME",marketName)
+                        i.putExtra("PHONE",phone)
                         i.putExtra("SELLER_NAME",sellerName)
                         i.putExtra("EMAIL",email)
                         i.putExtra("PASSWORD",password)

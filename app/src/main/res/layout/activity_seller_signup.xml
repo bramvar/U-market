@@ -37,22 +37,6 @@
         app:srcCompat="@drawable/brand_logov2" />
 
     <EditText
-        android:id="@+id/signUpSellerMarketNameTextField"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/shaping_plain_text"
-        android:ems="10"
-        android:hint="Nombre del emprendimiento"
-        android:inputType="textPersonName"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <EditText
         android:id="@+id/signUpSellerRepPasswdTextField"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -72,33 +56,48 @@
         android:id="@+id/signUpSellerNameTextField"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Nombre del  propietario"
         android:inputType="textPersonName"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/signUpSellerMarketNameTextField"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/signUpSellerMarketNameTextField"
-        app:layout_constraintTop_toBottomOf="@+id/signUpSellerMarketNameTextField" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <EditText
-        android:id="@+id/signUpSellerEmailTextField"
+        android:id="@+id/signUpSellerPhoneTextField"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
-        android:hint="Correo"
-        android:inputType="textPersonName"
+        android:hint="Celular"
+        android:inputType="number"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/signUpSellerNameTextField"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/signUpSellerNameTextField"
         app:layout_constraintTop_toBottomOf="@+id/signUpSellerNameTextField" />
+
+    <EditText
+        android:id="@+id/signUpSellerEmailTextField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Correo"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/signUpSellerPhoneTextField"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/signUpSellerPhoneTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpSellerPhoneTextField" />
 
     <EditText
         android:id="@+id/signUpSellerPasswdTextField"
@@ -112,7 +111,7 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/signUpSellerEmailTextField"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/signUpSellerEmailTextField"
         app:layout_constraintTop_toBottomOf="@+id/signUpSellerEmailTextField" />
 

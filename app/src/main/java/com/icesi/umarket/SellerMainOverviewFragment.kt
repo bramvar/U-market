@@ -53,7 +53,7 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
         productImage: String,
     ) {
         val product = Product(id,productName,productPrice,productDescription,productImage)
-        Firebase.firestore.collection("markets").document(marketName)
+        //Firebase.firestore.collection("markets").document(marketName)
         adapter.addProduct(product)
     }
 

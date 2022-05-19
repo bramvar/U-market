@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="orange_main">#FAB057</color>
+    <color name="purple_bckg">#5A51CE</color>
+    <color name="purple_titles">#2C2C7A</color>
+    <color name="pale_white">#66FFFFFF</color>
+    <color name="pale_white_for_img">#A1A1A1</color>
+    <color name="green_available">#5AF084</color>
+</resources>

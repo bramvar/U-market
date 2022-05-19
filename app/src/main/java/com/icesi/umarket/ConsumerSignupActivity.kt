@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
@@ -43,24 +44,24 @@ class ConsumerSignupActivity : AppCompatActivity() {
             }
         }
 
-        binding.consumerCreateAccount.setOnClickListener{
+        binding.consumerCreateAccount.addTextChangedListener{
             val intent = Intent(this, ConsumerLoginActivity::class.java)
             launcher.launch(intent)
         }
 
-        binding.consumerNameText.setOnClickListener{
+        binding.consumerNameText.addTextChangedListener{
             changeToNormalText(binding.consumerNameText)
         }
-        binding.consumerEmailText.setOnClickListener{
+        binding.consumerEmailText.addTextChangedListener{
             changeToNormalText(binding.consumerEmailText)
             binding.emailMsg.isVisible = false
         }
 
-        binding.consumerPasswordText.setOnClickListener{
+        binding.consumerPasswordText.addTextChangedListener{
             changeToNormalText(binding.consumerPasswordText)
         }
 
-        binding.consumerRepasswordText.setOnClickListener{
+        binding.consumerRepasswordText.addTextChangedListener{
             binding.passwordMsg.isVisible = false
         }
     }

@@ -83,7 +83,8 @@ class NewProductFragment : Fragment() {
                     .joinToString("");
                     val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     file = File("${activity?.getExternalFilesDir(null)}/"+randomString+".png")
-                    val uri = FileProvider.getUriForFile(requireActivity(), "com.icesi.umarket", file!!)            //i.putExtra(MediaStore.EXTRA_OUTPUT,uri)
+                    val uri = FileProvider.getUriForFile(requireActivity(), "com.icesi.umarket", file!!)
+                    productImageUri = uri
                     i.putExtra(MediaStore.EXTRA_OUTPUT,uri)
                     camLauncher.launch(i)
                 }

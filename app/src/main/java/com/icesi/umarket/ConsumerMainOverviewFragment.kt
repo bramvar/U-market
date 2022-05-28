@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -13,6 +14,7 @@ import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.ProductAdapter
+import com.icesi.umarket.model.User
 
 
 class ConsumerMainOverviewFragment : Fragment() {
@@ -34,7 +36,7 @@ class ConsumerMainOverviewFragment : Fragment() {
         //user = loadUser()!!
 
         getMarket()
-
+        getUserData()
         val productRecycler = binding.recyclerView
         productRecycler.setHasFixedSize(true)
         productRecycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -42,6 +44,19 @@ class ConsumerMainOverviewFragment : Fragment() {
 
         return binding.root
         //return inflater.inflate(R.layout.fragment_consumer_main_overview, container, false)
+    }
+
+    fun getUserData(){
+        var email: String = Firebase.auth.currentUser?.email.toString()
+        Firebase.firestore.collection("users").whereEqualTo("email", email).limit(1).
+        addSnapshotListener { value, error ->
+            if (value != null) {
+                for (doc in value.documents ){
+                    var user = doc.toObject(User::class.java)!!
+                    binding.textView11.text = user.name
+                }
+            }
+        }
     }
 
     fun getMarket(){

@@ -9,20 +9,23 @@ class ConsumerHomeActivity : AppCompatActivity() {
 
     private lateinit var menuConsumer:BottomNavigationView
     private lateinit var consumerMainOverviewFragment: ConsumerMainOverviewFragment
+    private lateinit var consumerProfileFragment: ConsumerProfileFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_consumer_home)
 
         consumerMainOverviewFragment = ConsumerMainOverviewFragment.newInstance()
+        consumerProfileFragment = ConsumerProfileFragment.newInstance()
 
         menuConsumer = findViewById(R.id.menuConsumer)
+        showFragment(consumerMainOverviewFragment)
 
         menuConsumer.setOnItemReselectedListener { menuItem->
             if(menuItem.itemId == R.id.homeItem){
                 showFragment(consumerMainOverviewFragment)
             }else if (menuItem.itemId == R.id.profileItem){
-                showFragment(consumerMainOverviewFragment)
+                showFragment(consumerProfileFragment)
             }else if (menuItem.itemId == R.id.ordersItem){
                 showFragment(consumerMainOverviewFragment)
             }

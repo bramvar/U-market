@@ -7,6 +7,17 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="152dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/initBackgroundImageView"
+        app:srcCompat="@drawable/brand_logov1" />
+
+    <ImageView
         android:id="@+id/initBackgroundImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,35 +29,11 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/init_backkground_blur" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/initBackgroundImageView"
-        app:srcCompat="@drawable/brand_logov1" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:fontFamily="@font/manrope_semibold"
-        android:text="¿Eres emprendedor o consumidor?"
-        android:textColor="#FFFCFC"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
     <Button
         android:id="@+id/selectConsumerBtn"
         android:layout_width="295dp"
         android:layout_height="52dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="#FAB057"
         android:text="Consumidor"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,5 +53,19 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/selectConsumerBtn"
         app:layout_constraintTop_toBottomOf="@+id/selectConsumerBtn"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintVertical_bias="0.06" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/manrope_semibold"
+        android:text="¿Eres emprendedor o consumidor?"
+        android:textColor="#FFFCFC"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

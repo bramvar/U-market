@@ -37,10 +37,7 @@
             android:name=".SellerLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ConsumerRegistrationActivityPhoto"
-            android:exported="false" />
-        <activity
-            android:name=".ConsumerRegistrationActivityData"
+            android:name=".ConsumerLoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -55,6 +52,15 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:authorities="com.icesi.umarket"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/paths"/>
+        </provider>
     </application>
 
 </manifest>

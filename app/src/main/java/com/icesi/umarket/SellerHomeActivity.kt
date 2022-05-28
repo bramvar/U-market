@@ -9,6 +9,7 @@ class SellerHomeActivity : AppCompatActivity() {
 
     private lateinit var newProductFragment: NewProductFragment
     private lateinit var sellerMainOverviewFragment: SellerMainOverviewFragment
+    private lateinit var sellerProfileFragment: SellerProfileFragment
 
     private lateinit var binding:ActivitySellerHomeBinding
 
@@ -19,6 +20,8 @@ class SellerHomeActivity : AppCompatActivity() {
 
         newProductFragment = NewProductFragment.newInstance()
         sellerMainOverviewFragment = SellerMainOverviewFragment.newInstance()
+        sellerProfileFragment = SellerProfileFragment.newInstance()
+
 
         newProductFragment.listener = sellerMainOverviewFragment
         showFragment(sellerMainOverviewFragment)
@@ -28,6 +31,8 @@ class SellerHomeActivity : AppCompatActivity() {
                 showFragment(sellerMainOverviewFragment)
             }else if(menuItem.itemId == R.id.addProductItem){
                 showFragment(newProductFragment)
+            }else if(menuItem.itemId == R.id.profileItem){
+                showFragment(sellerProfileFragment)
             }
             true
         }

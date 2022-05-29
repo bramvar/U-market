@@ -1,15 +1,18 @@
 package com.icesi.umarket
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Product
@@ -54,11 +57,19 @@ class ConsumerMainOverviewFragment : Fragment() {
                 for (doc in value.documents ){
                     var user = doc.toObject(User::class.java)!!
                     binding.textView11.text = user.name
+                    loadProfileImg(user.img)
                 }
             }
         }
     }
 
+    fun loadProfileImg(imageID: String){
+
+        Firebase.storage.reference.child("profile").child(imageID).downloadUrl
+            .addOnSuccessListener{
+                Glide.with(binding.imageView6).load(it).into(binding.imageView6)
+            }
+    }
     fun getMarket(){
         Firebase.firestore.collection("markets").document("2c63f174-0beb-446f-b7c8-e4e41ad1e927").get()
             .addOnSuccessListener {

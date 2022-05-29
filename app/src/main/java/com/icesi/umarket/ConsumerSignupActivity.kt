@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityConsumerSignupBinding
@@ -33,11 +34,18 @@ class ConsumerSignupActivity : AppCompatActivity() {
                 var email: String = binding.consumerEmailText.text.toString()
                 var password: String= binding.consumerPasswordText.text.toString()
 
-                Firebase.auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
+                Firebase.auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener{
                     var id = Firebase.auth.currentUser?.uid
-                    val intent = Intent(this, AdditionalConsumerInfoActivity::class.java)
-                        .putExtra("userObj", gson.toJson(User(id.toString(), name, email, password,"","","consumer")))
-                    startActivity(intent)
+                    var user: User = User(id.toString(), name, email, password,"","","consumer")
+
+                    Firebase.firestore.collection("users")
+                        .document(user.id)
+                        .set(user).addOnSuccessListener {
+                            val intent = Intent(this, AdditionalConsumerInfoActivity::class.java)
+                                .putExtra("userObj", gson.toJson(user))
+                            startActivity(intent)
+                        }
+
                 }.addOnFailureListener {
                     Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()
                 }

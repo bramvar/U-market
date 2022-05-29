@@ -1,18 +1,23 @@
 package com.icesi.umarket
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.ProductAdapter
+import com.icesi.umarket.model.User
 
 
 class ConsumerMainOverviewFragment : Fragment() {
@@ -34,7 +39,7 @@ class ConsumerMainOverviewFragment : Fragment() {
         //user = loadUser()!!
 
         getMarket()
-
+        getUserData()
         val productRecycler = binding.recyclerView
         productRecycler.setHasFixedSize(true)
         productRecycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -44,6 +49,27 @@ class ConsumerMainOverviewFragment : Fragment() {
         //return inflater.inflate(R.layout.fragment_consumer_main_overview, container, false)
     }
 
+    fun getUserData(){
+        var email: String = Firebase.auth.currentUser?.email.toString()
+        Firebase.firestore.collection("users").whereEqualTo("email", email).limit(1).
+        addSnapshotListener { value, error ->
+            if (value != null) {
+                for (doc in value.documents ){
+                    var user = doc.toObject(User::class.java)!!
+                    binding.textView11.text = user.name
+                    loadProfileImg(user.img)
+                }
+            }
+        }
+    }
+
+    fun loadProfileImg(imageID: String){
+
+        Firebase.storage.reference.child("profile").child(imageID).downloadUrl
+            .addOnSuccessListener{
+                Glide.with(binding.imageView6).load(it).into(binding.imageView6)
+            }
+    }
     fun getMarket(){
         Firebase.firestore.collection("markets").document("2c63f174-0beb-446f-b7c8-e4e41ad1e927").get()
             .addOnSuccessListener {

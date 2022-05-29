@@ -25,6 +25,7 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdditionalConsumerInfoBinding
     private var changeImage: Boolean = false
     private lateinit var userObj: User
+    private lateinit var idImg: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
 
         binding.consumerFinishRegistButtom.setOnClickListener {
             if (validateData()) {
-                sendDataToDB()
+                saveUser()
                 val intent = Intent(this, ConsumerHomeActivity::class.java)
                 launcher.launch(intent)
             }
@@ -66,13 +67,6 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
             changeToNormalText(binding.ConsumerPhoneText)
             binding.phoneMsg.isVisible = false
         }
-    }
-
-    private fun sendDataToDB() {
-        Firebase.firestore.collection("users")
-            .document(userObj.id)
-            .set(userObj)
-        saveUser()
     }
 
     private fun validateData(): Boolean {
@@ -107,14 +101,12 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
             binding.cardView.setContentPadding(10, 10, 10, 10)
             binding.consumerProfileImage.setImageURI(uri)
             changeImage = true;
+            idImg = UUID.randomUUID().toString()
 
-            Log.e("<<<", uri.toString())
-            Firebase.storage.reference.child("profile").child(UUID.randomUUID().toString())
+            Firebase.storage.reference.child("profile").child(idImg.toString())
                 .putFile(uri!!)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Imagen cargada", Toast.LENGTH_LONG).show()
-                }.addOnFailureListener {
-                    Toast.makeText(this, "Error al cargar imagen", Toast.LENGTH_LONG).show()
                 }
         }else{
             Toast.makeText(this, "No carga la imagen", Toast.LENGTH_LONG).show()
@@ -124,6 +116,7 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
         val sp = getSharedPreferences("u-market", MODE_PRIVATE)
         val json = Gson().toJson(userObj)
         sp.edit().putString("user",json).apply()
+        Firebase.firestore.collection("users").document(userObj.id).update("img", idImg)
     }
 
     fun onResult(activityResult: ActivityResult?) {

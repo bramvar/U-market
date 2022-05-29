@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_bckg"
+    tools:context=".EditProfileConsumer">
+
+    <Button
+        android:id="@+id/backBtn2"
+        android:layout_width="48dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FAB057"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:isScrollContainer="false"
+        app:cornerRadius="24dp"
+        app:icon="@drawable/back_arrow_icon"
+        app:iconGravity="top"
+        app:iconPadding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backBtn2">
+
+        <ImageView
+            android:id="@+id/Profilephoto"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Cambiar foto"
+        android:textColor="@color/orange_main"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <EditText
+        android:id="@+id/nombreEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/emailEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Correo"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/nombreEdit"
+        app:layout_constraintStart_toStartOf="@+id/nombreEdit"
+        app:layout_constraintTop_toBottomOf="@+id/nombreEdit" />
+
+    <EditText
+        android:id="@+id/passEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/emailEdit"
+        app:layout_constraintStart_toStartOf="@+id/emailEdit"
+        app:layout_constraintTop_toBottomOf="@+id/emailEdit" />
+
+    <EditText
+        android:id="@+id/phoneEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shaping_plain_text"
+        android:ems="10"
+        android:hint="Celular"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/passEdit"
+        app:layout_constraintStart_toStartOf="@+id/passEdit"
+        app:layout_constraintTop_toBottomOf="@+id/passEdit" />
+
+    <Button
+        android:id="@+id/editDoneBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="32dp"
+        android:text="Guardar cambios "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneEdit" />
+</androidx.constraintlayout.widget.ConstraintLayout>

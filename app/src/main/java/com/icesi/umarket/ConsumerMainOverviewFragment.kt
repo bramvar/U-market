@@ -67,9 +67,10 @@ class ConsumerMainOverviewFragment : Fragment() {
 
         Firebase.storage.reference.child("profile").child(imageID).downloadUrl
             .addOnSuccessListener{
-                Glide.with(binding.imageView6).load(it).into(binding.imageView6)
+                Glide.with(binding.marketProfileImage).load(it).into(binding.marketProfileImage)
             }
     }
+
     fun getMarket(){
         Firebase.firestore.collection("markets").document("2c63f174-0beb-446f-b7c8-e4e41ad1e927").get()
             .addOnSuccessListener {

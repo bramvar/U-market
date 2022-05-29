@@ -37,6 +37,9 @@
             android:name=".SellerLoginActivity"
             android:exported="false" />
         <activity
+            android:name=".ConsumerEditProfile"
+            android:exported="false" />
+        <activity
             android:name=".ConsumerLoginActivity"
             android:exported="false" />
         <activity

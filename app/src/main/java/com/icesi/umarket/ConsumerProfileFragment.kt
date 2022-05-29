@@ -1,5 +1,6 @@
 package com.icesi.umarket
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentConsumerProfileBinding
 import com.icesi.umarket.model.User
 
@@ -25,29 +27,23 @@ class ConsumerProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentConsumerProfileBinding.inflate(layoutInflater)
-        var email: String = Firebase.auth.currentUser?.email.toString()
-        lateinit var user: User
-        Firebase.firestore.collection("users").whereEqualTo("email", email).limit(1).
-        addSnapshotListener { value, error ->
-            if (value != null) {
-                for (doc in value.documents ){
-                    user = doc.toObject(User::class.java)!!
 
-                    binding.nameConsumer.text = user.name
-                    binding.emailConsumer.text = user.email
-                    binding.phoneConsumer.text = user.phone
-                    loadProfileImg(user.img)
-                }
-            }
-        }
-
-
+        loadUserData()
         binding.settingsBtn.setOnClickListener {
             val intent = Intent(activity, ConsumerEditProfile::class.java)
             startActivity(intent)
         }
 
         return binding.root
+    }
+
+    fun loadUserData(){
+        val prefs = context?.getSharedPreferences("u-market", Context.MODE_PRIVATE)
+        val user = Gson().fromJson(prefs!!.getString("user",""), User::class.java)
+        binding.nameConsumer.text = user.name
+        binding.emailConsumer.text = user.email
+        binding.phoneConsumer.text = user.phone
+        loadProfileImg(user.img)
     }
 
     fun loadProfileImg(imageID: String){

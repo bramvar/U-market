@@ -63,7 +63,6 @@ class ConsumerLoginActivity : AppCompatActivity() {
         val sp = getSharedPreferences("u-market", MODE_PRIVATE)
         val json = Gson().toJson(user)
         sp.edit().putString("user",json).apply()
-
     }
 }
 

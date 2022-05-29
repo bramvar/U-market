@@ -8,9 +8,11 @@
 
     <Button
         android:id="@+id/postNewProductBtn"
-        android:layout_width="247dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/style_bottom"
         android:backgroundTint="#FAB057"
         android:text="Publicar"
@@ -21,7 +23,7 @@
 
     <EditText
         android:id="@+id/descriptionNewProductTextField"
-        android:layout_width="249dp"
+        android:layout_width="0dp"
         android:layout_height="107dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/shaping_plain_text"
@@ -37,7 +39,7 @@
 
     <EditText
         android:id="@+id/priceNewProductTextField"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/shaping_plain_text"
@@ -53,9 +55,11 @@
 
     <EditText
         android:id="@+id/nameNewProductTextFiled"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Nombre del producto"
@@ -63,7 +67,7 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 
@@ -84,6 +88,7 @@
         android:id="@+id/cardView3"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginTop="16dp"
         app:cardCornerRadius="75dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

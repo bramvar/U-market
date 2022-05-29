@@ -13,10 +13,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,22 +26,25 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/button"
+                app:layout_constraintTop_toBottomOf="@+id/button"
                 app:srcCompat="@drawable/brand_logov2" />
 
             <EditText
                 android:id="@+id/consumerNameText"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="42dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/shaping_plain_text"
                 android:ems="10"
                 android:fontFamily="@font/manrope_semibold"
                 android:hint="Nombre de Usuario"
                 android:inputType="textPersonName"
+                android:minHeight="48dp"
                 android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
@@ -50,7 +53,7 @@
 
             <EditText
                 android:id="@+id/consumerRepasswordText"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/shaping_plain_text"
@@ -58,29 +61,28 @@
                 android:fontFamily="@font/manrope_semibold"
                 android:hint="Confirmar Contraseña"
                 android:inputType="textPersonName|textPassword"
+                android:minHeight="48dp"
                 android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/consumerPasswordText"
+                app:layout_constraintStart_toStartOf="@+id/consumerPasswordText"
                 app:layout_constraintTop_toBottomOf="@+id/consumerPasswordText" />
 
             <Button
                 android:id="@+id/consumerRegistButtom"
-                android:layout_width="250dp"
-                android:layout_height="45dp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/style_bottom"
                 android:backgroundTint="@color/orange_main"
                 android:fontFamily="@font/manrope_semibold"
                 android:text="Registrarme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.503"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/consumerRepasswordText"
+                app:layout_constraintStart_toStartOf="@+id/consumerRepasswordText"
                 app:layout_constraintTop_toBottomOf="@+id/consumerRepasswordText" />
 
             <EditText
                 android:id="@+id/consumerPasswordText"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
                 android:background="@drawable/shaping_plain_text"
@@ -88,18 +90,18 @@
                 android:fontFamily="@font/manrope_semibold"
                 android:hint="Contraseña"
                 android:inputType="textPersonName|textPassword"
+                android:minHeight="48dp"
                 android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.507"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/consumerEmailText"
+                app:layout_constraintStart_toStartOf="@+id/consumerEmailText"
                 app:layout_constraintTop_toBottomOf="@+id/consumerEmailText" />
 
             <TextView
                 android:id="@+id/consumerCreateAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="70dp"
                 android:fontFamily="@font/manrope_semibold"
                 android:text="Inicia Sesión "
                 android:textColor="@color/orange_main"
@@ -109,17 +111,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/manrope_semibold"
                 android:text="¿Ya tienes cuenta?"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/consumerRegistButtom"
-                app:layout_constraintTop_toBottomOf="@+id/consumerRegistButtom" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/consumerCreateAccount"
+                app:layout_constraintTop_toTopOf="@+id/consumerCreateAccount" />
 
             <EditText
                 android:id="@+id/consumerEmailText"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/shaping_plain_text"
@@ -127,10 +129,10 @@
                 android:fontFamily="@font/manrope_semibold"
                 android:hint="Correo"
                 android:inputType="textPersonName|textEmailSubject"
+                android:minHeight="48dp"
                 android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/consumerNameText"
+                app:layout_constraintStart_toStartOf="@+id/consumerNameText"
                 app:layout_constraintTop_toBottomOf="@+id/consumerNameText" />
 
             <TextView
@@ -159,8 +161,8 @@
                 android:id="@+id/button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/shape_circle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

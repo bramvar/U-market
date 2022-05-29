@@ -31,10 +31,13 @@
 
     <Button
         android:id="@+id/selectConsumerBtn"
-        android:layout_width="295dp"
+        android:layout_width="0dp"
         android:layout_height="52dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="#FAB057"
+        android:fontFamily="@font/manrope_semibold"
         android:text="Consumidor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,15 +45,15 @@
 
     <Button
         android:id="@+id/selectSellerBtn"
-        android:layout_width="295dp"
+        android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginTop="12dp"
         android:backgroundTint="#FAB057"
+        android:fontFamily="@font/manrope_semibold"
         android:text="Emprendedor"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/initBackgroundImageView"
         app:layout_constraintEnd_toEndOf="@+id/selectConsumerBtn"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/selectConsumerBtn"
         app:layout_constraintTop_toBottomOf="@+id/selectConsumerBtn"
         app:layout_constraintVertical_bias="0.06" />

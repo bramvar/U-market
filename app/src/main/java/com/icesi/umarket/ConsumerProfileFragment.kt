@@ -31,12 +31,6 @@ class ConsumerProfileFragment : Fragment() {
         // Inflate the layout for this fragment
 
         _binding = FragmentConsumerProfileBinding.inflate(inflater,container,false)
-        binding.nameConsumer.text = currentUser?.name
-        binding.emailConsumer.text = currentUser?.email
-        binding.phoneConsumer.text = currentUser?.phone
-        loadProfileImg(currentUser!!.img)
-
-
 
         loadUserData()
         binding.settingsBtn.setOnClickListener {
@@ -48,9 +42,14 @@ class ConsumerProfileFragment : Fragment() {
         return binding.root
     }
 
+    private fun loadUserData(){
+        binding.nameConsumer.text = currentUser?.name
+        binding.emailConsumer.text = currentUser?.email
+        binding.phoneConsumer.text = currentUser?.phone
+        loadProfileImg(currentUser!!.img)
+    }
+
     private fun loadProfileImg(imageID: String){
-
-
         Firebase.storage.reference.child("profile").child(imageID).downloadUrl
             .addOnSuccessListener{
                 Glide.with(binding.profilePhotoConsumer).load(it).into(binding.profilePhotoConsumer)

@@ -23,9 +23,7 @@ class ConsumerMainOverviewFragment : Fragment() {
 
     private var _binding: FragmentConsumerMainOverviewBinding? = null
     private val binding get() = _binding!!
-
     lateinit var currentUser: User
-
 
     //STATE
     private val adapter = MarketAdapter()
@@ -48,10 +46,8 @@ class ConsumerMainOverviewFragment : Fragment() {
     }
 
     fun getUserData(){
-
-        binding.textView11.text = currentUser.name
+        binding.consumerName.text = currentUser.name
         loadProfileImg(currentUser.img)
-
     }
 
     fun loadProfileImg(imageID: String){

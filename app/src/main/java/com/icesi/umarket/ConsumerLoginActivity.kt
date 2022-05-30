@@ -48,7 +48,9 @@ class ConsumerLoginActivity : AppCompatActivity() {
                             val user = it.toObject(User::class.java)
 
                             saveUser(user!!)
-                            startActivity(Intent(this, ConsumerHomeActivity::class.java))
+                            startActivity(Intent(this, ConsumerHomeActivity::class.java).apply{
+                                putExtra("currentUser", Gson().toJson(user))
+                            })
                             finish()
                         }.addOnFailureListener {
                             Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()

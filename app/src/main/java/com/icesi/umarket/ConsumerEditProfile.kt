@@ -7,18 +7,25 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityConsumerEditProfileBinding
 import com.icesi.umarket.databinding.ActivityConsumerLoginBinding
 import com.icesi.umarket.model.User
 
 class ConsumerEditProfile : AppCompatActivity() {
     private lateinit var binding: ActivityConsumerEditProfileBinding
+    lateinit var currentUser: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityConsumerEditProfileBinding.inflate(layoutInflater)
-        loadUSer()
         setContentView(binding.root)
+
+        currentUser = Gson().fromJson(
+            intent.extras?.getString("currentUser",""),
+            User::class.java
+        )
+        loadInformation(currentUser)
     }
 
     fun loadInformation(user: User){
@@ -32,19 +39,5 @@ class ConsumerEditProfile : AppCompatActivity() {
             .addOnSuccessListener{
                 Glide.with(binding.profilephotoedit).load(it).into(binding.profilephotoedit)
             }
-    }
-
-    fun loadUSer(){
-        var email: String = Firebase.auth.currentUser?.email.toString()
-
-        Firebase.firestore.collection("users").whereEqualTo("email", email).limit(1).
-        addSnapshotListener { value, error ->
-            if (value != null) {
-                for (doc in value.documents ){
-                    var user = doc.toObject(User::class.java)!!
-                    loadInformation(user)
-                }
-            }
-        }
     }
 }

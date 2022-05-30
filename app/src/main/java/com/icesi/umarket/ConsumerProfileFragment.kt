@@ -12,6 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentConsumerProfileBinding
 import com.icesi.umarket.model.User
 
@@ -20,7 +21,7 @@ class ConsumerProfileFragment : Fragment() {
     private var _binding: FragmentConsumerProfileBinding? = null
     private val binding get() = _binding!!
 
-    var currentUser: User? = null
+    lateinit var currentUser: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,17 +29,17 @@ class ConsumerProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentConsumerProfileBinding.inflate(inflater,container,false)
-
         binding.nameConsumer.text = currentUser?.name
         binding.emailConsumer.text = currentUser?.email
         binding.phoneConsumer.text = currentUser?.phone
         loadProfileImg(currentUser!!.img)
 
         binding.settingsBtn.setOnClickListener {
-            val intent = Intent(activity, ConsumerEditProfile::class.java)
+            val intent = Intent(activity, ConsumerEditProfile::class.java).apply{
+                putExtra("currentUser", Gson().toJson(currentUser))
+            }
             startActivity(intent)
         }
-
         return binding.root
     }
 

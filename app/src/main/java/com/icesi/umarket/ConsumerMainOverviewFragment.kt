@@ -13,6 +13,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Product
@@ -24,8 +25,7 @@ class ConsumerMainOverviewFragment : Fragment() {
 
     private var _binding: FragmentConsumerMainOverviewBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var user: Seller
+    lateinit var currentUser: User
 
     //STATE
     private val adapter = ProductAdapter()
@@ -36,7 +36,6 @@ class ConsumerMainOverviewFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentConsumerMainOverviewBinding.inflate(inflater,container,false)
-        //user = loadUser()!!
 
         getMarket()
         getUserData()
@@ -46,25 +45,14 @@ class ConsumerMainOverviewFragment : Fragment() {
         productRecycler.adapter = adapter
 
         return binding.root
-        //return inflater.inflate(R.layout.fragment_consumer_main_overview, container, false)
     }
 
     fun getUserData(){
-        var email: String = Firebase.auth.currentUser?.email.toString()
-        Firebase.firestore.collection("users").whereEqualTo("email", email).limit(1).
-        addSnapshotListener { value, error ->
-            if (value != null) {
-                for (doc in value.documents ){
-                    var user = doc.toObject(User::class.java)!!
-                    binding.textView11.text = user.name
-                    loadProfileImg(user.img)
-                }
-            }
-        }
+        binding.textView11.text = currentUser.name
+        loadProfileImg(currentUser.img)
     }
 
     fun loadProfileImg(imageID: String){
-
         Firebase.storage.reference.child("profile").child(imageID).downloadUrl
             .addOnSuccessListener{
                 Glide.with(binding.marketProfileImage).load(it).into(binding.marketProfileImage)
@@ -95,6 +83,5 @@ class ConsumerMainOverviewFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = ConsumerMainOverviewFragment()
-
     }
 }

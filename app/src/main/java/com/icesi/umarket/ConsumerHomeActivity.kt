@@ -7,6 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import com.icesi.umarket.model.User
 
 class ConsumerHomeActivity : AppCompatActivity() {
@@ -21,11 +22,15 @@ class ConsumerHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_consumer_home)
 
-        //Extras
+        currentUser = Gson().fromJson(
+            intent.extras?.getString("currentUser",""),
+            User::class.java
+        )
 
         consumerMainOverviewFragment = ConsumerMainOverviewFragment.newInstance()
         consumerProfileFragment = ConsumerProfileFragment.newInstance()
         consumerProfileFragment.currentUser = currentUser
+        consumerMainOverviewFragment.currentUser = currentUser
 
         menuConsumer = findViewById(R.id.menuConsumer)
         showFragment(consumerMainOverviewFragment)
@@ -39,6 +44,7 @@ class ConsumerHomeActivity : AppCompatActivity() {
             true
         }
     }
+
     fun showFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)

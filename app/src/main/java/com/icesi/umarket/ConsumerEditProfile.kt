@@ -30,7 +30,7 @@ class ConsumerEditProfile : AppCompatActivity() {
 
         Firebase.storage.reference.child("profile").child(user.img).downloadUrl
             .addOnSuccessListener{
-                Glide.with(binding.Profilephoto).load(it).into(binding.Profilephoto)
+                Glide.with(binding.profilephotoedit).load(it).into(binding.profilephotoedit)
             }
     }
 

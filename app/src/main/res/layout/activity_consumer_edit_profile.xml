@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="89dp">
 
         <ImageView
-            android:id="@+id/Profilephoto"
+            android:id="@+id/profilephotoedit"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:scaleType="centerCrop"

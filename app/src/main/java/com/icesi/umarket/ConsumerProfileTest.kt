@@ -2,29 +2,30 @@ package com.icesi.umarket
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.icesi.umarket.databinding.FragmentConsumerProfileBinding
+import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
+import com.icesi.umarket.databinding.FragmentConsumerProfileTestBinding
+import com.icesi.umarket.databinding.FragmentProfileConsumerBinding
 import com.icesi.umarket.model.User
 
-
-class ConsumerProfileFragment : Fragment() {
-
-    private lateinit var binding: FragmentConsumerProfileBinding
+class ConsumerProfileTest : Fragment() {
+    private var _binding: FragmentConsumerProfileTestBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentConsumerProfileBinding.inflate(layoutInflater)
+        _binding = FragmentConsumerProfileTestBinding.inflate(layoutInflater)
         var email: String = Firebase.auth.currentUser?.email.toString()
         lateinit var user: User
         Firebase.firestore.collection("users").whereEqualTo("email", email).limit(1).
@@ -40,7 +41,6 @@ class ConsumerProfileFragment : Fragment() {
                 }
             }
         }
-
 
         binding.settingsBtn.setOnClickListener {
             val intent = Intent(activity, ConsumerEditProfile::class.java)
@@ -60,6 +60,6 @@ class ConsumerProfileFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = ConsumerProfileFragment()
+        fun newInstance() = ConsumerProfileTest()
     }
 }

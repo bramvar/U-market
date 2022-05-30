@@ -15,6 +15,7 @@ class ConsumerHomeActivity : AppCompatActivity() {
     private lateinit var menuConsumer:BottomNavigationView
     private lateinit var consumerMainOverviewFragment: ConsumerMainOverviewFragment
     private lateinit var consumerProfileFragment: ConsumerProfileFragment
+    private lateinit var consumerShoppingFragment: ConsumerShoppingFragment
 
     private lateinit var currentUser: User
 
@@ -29,17 +30,23 @@ class ConsumerHomeActivity : AppCompatActivity() {
 
         consumerMainOverviewFragment = ConsumerMainOverviewFragment.newInstance()
         consumerProfileFragment = ConsumerProfileFragment.newInstance()
+
         consumerProfileFragment.currentUser = currentUser
         consumerMainOverviewFragment.currentUser = currentUser
 
+        consumerShoppingFragment = ConsumerShoppingFragment.newInstance()
+
+
         menuConsumer = findViewById(R.id.menuConsumer)
         showFragment(consumerMainOverviewFragment)
+
 
         menuConsumer.setOnItemSelectedListener { menuItem->
             when(menuItem.itemId){
                 R.id.homeItem -> showFragment(consumerMainOverviewFragment)
                 R.id.profileItem -> showFragment(consumerProfileFragment)
                 R.id.ordersItem -> showFragment(consumerMainOverviewFragment)
+
             }
             true
         }

@@ -1,5 +1,6 @@
 package com.icesi.umarket
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -28,12 +29,16 @@ class ConsumerProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         _binding = FragmentConsumerProfileBinding.inflate(inflater,container,false)
         binding.nameConsumer.text = currentUser?.name
         binding.emailConsumer.text = currentUser?.email
         binding.phoneConsumer.text = currentUser?.phone
         loadProfileImg(currentUser!!.img)
 
+
+
+        loadUserData()
         binding.settingsBtn.setOnClickListener {
             val intent = Intent(activity, ConsumerEditProfile::class.java).apply{
                 putExtra("currentUser", Gson().toJson(currentUser))
@@ -44,6 +49,7 @@ class ConsumerProfileFragment : Fragment() {
     }
 
     private fun loadProfileImg(imageID: String){
+
 
         Firebase.storage.reference.child("profile").child(imageID).downloadUrl
             .addOnSuccessListener{

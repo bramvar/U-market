@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".ConsumerProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -33,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="mariana_toro15@gmail.com"
+            tools:text="mariana_toro15@gmail.com"
             android:textColor="@color/purple_titles"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="315-458-7945"
+            tools:text="315-458-7945"
             android:textColor="@color/purple_titles"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +134,8 @@
             app:iconPadding="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/backBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/backBtn" />
+            app:layout_constraintTop_toTopOf="@+id/backBtn"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -146,7 +148,7 @@
             app:layout_constraintTop_toBottomOf="@+id/backBtn">
 
             <ImageView
-                android:id="@+id/profilephoto"
+                android:id="@+id/profilePhotoConsumer"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 tools:srcCompat="@tools:sample/avatars" />

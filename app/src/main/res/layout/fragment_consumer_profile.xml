@@ -82,46 +82,29 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/style_bottom"
         android:text="Cerrar Sesión"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="342dp"
+        android:layout_width="match_parent"
+        android:layout_height="318dp"
         android:background="@drawable/profile_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/backBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/shape_circle"
-            android:backgroundTint="#FAB057"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:isScrollContainer="false"
-            app:cornerRadius="24dp"
-            app:icon="@drawable/back_arrow_icon"
-            app:iconGravity="top"
-            app:iconPadding="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <Button
             android:id="@+id/settingsBtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/shape_circle"
             android:backgroundTint="#FAB057"
@@ -132,25 +115,25 @@
             app:icon="@drawable/setting_icon"
             app:iconGravity="top"
             app:iconPadding="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/backBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/backBtn"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="90dp"
             app:cardCornerRadius="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/backBtn">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/profilePhotoConsumer"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
+                android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
         </androidx.cardview.widget.CardView>
 

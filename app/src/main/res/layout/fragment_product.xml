@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="24dp"
                 android:text="Nombre producto"
                 android:textColor="#17226C"
                 android:textSize="30sp"
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="24dp"
                 android:text="$500"
                 android:textColor="#17226C"
                 android:textSize="30sp"
@@ -68,17 +68,17 @@
                 <ImageView
                     android:id="@+id/productImg"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="250dp"
                     android:scaleType="centerCrop"
                     tools:src="@tools:sample/backgrounds/scenic" />
             </androidx.cardview.widget.CardView>
 
             <Button
-                android:id="@+id/ProductBackBtn"
+                android:id="@+id/productBackBtn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/shape_circle"
                 android:backgroundTint="#FAB057"
                 android:foregroundGravity="center"
@@ -111,26 +111,27 @@
                 android:layout_width="118dp"
                 android:layout_height="55dp"
                 android:layout_marginEnd="32dp"
+                android:layout_marginBottom="10dp"
                 android:text="Pedir"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout8" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="150dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/circle"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/priceProduct"
                 app:layout_constraintTop_toBottomOf="@+id/priceProduct">
 
                 <TextView
                     android:id="@+id/lessText"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
@@ -144,8 +145,8 @@
 
                 <TextView
                     android:id="@+id/moreText"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
@@ -161,9 +162,9 @@
                     android:id="@+id/amountText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="16dp"
                     android:text="1"
                     android:textColor="@color/purple_titles"

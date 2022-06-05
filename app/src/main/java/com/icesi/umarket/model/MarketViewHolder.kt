@@ -20,7 +20,15 @@ class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     var marketImageRow: ImageView = itemView.findViewById(R.id.marketRowImage)
     var descriptMarket:  TextView = itemView.findViewById(R.id.descriptMarket)
 
-    //state
+
+
+    init {
+        marketImageRow.setOnClickListener {
+            //clickRowListener.onClickRowListener(pokemon)
+        }
+
+
+        //state
     fun bindMarket(market: Market){
         this.market = market
         marketName.text = market.marketName
@@ -32,5 +40,8 @@ class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
                     Glide.with(marketImageRow).load(it).into(marketImageRow)
                 }
         }
+
+
+
     }
 }

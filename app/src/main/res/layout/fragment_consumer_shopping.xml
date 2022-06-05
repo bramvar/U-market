@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="Mi carrito"
+                android:text="Mis ordenes "
                 android:textColor="#17226C"
                 android:textSize="28sp"
                 android:textStyle="bold"

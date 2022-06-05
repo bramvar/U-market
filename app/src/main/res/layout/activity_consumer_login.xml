@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logInUserNameTextField" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/amountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -101,9 +101,9 @@
         android:text="Registrate"
         android:textColor="#FAB057"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintBottom_toBottomOf="@+id/amountText"
         app:layout_constraintEnd_toEndOf="@+id/loginBtn"
-        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/amountText"
         app:layout_constraintVertical_bias="0.14999998" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

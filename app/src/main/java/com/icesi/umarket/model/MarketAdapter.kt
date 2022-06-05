@@ -6,24 +6,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.icesi.umarket.ConsumerMainOverviewFragment
 import com.icesi.umarket.R
 import java.io.File
 
 class MarketAdapter: RecyclerView.Adapter<MarketViewHolder>() {
 
     private val markets = ArrayList<Market>()
+    lateinit var onSellerObserver: ConsumerMainOverviewFragment.SellerObserver
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarketViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.market_row,parent,false)
         val marketViewHolder = MarketViewHolder(view)
-
+        marketViewHolder.onSellerObserver = onSellerObserver
         return marketViewHolder
     }
 
     override fun onBindViewHolder(holder: MarketViewHolder, position: Int) {
         val market = markets[position]
-        Log.e("Market en onBind: ", market.toString())
         holder.bindMarket(market)
     }
 

@@ -2,6 +2,8 @@ package com.icesi.umarket
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +26,7 @@ class ConsumerMainOverviewFragment : Fragment() {
     private var _binding: FragmentConsumerMainOverviewBinding? = null
     private val binding get() = _binding!!
     lateinit var currentUser: User
+    lateinit var onSellerObserver: SellerObserver
 
     //STATE
     private val adapter = MarketAdapter()
@@ -34,7 +37,7 @@ class ConsumerMainOverviewFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentConsumerMainOverviewBinding.inflate(inflater,container,false)
-
+        adapter.onSellerObserver = onSellerObserver
         getMarket()
         getUserData()
         val marketRecyclerView = binding.recyclerView
@@ -72,4 +75,10 @@ class ConsumerMainOverviewFragment : Fragment() {
         @JvmStatic
         fun newInstance() = ConsumerMainOverviewFragment()
     }
+
+    interface SellerObserver{
+        fun sendMarket(market: Market)
+        fun sendProduct(product: Product)
+    }
+
 }

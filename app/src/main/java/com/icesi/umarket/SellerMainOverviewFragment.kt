@@ -14,10 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentSellerMainOverviewBinding
-import com.icesi.umarket.model.Market
-import com.icesi.umarket.model.Product
-import com.icesi.umarket.model.ProductAdapter
-import com.icesi.umarket.model.ProductSellerAdapter
+import com.icesi.umarket.model.*
 import java.util.*
 
 class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductListener {
@@ -29,6 +26,7 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
 
     //STATE
     private val adapter = ProductSellerAdapter()
+    private val realAdapter=OrderSellerAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +39,28 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
 
         getMarket()
 
+
+
         val productRecycler = binding.productsRecycler
+        val ordersRecycler= binding.ordersRecycler
         productRecycler.setHasFixedSize(true)
         productRecycler.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
         productRecycler.adapter = adapter
+        ordersRecycler.adapter= realAdapter
 
         return binding.root
+    }
+
+    fun getOrders(marketID: String,userID: String){
+        Firebase.firestore.collection("orders").document(user.marketID).collection("UserOrders").document(user.id).collection("ProductsOrder").get()
+            .addOnCompleteListener { order ->
+                adapter.clear()
+                for(doc in order.result!!){
+                    val prod =doc.toObject(Order::class.java)
+                    realAdapter.addProduct(prod)
+                }
+
+            }
     }
 
     fun getMarket(){

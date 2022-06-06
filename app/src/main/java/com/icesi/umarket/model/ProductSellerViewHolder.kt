@@ -1,6 +1,5 @@
 package com.icesi.umarket.model
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,8 +16,8 @@ class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) 
 
     //UI controllers
     var producImageRow: ImageView = itemView.findViewById(R.id.marketRowImage)
-    var productNameRow: TextView = itemView.findViewById(R.id.marketNameRowTextView)
-    var productPriceRow: TextView = itemView.findViewById(R.id.descriptMarket)
+    var productNameRow: TextView = itemView.findViewById(R.id.name)
+    var productPriceRow: TextView = itemView.findViewById(R.id.descriptOrder)
 
     //state
 

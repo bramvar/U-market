@@ -28,7 +28,7 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
     private lateinit var user: Seller
 
     //STATE
-    private val adapter = ProductSellerAdapter()
+    val adapter = ProductSellerAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -116,5 +116,9 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
         adapter.addProduct(product)
     }
 
+    interface onProductsOnSellerObserver{
+        fun sendProduct(product: Product)
+        fun backToOverview()
+    }
 
 }

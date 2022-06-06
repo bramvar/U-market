@@ -9,21 +9,24 @@ import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.R
+import com.icesi.umarket.SellerMainOverviewFragment
 
 class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
 
     //STATE
     var product: Product? = null
+    lateinit var onProductSellerObserver : SellerMainOverviewFragment.onProductsOnSellerObserver
 
     //UI controllers
     var producImageRow: ImageView = itemView.findViewById(R.id.marketRowImage)
     var productNameRow: TextView = itemView.findViewById(R.id.marketNameRowTextView)
     var productPriceRow: TextView = itemView.findViewById(R.id.descriptMarket)
-
     //state
 
     init {
-
+        producImageRow.setOnClickListener {
+            onProductSellerObserver.sendProduct(product!!)
+        }
     }
 
     fun bindProduct(product: Product){

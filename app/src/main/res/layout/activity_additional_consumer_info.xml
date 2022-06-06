@@ -84,6 +84,7 @@
             android:id="@+id/consumerProfileImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             tools:srcCompat="@drawable/add_img" />
 
     </androidx.cardview.widget.CardView>

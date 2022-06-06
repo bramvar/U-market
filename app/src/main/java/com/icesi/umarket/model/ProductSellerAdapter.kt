@@ -6,17 +6,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.icesi.umarket.R
+import com.icesi.umarket.SellerMainOverviewFragment
 import java.io.File
 
 class ProductSellerAdapter: RecyclerView.Adapter<ProductSellerViewHolder>() {
 
     private val products = ArrayList<Product>()
+    lateinit var onProductSellerObserver: SellerMainOverviewFragment.onProductsOnSellerObserver
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductSellerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.product_row,parent,false)
         val productViewHolder = ProductSellerViewHolder(view)
-
+        productViewHolder.onProductSellerObserver = onProductSellerObserver
         return productViewHolder
     }
 

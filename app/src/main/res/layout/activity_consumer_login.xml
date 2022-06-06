@@ -22,8 +22,6 @@
         app:icon="@drawable/back_arrow_icon"
         app:iconGravity="top"
         app:iconPadding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

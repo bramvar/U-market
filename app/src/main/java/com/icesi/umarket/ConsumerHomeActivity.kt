@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityConsumerHomeBinding
 import com.icesi.umarket.model.*
+import java.util.*
 
 class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.SellerObserver {
 
@@ -96,6 +97,11 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
                 var user= doc.toObject(User::class.java)!!
                 for(order in shoppingCar.orders){
                     Firebase.firestore.collection("users").document(user.id).collection("orders").add(order)
+
+                    Firebase.firestore.collection("order")
+                        .document(order.idMarket)
+                        .collection(currentUser.id)
+                        .add(order)
                 }
                 backToMarkets()
                 startActivity(intent)
@@ -103,9 +109,14 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         }
     }
 
+    override fun sendMarketInfo(market: Market){
+        productFragment.currentMarket = market
+    }
+
     override fun backToTheMainMarket(){
         showFragment(consumerSellerProfileFragment, true)
     }
+
 
     override fun backToMarketBlank(){
         showFragment(consumerMainOverviewFragment, true)

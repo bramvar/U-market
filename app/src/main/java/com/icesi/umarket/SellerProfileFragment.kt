@@ -35,6 +35,7 @@ class SellerProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
     ): View? {
         _binding = FragmentSellerProfileBinding.inflate(inflater,container,false)
         adapter.onProductObserver = onProductObserver
+        onProductObserver.sendMarketInfo(currentMarket)
         adapter.clear()
         _binding.infoMarketProfile.text = currentMarket.marketDescription
         _binding.marketName.text = currentMarket.marketName
@@ -92,9 +93,7 @@ class SellerProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
 
     override fun confirm() {
         dialogFragment.onDestroy()
-        ///shoppingCar.marketNumber = "3186775051"
         onProductObserver.sendMessage(shoppingCar.sendMessage())
-
     }
 
     override fun discard() {

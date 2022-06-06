@@ -86,6 +86,7 @@ class ConsumerMainOverviewFragment : Fragment() {
         fun backToMarkets()
         fun backToMarketBlank()
         fun backToTheMainMarket()
+        fun sendMarketInfo(market: Market)
     }
 
 }

@@ -7,4 +7,5 @@ data class Market (
         val marketDescription: String="",
         val imageID: String?= null,
         val phoneNumber: String=""
+
         )

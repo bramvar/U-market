@@ -44,7 +44,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
             if(verifyBlankAdditionalInfoFields(marketName,marketDescription)){
                 val seller = Seller(id!!,sellerName!!,email!!,password!!,phone!!,"Seller",marketID)
 
-                val market = Market(marketID,id,marketName,marketDescription,fileName)
+                val market = Market(marketID,id,marketName,marketDescription,fileName,phone)
 
                 Firebase.firestore.collection("users").document(id).set(seller).addOnSuccessListener {
                     Firebase.firestore.collection("markets").document(marketID).set(market).addOnSuccessListener {

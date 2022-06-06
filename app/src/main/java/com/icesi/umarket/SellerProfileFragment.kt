@@ -35,6 +35,7 @@ class SellerProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
     ): View? {
         _binding = FragmentSellerProfileBinding.inflate(inflater,container,false)
         adapter.onProductObserver = onProductObserver
+        adapter.clear()
         _binding.infoMarketProfile.text = currentMarket.marketDescription
         _binding.marketName.text = currentMarket.marketName
         onProductObserver.sendShoppingInfo(currentUser.name, currentMarket.phoneNumber)

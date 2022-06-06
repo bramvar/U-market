@@ -108,6 +108,7 @@ class NewProductFragment : Fragment() {
                     .addOnSuccessListener {
                         Firebase.storage.getReference().child("product-images").child(ImageID).putFile(productImageUri)
                             .addOnSuccessListener {
+                                clearNewProductFields()
                                 Toast.makeText(activity,"producto publicado", Toast.LENGTH_LONG).show()
                             }.addOnFailureListener{
                                 Toast.makeText(activity,it.message, Toast.LENGTH_LONG).show()
@@ -122,6 +123,13 @@ class NewProductFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun clearNewProductFields(){
+        binding.nameNewProductTextFiled.text.clear()
+        binding.priceNewProductTextField.text.clear()
+        binding.descriptionNewProductTextField.text.clear()
+        binding.newProductImage.setImageURI(null)
     }
 
     private fun onCameraResult(activityResult: ActivityResult){

@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.icesi.umarket.ConsumerMainOverviewFragment
 import com.icesi.umarket.R
 
-class ProductViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
+class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
 
     //STATE
     var product: Product? = null
-    lateinit var onProductObserver: ConsumerMainOverviewFragment.SellerObserver
+
     //UI controllers
     var producImageRow: ImageView = itemView.findViewById(R.id.marketRowImage)
     var productNameRow: TextView = itemView.findViewById(R.id.marketNameRowTextView)
@@ -24,11 +23,7 @@ class ProductViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     //state
 
     init {
-        producImageRow.setOnClickListener {
-            onProductObserver.sendProduct(Product(product!!.id, productNameRow.text.toString(),Integer.parseInt(productPriceRow.text.toString()),
-                product!!.description,
-                product!!.imageID))
-        }
+
     }
 
     fun bindProduct(product: Product){
@@ -37,11 +32,15 @@ class ProductViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
         productNameRow.text = product.name
         productPriceRow.text = product.price.toString()
 
+
+
         if(product.imageID != ""){
             Firebase.storage.reference.child("product-images").child(product.imageID!!).downloadUrl
                 .addOnSuccessListener {
                     Glide.with(producImageRow).load(it).into(producImageRow)
                 }
         }
+
+
     }
 }

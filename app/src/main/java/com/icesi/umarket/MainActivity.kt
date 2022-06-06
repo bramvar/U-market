@@ -28,11 +28,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeActivity(userType: String){
-        val intent = Intent(this, SellerLoginActivity::class.java).apply{
-            putExtra("userType", userType)
+        if(userType == "consumer"){
+            val intent2 = Intent(this, ConsumerLoginActivity::class.java).apply {
+                putExtra("userType", userType)
+
+            }
+            launcher.launch(intent2)
+        }else if(userType == "seller") {
+            val intent = Intent(this, SellerLoginActivity::class.java).apply {
+                putExtra("userType", userType) }
+            launcher.launch(intent)
+
         }
-        launcher.launch(intent)
+
     }
 
     fun onResult(activityResult: ActivityResult?) {}
 }
+

@@ -60,11 +60,8 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
             }
         }
 
-        binding.newMarketImage.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            galleryLauncher.launch(intent)
-        }
+
+        ////binding.newMarketImage.setOnClickListener { val intent = Intent(Intent.ACTION_GET_CONTENT) intent.type = "image/*" galleryLauncher.launch(intent) }
 
         binding.sellerAdditionalInfoBackBtn.setOnClickListener {
             finish()
@@ -74,7 +71,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
     private fun onGalleryResult(activityResult: ActivityResult){
         if(activityResult.resultCode == RESULT_OK){
             imageUri= activityResult.data?.data!!
-            binding.newMarketImage.setImageURI(imageUri)
+            //binding.newMarketImage.setImageURI(imageUri)
 
             //image upload
         }

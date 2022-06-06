@@ -9,13 +9,16 @@
 
     <EditText
         android:id="@+id/signUpMarketNameTextField"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Nombre del emprendimiento"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,10 +28,10 @@
 
     <Button
         android:id="@+id/sellerAdditionalInfoBackBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/shape_circle"
         android:backgroundTint="#FAB057"
         android:foregroundGravity="center"
@@ -43,21 +46,21 @@
 
     <Button
         android:id="@+id/sellerSignupBtn"
-        android:layout_width="247dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/style_bottom"
         android:backgroundTint="#FAB057"
         android:text="Registrarme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sellerInfoDescriptionTextField"
+        app:layout_constraintStart_toStartOf="@+id/sellerInfoDescriptionTextField"
         app:layout_constraintTop_toBottomOf="@+id/sellerInfoDescriptionTextField" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="306dp"
         android:layout_height="85dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Añade información de tu emprendimiento"
         android:textColor="#FFFFFF"
@@ -65,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/sellerAdditionalInfoBackBtn" />
 
     <EditText
         android:id="@+id/sellerInfoDescriptionTextField"
@@ -95,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <ImageView
-            android:id="@+id/newMarketImage"
+            android:id="@+id/MarketImageProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"

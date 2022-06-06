@@ -17,6 +17,7 @@ import com.icesi.umarket.databinding.FragmentSellerMainOverviewBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.ProductAdapter
+import com.icesi.umarket.model.ProductSellerAdapter
 import java.util.*
 
 class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductListener {
@@ -27,7 +28,7 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
     private lateinit var user: Seller
 
     //STATE
-    private val adapter = ProductAdapter()
+    private val adapter = ProductSellerAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

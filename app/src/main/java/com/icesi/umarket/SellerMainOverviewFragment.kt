@@ -1,6 +1,7 @@
 package com.icesi.umarket
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -78,7 +79,7 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
 
     fun downloadMarketProfileImage(imageID: String?){
         if(imageID == null) return
-
+        Log.e("IMG id ", imageID)
         Firebase.storage.reference.child("market-image-profile").child(imageID).downloadUrl
             .addOnSuccessListener{
                 Glide.with(binding.marketProfileImage).load(it).into(binding.marketProfileImage)

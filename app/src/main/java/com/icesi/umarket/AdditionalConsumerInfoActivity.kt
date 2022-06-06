@@ -56,7 +56,6 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
             val i = Intent(Intent.ACTION_GET_CONTENT)
             i.type = "image/*"
             galLauncher.launch(i)
-
         }
         requestPermissions(arrayOf(
             Manifest.permission.CAMERA,

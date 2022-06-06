@@ -96,7 +96,7 @@ class NewProductFragment : Fragment() {
             val productID = UUID.randomUUID().toString()
             val productName = binding.nameNewProductTextFiled.text.toString()
             val productPrice = binding.priceNewProductTextField.text.toString()
-            val productDescription = binding.descriptionNewProductTextField.toString()
+            val productDescription = binding.descriptionNewProductTextField.text.toString()
             val ImageID = UUID.randomUUID().toString()
 
             if( productName.isBlank() or productPrice.isBlank() or productDescription.isBlank()){

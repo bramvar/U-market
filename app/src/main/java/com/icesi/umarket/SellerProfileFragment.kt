@@ -91,7 +91,7 @@ class SellerProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
 
     override fun confirm() {
         dialogFragment.onDestroy()
-        shoppingCar.marketNumber = "3186775051"
+        ///shoppingCar.marketNumber = "3186775051"
         onProductObserver.sendMessage(shoppingCar.sendMessage())
 
     }

@@ -33,6 +33,10 @@ class ProductFragment : Fragment() {
         _binding.priceProduct.text = "$" + product.price.toString()
         loadImage()
 
+        _binding.productBackBtn.setOnClickListener {
+            onOrderObserver.backToTheMainMarket()
+        }
+
         _binding.moreText.setOnClickListener {
             changeAmountText(true)
         }

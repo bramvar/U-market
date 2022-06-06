@@ -103,6 +103,10 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         }
     }
 
+    override fun backToTheMainMarket(){
+        showFragment(consumerSellerProfileFragment, true)
+    }
+
     override fun backToMarketBlank(){
         showFragment(consumerMainOverviewFragment, true)
     }

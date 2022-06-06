@@ -31,10 +31,10 @@ class ShoppingCar() {
         var msg = "Hola! Soy $consumerName y me gustaria comprar lo siguiente: \n"
         var total = 0
         for(order in orders){
-            msg += "-"+order.amount+" de "+order.name+ "\n"
+            msg += "\n-"+order.amount+" de "+order.name
             total += order.totalPrice
         }
-        msg+="\nPara un total de $"+total
+        msg+="\n\nPara un total de $"+total
         msg+="\nMuchas gracias! Espero tu respuesta."
         return msg
     }

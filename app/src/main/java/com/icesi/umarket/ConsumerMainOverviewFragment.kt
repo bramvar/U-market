@@ -85,6 +85,7 @@ class ConsumerMainOverviewFragment : Fragment() {
         fun sendMessage(intent: Intent)
         fun backToMarkets()
         fun backToMarketBlank()
+        fun backToTheMainMarket()
     }
 
 }

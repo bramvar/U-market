@@ -1,7 +1,9 @@
 package com.icesi.umarket
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -26,6 +28,15 @@ class ConsumerEditProfile : AppCompatActivity() {
             User::class.java
         )
         loadInformation(currentUser)
+
+        binding.editDoneBtn.setOnClickListener{
+            val idtoCompare = currentUser.id
+            updateInformation(currentUser)
+            Firebase.firestore.collection("users").document(idtoCompare).set(currentUser)
+            Toast.makeText(this, "Update succesfull", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, ConsumerHomeActivity::class.java).apply{putExtra("currentUser", Gson().toJson(currentUser))}
+            startActivity(intent)
+        }
     }
 
     fun loadInformation(user: User){
@@ -39,5 +50,12 @@ class ConsumerEditProfile : AppCompatActivity() {
             .addOnSuccessListener{
                 Glide.with(binding.profilephotoedit).load(it).into(binding.profilephotoedit)
             }
+    }
+
+    fun updateInformation(user: User){
+        user.name = binding.nameEdit.text.toString()
+        user.password = binding.passEdit.text.toString()
+        user.email = binding.emailEdit.text.toString()
+        user.phone = binding.phoneEdit.text.toString()
     }
 }

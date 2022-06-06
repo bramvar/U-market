@@ -27,7 +27,7 @@ class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
      */
     init {
         marketImageRow.setOnClickListener {
-            onSellerObserver.sendMarket(Market(market!!.id,"", marketName.text.toString(),descriptMarket.text.toString(), market!!.imageID))
+            onSellerObserver.sendMarket(Market(market!!.id,"", marketName.text.toString(),descriptMarket.text.toString(), market!!.imageID, market!!.phoneNumber))
         }
 
     }

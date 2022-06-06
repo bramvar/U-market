@@ -1,6 +1,7 @@
 package com.icesi.umarket
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
@@ -79,6 +80,11 @@ class ConsumerMainOverviewFragment : Fragment() {
     interface SellerObserver{
         fun sendMarket(market: Market)
         fun sendProduct(product: Product)
+        fun loadOrder(order: Order)
+        fun sendShoppingInfo(name:String, phone:String)
+        fun sendMessage(intent: Intent)
+        fun backToMarkets()
+        fun backToMarketBlank()
     }
 
 }

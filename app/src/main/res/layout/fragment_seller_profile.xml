@@ -32,7 +32,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout6"
-                android:layout_width="414dp"
+                android:layout_width="match_parent"
                 android:layout_height="314dp"
                 android:background="@drawable/profile_background"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
                     app:cardCornerRadius="75dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sellerAdditionalInfoBackBtn2">
+                    app:layout_constraintTop_toBottomOf="@+id/sellerinfoBtn">
 
                     <ImageView
                         android:id="@+id/MarketImageProfile"
@@ -57,7 +57,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <Button
-                    android:id="@+id/sellerAdditionalInfoBackBtn2"
+                    android:id="@+id/sellerinfoBtn"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="32dp"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
@@ -18,6 +19,7 @@ class ProductFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var product: Product
     lateinit var shoppingCar: ShoppingCar
+    lateinit var onOrderObserver: ConsumerMainOverviewFragment.SellerObserver
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +42,16 @@ class ProductFragment : Fragment() {
         }
 
         _binding.pedirBtn.setOnClickListener {
-            shoppingCar = ShoppingCar("Valentina","3186775051")
-            shoppingCar.orders.add(Order(1, "Pan"))
-            shoppingCar.orders.add(Order(4, "Hamburguesa"))
-            shoppingCar.orders.add(Order(3, "Pizza"))
-            shoppingCar.orders.add(Order(5, "Arroz"))
-            shoppingCar.orders.add(Order(2, "Pan de bono"))
-            startActivity(shoppingCar.sendMessage())
+            var amount:Int = Integer.valueOf(_binding.amountText.text.toString())
+            var name = _binding.productName.text.toString()
+            var price = Integer.valueOf(_binding.priceProduct.text.toString().replace("$",""))
+
+            if(amount > 0){
+                onOrderObserver.loadOrder(Order(amount,name,price, price*amount, product.imageID.toString()))
+            }else{
+                Toast.makeText(getActivity(),"Cantidad invalida", Toast.LENGTH_SHORT).show();
+            }
+            ///startActivity(shoppingCar.sendMessage())
         }
         // Inflate the layout for this fragment
         return _binding.root

@@ -2,67 +2,79 @@ package com.icesi.umarket
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
-import com.icesi.umarket.databinding.FragmentConsumerProfileBinding
+import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
 import com.icesi.umarket.databinding.FragmentConsumerShoppingBinding
+import com.icesi.umarket.model.Order
+import com.icesi.umarket.model.OrderAdapter
 import com.icesi.umarket.model.User
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
 
 class ConsumerShoppingFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
 
-    private lateinit var binding: FragmentConsumerShoppingBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var currentUser: User
+    var itHasOrders: Boolean = false
+    private lateinit var _binding: FragmentConsumerShoppingBinding
+    private val binding get() = _binding!!
+     val adapter = OrderAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentConsumerShoppingBinding.inflate(layoutInflater)
+        _binding = FragmentConsumerShoppingBinding.inflate(inflater,container,false)
+        var orderRecyclerView = _binding.ordersRecyclerView
+        orderRecyclerView.setHasFixedSize(true)
+        orderRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        orderRecyclerView.adapter = adapter
 
         val prefs = requireActivity().getSharedPreferences("u-market", Context.MODE_PRIVATE)
         val json = Gson().fromJson(prefs.getString("user",""), User::class.java)
+        _binding.consumerNameShopping.text = json.name
 
-        binding.consumerNameShopping.text = json.name
+        loadOrders()
         loadProfileImg(json.img)
 
         // Inflate the layout for this fragment
-        return binding.root
+        return _binding.root
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() =
-            ConsumerShoppingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        fun newInstance() = ConsumerShoppingFragment()
+    }
+
+    fun loadOrders() {
+        Firebase.firestore.collection("users").document(currentUser.id).collection("orders").get()
+            .addOnSuccessListener {
+                for(doc in it.documents){
+                    itHasOrders = true
+                    adapter.addOrder(doc.toObject(Order::class.java)!!)
+                }
+
+                if(itHasOrders){
+                    adapter.showOrders()
                 }
             }
     }
 
     fun loadProfileImg(imageID: String){
-
         Firebase.storage.reference.child("profile").child(imageID).downloadUrl
             .addOnSuccessListener{
-                Glide.with(binding.consumerProfileShopping).load(it).into(binding.consumerProfileShopping)
+                Glide.with(_binding.consumerProfileShopping).load(it).into(_binding.consumerProfileShopping)
             }
     }
 }
+
+

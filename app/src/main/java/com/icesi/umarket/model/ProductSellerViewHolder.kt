@@ -28,11 +28,8 @@ class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) 
 
     fun bindProduct(product: Product){
         this.product = product
-
         productNameRow.text = product.name
         productPriceRow.text = product.price.toString()
-
-
 
         if(product.imageID != ""){
             Firebase.storage.reference.child("product-images").child(product.imageID!!).downloadUrl
@@ -40,7 +37,5 @@ class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) 
                     Glide.with(producImageRow).load(it).into(producImageRow)
                 }
         }
-
-
     }
 }

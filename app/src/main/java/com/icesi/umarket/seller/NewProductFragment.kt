@@ -1,17 +1,14 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +24,7 @@ import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentNewProductBinding
 import com.icesi.umarket.model.Product
-import com.icesi.umarket.util.UtilDomi
+import com.icesi.umarket.model.Seller
 import java.io.File
 import java.util.*
 

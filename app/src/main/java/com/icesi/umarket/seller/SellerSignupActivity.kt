@@ -1,4 +1,4 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

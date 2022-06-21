@@ -1,39 +1,38 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+import com.icesi.umarket.consumer.ConsumerSignupActivity
+import com.icesi.umarket.databinding.ActivitySellerLoginBinding
+import com.icesi.umarket.model.Seller
 
-import com.icesi.umarket.databinding.ActivityConsumerLoginBinding
-import com.icesi.umarket.model.User
+class SellerLoginActivity : AppCompatActivity() {
 
-
-class ConsumerLoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityConsumerLoginBinding
-
+    private lateinit var binding: ActivitySellerLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityConsumerLoginBinding.inflate(layoutInflater)
+
+        binding = ActivitySellerLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.signUpHyperLink.setOnClickListener {
             var userType = intent.extras?.getString("userType","")
             if(userType=="consumer"){
-                startActivity(Intent(this,ConsumerSignupActivity::class.java))
+                startActivity(Intent(this, ConsumerSignupActivity::class.java))
             }else{
-                startActivity(Intent(this,SellerSignupActivity::class.java))
+                startActivity(Intent(this, SellerSignupActivity::class.java))
             }
         }
         binding.sellerLoginGoBackBtn.setOnClickListener {
             finish()
         }
-
 
         binding.loginBtn.setOnClickListener {
             val email = binding.logInUserNameTextField.text.toString()
@@ -45,26 +44,24 @@ class ConsumerLoginActivity : AppCompatActivity() {
 
                     Firebase.firestore.collection("users").document(currentUser!!.uid).get()
                         .addOnSuccessListener {
-                            val user = it.toObject(User::class.java)
+                            val user = it.toObject(Seller::class.java)
 
                             saveUser(user!!)
-                            startActivity(Intent(this, ConsumerHomeActivity::class.java).apply{
-                                putExtra("currentUser", Gson().toJson(user))
-                            })
+                            startActivity(Intent(this, SellerHomeActivity::class.java))
                             finish()
-                        }.addOnFailureListener {
-                            Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
+                        }.addOnFailureListener{
+                            Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()
                         }
-                }.addOnFailureListener {
-                    Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
-                }
-
+                }.addOnFailureListener{
+                Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
-    private fun saveUser(user: User){
+
+    private fun saveUser(user: Seller){
         val sp = getSharedPreferences("u-market", MODE_PRIVATE)
         val json = Gson().toJson(user)
         sp.edit().putString("user",json).apply()
+
     }
 }
-

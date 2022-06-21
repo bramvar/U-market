@@ -1,12 +1,13 @@
-package com.icesi.umarket.model
+package com.icesi.umarket.model.adapters
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.icesi.umarket.ConsumerMainOverviewFragment
 import com.icesi.umarket.R
+import com.icesi.umarket.model.Order
+import com.icesi.umarket.model.holders.OrderViewHolder
 import java.io.File
 
 class OrderAdapter: RecyclerView.Adapter<OrderViewHolder>()  {

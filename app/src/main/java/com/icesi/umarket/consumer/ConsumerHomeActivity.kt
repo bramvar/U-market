@@ -1,17 +1,17 @@
-package com.icesi.umarket
+package com.icesi.umarket.consumer
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+import com.icesi.umarket.ProductFragment
+import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivityConsumerHomeBinding
 import com.icesi.umarket.model.*
-import java.util.*
 
 class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.SellerObserver {
 
@@ -23,7 +23,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     private  var consumerMainOverviewFragment = ConsumerMainOverviewFragment.newInstance()
     private  var consumerProfileFragment = ConsumerProfileFragment.newInstance()
     private  var consumerShoppingFragment= ConsumerShoppingFragment.newInstance()
-    private  var consumerSellerProfileFragment= SellerProfileFragment.newInstance()
+    private  var consumerMarketProfileFragment= MarketProfileFragment.newInstance()
     private  var productFragment = ProductFragment.newInstance()
     private lateinit var currentUser: User
     private lateinit var shoppingCar: ShoppingCar
@@ -42,12 +42,12 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         ///// Init the currentUser in the fragments
         consumerProfileFragment.currentUser = currentUser
         consumerMainOverviewFragment.currentUser = currentUser
-        consumerSellerProfileFragment.currentUser = currentUser
+        consumerMarketProfileFragment.currentUser = currentUser
         consumerShoppingFragment.currentUser = currentUser
 
         ////// Load the listener
         consumerMainOverviewFragment.onSellerObserver = this
-        consumerSellerProfileFragment.onProductObserver = this
+        consumerMarketProfileFragment.onProductObserver = this
         productFragment.onOrderObserver = this
 
         showFragment(consumerMainOverviewFragment, true)
@@ -77,8 +77,8 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     }
 
     override fun sendMarket(market: Market) {
-        consumerSellerProfileFragment.currentMarket = market
-        showFragment(consumerSellerProfileFragment, true)
+        consumerMarketProfileFragment.currentMarket = market
+        showFragment(consumerMarketProfileFragment, true)
     }
 
     override fun sendProduct(product: Product) {
@@ -114,7 +114,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     }
 
     override fun backToTheMainMarket(){
-        showFragment(consumerSellerProfileFragment, true)
+        showFragment(consumerMarketProfileFragment, true)
     }
 
 
@@ -124,13 +124,13 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
 
     override fun backToMarkets() {
         shoppingCar = ShoppingCar()
-        consumerSellerProfileFragment.shoppingCar = shoppingCar
+        consumerMarketProfileFragment.shoppingCar = shoppingCar
         showFragment(consumerMainOverviewFragment, true)
     }
 
     override fun loadOrder(order: Order) {
         shoppingCar.loadOrder(order)
-        consumerSellerProfileFragment.shoppingCar = shoppingCar
-        showFragment(consumerSellerProfileFragment, true)
+        consumerMarketProfileFragment.shoppingCar = shoppingCar
+        showFragment(consumerMarketProfileFragment, true)
     }
 }

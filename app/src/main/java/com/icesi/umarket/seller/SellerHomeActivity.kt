@@ -1,8 +1,9 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivitySellerHomeBinding
 import com.icesi.umarket.model.Product
 

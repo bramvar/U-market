@@ -1,4 +1,4 @@
-package com.icesi.umarket
+package com.icesi.umarket.consumer
 
 import android.app.AlertDialog
 import android.app.Dialog

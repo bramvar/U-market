@@ -1,26 +1,22 @@
-package com.icesi.umarket
+package com.icesi.umarket.consumer
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LifecycleObserver
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.icesi.umarket.databinding.ActivityConsumerHomeBinding
-import com.icesi.umarket.databinding.FragmentSellerProfileBinding
+import com.icesi.umarket.databinding.FragmentMarketProfileBinding
 import com.icesi.umarket.model.*
+import com.icesi.umarket.model.adapters.ProductAdapter
 
-class SellerProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.ConfirmPurchaseObserver {
+class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.ConfirmPurchaseObserver {
 
-    private lateinit var _binding: FragmentSellerProfileBinding
+    private lateinit var _binding: FragmentMarketProfileBinding
     private val binding get() = _binding!!
     lateinit var currentMarket: Market
     lateinit var currentUser: User
@@ -33,7 +29,7 @@ class SellerProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSellerProfileBinding.inflate(inflater,container,false)
+        _binding = FragmentMarketProfileBinding.inflate(inflater,container,false)
         adapter.onProductObserver = onProductObserver
         onProductObserver.sendMarketInfo(currentMarket)
         adapter.clear()
@@ -68,7 +64,7 @@ class SellerProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
 
     companion object {
         @JvmStatic
-        fun newInstance() = SellerProfileFragment()
+        fun newInstance() = MarketProfileFragment()
     }
 
     fun loadImage(){

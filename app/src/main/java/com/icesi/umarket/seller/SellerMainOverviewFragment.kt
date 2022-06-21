@@ -1,4 +1,4 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import android.os.Bundle
 import android.util.Log
@@ -10,16 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentSellerMainOverviewBinding
-import com.icesi.umarket.model.Market
-import com.icesi.umarket.model.Product
-import com.icesi.umarket.model.ProductAdapter
-import com.icesi.umarket.model.ProductSellerAdapter
-import java.util.*
+import com.icesi.umarket.model.*
+import com.icesi.umarket.model.adapters.ProductSellerAdapter
 
 class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductListener {
 

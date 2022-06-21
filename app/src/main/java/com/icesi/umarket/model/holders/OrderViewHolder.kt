@@ -1,4 +1,4 @@
-package com.icesi.umarket.model
+package com.icesi.umarket.model.holders
 
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.R
+import com.icesi.umarket.model.Order
 
 class OrderViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
 

@@ -1,4 +1,4 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.icesi.umarket.databinding.FragmentProductBinding
 import com.icesi.umarket.databinding.FragmentProductSellerBinding
-import com.icesi.umarket.databinding.FragmentSellerMainOverviewBinding
 import com.icesi.umarket.model.Product
 
 class ProductSellerFragment : Fragment() {

@@ -1,28 +1,30 @@
-package com.icesi.umarket.model
+package com.icesi.umarket.model.adapters
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.icesi.umarket.consumer.ConsumerMainOverviewFragment
 import com.icesi.umarket.R
-import com.icesi.umarket.SellerMainOverviewFragment
+import com.icesi.umarket.model.Product
+import com.icesi.umarket.model.holders.ProductViewHolder
 import java.io.File
 
-class ProductSellerAdapter: RecyclerView.Adapter<ProductSellerViewHolder>() {
+class ProductAdapter: RecyclerView.Adapter<ProductViewHolder>() {
 
     private val products = ArrayList<Product>()
-    lateinit var onProductSellerObserver: SellerMainOverviewFragment.onProductsOnSellerObserver
+    lateinit var onProductObserver: ConsumerMainOverviewFragment.SellerObserver
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductSellerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.product_row,parent,false)
-        val productViewHolder = ProductSellerViewHolder(view)
-        productViewHolder.onProductSellerObserver = onProductSellerObserver
+        val productViewHolder = ProductViewHolder(view)
+        productViewHolder.onProductObserver = onProductObserver
         return productViewHolder
     }
 
-    override fun onBindViewHolder(holder: ProductSellerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val productn = products[position]
 
         holder.bindProduct(productn)

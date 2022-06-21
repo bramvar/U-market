@@ -1,8 +1,7 @@
-package com.icesi.umarket
+package com.icesi.umarket.consumer
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
-import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
 import com.icesi.umarket.databinding.FragmentConsumerShoppingBinding
 import com.icesi.umarket.model.Order
-import com.icesi.umarket.model.OrderAdapter
+import com.icesi.umarket.model.adapters.OrderAdapter
 import com.icesi.umarket.model.User
 
 

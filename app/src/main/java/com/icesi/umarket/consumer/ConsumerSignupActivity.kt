@@ -1,4 +1,4 @@
-package com.icesi.umarket
+package com.icesi.umarket.consumer
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivityConsumerSignupBinding
 import com.icesi.umarket.model.User
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5A51CE"
-    tools:context=".SellerLoginActivity">
+    tools:context=".seller.SellerLoginActivity">
 
     <Button
         android:id="@+id/sellerLoginGoBackBtn"

@@ -1,4 +1,4 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -14,7 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.databinding.ActivityAdditionalSellerInfoBinding
 import com.icesi.umarket.model.Market
-import com.icesi.umarket.model.Product
+import com.icesi.umarket.model.Seller
 import com.icesi.umarket.util.UtilDomi
 import java.util.*
 
@@ -39,7 +39,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
         val password = intent.getStringExtra("PASSWORD")
 
         binding.sellerSignupBtn.setOnClickListener {
-            val i = Intent(this,SellerLoginActivity::class.java)
+            val i = Intent(this, SellerLoginActivity::class.java)
 
             val marketID = UUID.randomUUID().toString()
             idMarket = marketID

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import com.icesi.umarket.consumer.ConsumerLoginActivity
 import com.icesi.umarket.databinding.ActivityMainBinding
+import com.icesi.umarket.seller.SellerLoginActivity
 
 class MainActivity : AppCompatActivity() {
 

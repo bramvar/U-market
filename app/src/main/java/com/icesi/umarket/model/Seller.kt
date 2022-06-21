@@ -1,4 +1,4 @@
-package com.icesi.umarket
+package com.icesi.umarket.model
 
 data class Seller(
     val id: String="",

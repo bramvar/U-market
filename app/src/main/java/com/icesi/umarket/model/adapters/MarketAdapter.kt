@@ -1,13 +1,14 @@
-package com.icesi.umarket.model
+package com.icesi.umarket.model.adapters
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.icesi.umarket.ConsumerMainOverviewFragment
+import com.icesi.umarket.consumer.ConsumerMainOverviewFragment
 import com.icesi.umarket.R
+import com.icesi.umarket.model.Market
+import com.icesi.umarket.model.holders.MarketViewHolder
 import java.io.File
 
 class MarketAdapter: RecyclerView.Adapter<MarketViewHolder>() {

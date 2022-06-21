@@ -1,12 +1,10 @@
-package com.icesi.umarket
+package com.icesi.umarket.consumer
 
 import android.Manifest
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,10 +13,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
+import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivityAdditionalConsumerInfoBinding
 import com.icesi.umarket.model.User
 import com.icesi.umarket.util.UtilDomi
-import com.squareup.okhttp.Dispatcher
 import java.util.*
 
 class AdditionalConsumerInfoActivity : AppCompatActivity() {

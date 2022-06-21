@@ -1,6 +1,5 @@
-package com.icesi.umarket.model
+package com.icesi.umarket.model.holders
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.icesi.umarket.ConsumerMainOverviewFragment
+import com.icesi.umarket.consumer.ConsumerMainOverviewFragment
 import com.icesi.umarket.R
+import com.icesi.umarket.model.Market
 
 class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
 

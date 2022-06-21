@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.icesi.umarket.consumer.ConsumerMainOverviewFragment
 import com.icesi.umarket.databinding.FragmentProductBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Order

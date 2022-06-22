@@ -11,6 +11,8 @@ import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityConsumerEditProfileBinding
 import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Util
+import com.icesi.umarket.util.Util.getExtras
 
 class ConsumerEditProfile : AppCompatActivity() {
     private lateinit var binding: ActivityConsumerEditProfileBinding
@@ -21,10 +23,15 @@ class ConsumerEditProfile : AppCompatActivity() {
         binding = ActivityConsumerEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        currentUser = Gson().fromJson(
-            intent.extras?.getString("currentUser",""),
-            User::class.java
+        /**
+         * currentUser = Gson().fromJson(
+        intent.extras?.getString("currentUser",""),
+        User::class.java
         )
+         *
+         */
+
+        getExtras(intent, "currentUser",  User::class.java)
         loadInformation(currentUser)
 
         binding.editDoneBtn.setOnClickListener{
@@ -32,22 +39,21 @@ class ConsumerEditProfile : AppCompatActivity() {
             updateInformation(currentUser)
             Firebase.firestore.collection("users").document(idtoCompare).set(currentUser)
             Toast.makeText(this, "Update succesfull", Toast.LENGTH_LONG).show()
-            val intent = Intent(this, ConsumerHomeActivity::class.java).apply{putExtra("currentUser", Gson().toJson(currentUser))}
+
+            val intent = Intent(this, ConsumerHomeActivity::class.java).apply{
+                putExtra("currentUser", Gson().toJson(currentUser))
+            }
+
             startActivity(intent)
         }
     }
 
     fun loadInformation(user: User){
-
         binding.nameEdit.setText(user.name)
         binding.passEdit.setText(user.password)
         binding.emailEdit.setText(user.email)
         binding.phoneEdit.setText(user.phone)
-
-        Firebase.storage.reference.child("profile").child(user.img).downloadUrl
-            .addOnSuccessListener{
-                Glide.with(binding.profilephotoedit).load(it).into(binding.profilephotoedit)
-            }
+        Util.loadImage(user.img,binding.profilephotoedit,"profile")
     }
 
     fun updateInformation(user: User){

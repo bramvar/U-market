@@ -14,6 +14,7 @@ class OrderAdapter: RecyclerView.Adapter<OrderViewHolder>()  {
 
     private val orders = ArrayList<Order>()
     var showNoOrder: Boolean = true
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.order_row,parent,false)
@@ -34,7 +35,6 @@ class OrderAdapter: RecyclerView.Adapter<OrderViewHolder>()  {
         return orders.size
     }
 
-
     fun clear() {
         val size = orders.size
         orders.clear()
@@ -44,12 +44,5 @@ class OrderAdapter: RecyclerView.Adapter<OrderViewHolder>()  {
     fun addOrder(order: Order){
         orders.add(order)
         notifyItemInserted(orders.size-1)
-    }
-
-    private fun setImageBitmap(image: String?): Bitmap? {
-        val file = image?.let { File(it) }
-        val bitmap = BitmapFactory.decodeFile(file?.path)
-        val thumbnail = Bitmap.createScaledBitmap(bitmap, bitmap.width/4, bitmap.height/4, true)
-        return thumbnail
     }
 }

@@ -35,7 +35,7 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
         adapter.clear()
         _binding.infoMarketProfile.text = currentMarket.marketDescription
         _binding.marketName.text = currentMarket.marketName
-        onProductObserver.sendShoppingInfo(currentUser.name, currentMarket.phoneNumber)
+        onProductObserver.sendShoppingInfo(currentUser.name, currentMarket)
 
         val productsRecyclerView = binding.productsMarketInConsumer
         productsRecyclerView.setHasFixedSize(true)

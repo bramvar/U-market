@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.R
 import com.icesi.umarket.model.Order
+import com.icesi.umarket.util.Util
 
 class OrderViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
 
@@ -21,19 +22,11 @@ class OrderViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     var amountProductOrder: TextView = itemView.findViewById(R.id.amountProductOrder)
     var priceProductOrder: TextView = itemView.findViewById(R.id.priceOrderRow)
 
-    //state
-
     fun bindOrder(order: Order) {
         this.order = order
         productNameOrder.text = order.name
         amountProductOrder.text = "  " + order.amount.toString()
         priceProductOrder.text = "  $" + order.totalPrice
-        var imageID = order.imageID
-        if (imageID != "") {
-            Firebase.storage.reference.child("product-images").child(imageID).downloadUrl
-                .addOnSuccessListener {
-                    Glide.with(productImgOrderRow).load(it).into(productImgOrderRow)
-                }
-        }
+        Util.loadImage(order.imageID,productImgOrderRow, "product-images")
     }
 }

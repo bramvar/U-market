@@ -109,10 +109,8 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
             Toast.makeText(this, "No carga la imagen", Toast.LENGTH_LONG).show()
         }
     }
+
     private fun saveUser(){
-        val sp = getSharedPreferences("u-market", MODE_PRIVATE)
-        val json = Gson().toJson(userObj)
-        sp.edit().putString("user",json).apply()
         Firebase.firestore.collection("users").document(userObj.id).update("img", idImg)
     }
 

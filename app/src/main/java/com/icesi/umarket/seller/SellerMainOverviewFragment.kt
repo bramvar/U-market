@@ -8,20 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentSellerMainOverviewBinding
 import com.icesi.umarket.model.*
 import com.icesi.umarket.model.adapters.ProductSellerAdapter
+import com.icesi.umarket.model.adapters.SellerOrdersToConfirmAdapter
+import java.util.*
 
 class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductListener {
 
     private var _binding: FragmentSellerMainOverviewBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var user: Seller
 
     //STATE
@@ -35,15 +38,17 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
         _binding = FragmentSellerMainOverviewBinding.inflate(inflater,container,false)
 
         user = loadUser()!!
-
         getMarket()
-
-        val productRecycler = binding.productsRecycler
-        productRecycler.setHasFixedSize(true)
-        productRecycler.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
-        productRecycler.adapter = adapter
+        initProductsRecyclerView(binding.productsRecycler)
 
         return binding.root
+    }
+
+
+    private fun  initProductsRecyclerView(recycler: RecyclerView){
+        recycler.setHasFixedSize(true)
+        recycler.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
+        recycler.adapter = adapter
     }
 
     fun getMarket(){
@@ -56,8 +61,8 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
                 binding.marketNameTextView.text = marketName
 
                 downloadMarketProfileImage(marketImage)
-                getProducts(user.marketID)
 
+                getProducts(user.marketID)
             }
     }
 
@@ -69,13 +74,11 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
                     val prod =doc.toObject(Product::class.java)
                     adapter.addProduct(prod)
                 }
-
             }
     }
 
     fun downloadMarketProfileImage(imageID: String?){
         if(imageID == null) return
-        Log.e("IMG id ", imageID)
         Firebase.storage.reference.child("market-image-profile").child(imageID).downloadUrl
             .addOnSuccessListener{
                 Glide.with(binding.marketProfileImage).load(it).into(binding.marketProfileImage)

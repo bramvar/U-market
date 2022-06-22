@@ -48,7 +48,6 @@ class ConsumerLoginActivity : AppCompatActivity() {
                         .addOnSuccessListener {
                             val user = it.toObject(User::class.java)
 
-                            saveUser(user!!)
                             startActivity(Intent(this, ConsumerHomeActivity::class.java).apply{
                                 putExtra("currentUser", Gson().toJson(user))
                             })
@@ -61,11 +60,6 @@ class ConsumerLoginActivity : AppCompatActivity() {
                 }
 
         }
-    }
-    private fun saveUser(user: User){
-        val sp = getSharedPreferences("u-market", MODE_PRIVATE)
-        val json = Gson().toJson(user)
-        sp.edit().putString("user",json).apply()
     }
 }
 

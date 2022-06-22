@@ -12,12 +12,14 @@ import com.icesi.umarket.ProductFragment
 import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivityConsumerHomeBinding
 import com.icesi.umarket.model.*
+import com.icesi.umarket.util.Util
 
 class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.SellerObserver {
 
-
     private lateinit var binding: ActivityConsumerHomeBinding
     private lateinit var menuConsumer:BottomNavigationView
+    private lateinit var currentUser: User
+    private var shoppingCar = ShoppingCar()
 
     ////// Init the fragment
     private  var consumerMainOverviewFragment = ConsumerMainOverviewFragment.newInstance()
@@ -25,33 +27,20 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     private  var consumerShoppingFragment= ConsumerShoppingFragment.newInstance()
     private  var consumerMarketProfileFragment= MarketProfileFragment.newInstance()
     private  var productFragment = ProductFragment.newInstance()
-    private lateinit var currentUser: User
-    private lateinit var shoppingCar: ShoppingCar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityConsumerHomeBinding.inflate(layoutInflater)
         menuConsumer = binding.menuConsumer
         setContentView(binding.root)
 
-        currentUser = Gson().fromJson(
-            intent.extras?.getString("currentUser",""),
-            User::class.java
-        )
+        currentUser = Util.getExtras(intent,"currentUser", User::class.java) as User
+        ///currentUser = Gson().fromJson(intent.extras?.getString("currentUser",""), User::class.java)
 
-        shoppingCar = ShoppingCar()
-        ///// Init the currentUser in the fragments
-        consumerProfileFragment.currentUser = currentUser
-        consumerMainOverviewFragment.currentUser = currentUser
-        consumerMarketProfileFragment.currentUser = currentUser
-        consumerShoppingFragment.currentUser = currentUser
-
-        ////// Load the listener
-        consumerMainOverviewFragment.onSellerObserver = this
-        consumerMarketProfileFragment.onProductObserver = this
-        productFragment.onOrderObserver = this
+        loadUserInFragments()
+        loadListeners()
 
         showFragment(consumerMainOverviewFragment, true)
-
         menuConsumer.setOnItemSelectedListener { menuItem->
             when(menuItem.itemId){
                 R.id.homeItem -> showFragment(consumerMainOverviewFragment, true)
@@ -62,8 +51,19 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         }
     }
 
-    override fun onBackPressed() {
-    // super.onBackPressed();
+    fun loadListeners(){
+        ////// Load the listener
+        consumerMainOverviewFragment.onSellerObserver = this
+        consumerMarketProfileFragment.onProductObserver = this
+        productFragment.onOrderObserver = this
+    }
+
+    fun loadUserInFragments(){
+        ///// Init the currentUser in the fragments
+        consumerProfileFragment.currentUser = currentUser
+        consumerMainOverviewFragment.currentUser = currentUser
+        consumerMarketProfileFragment.currentUser = currentUser
+        consumerShoppingFragment.currentUser = currentUser
     }
 
     fun showFragment(fragment: Fragment, eraseOrders: Boolean){
@@ -76,6 +76,10 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         transaction.commit()
     }
 
+    override fun onBackPressed() {
+        // super.onBackPressed();
+    }
+
     override fun sendMarket(market: Market) {
         consumerMarketProfileFragment.currentMarket = market
         showFragment(consumerMarketProfileFragment, true)
@@ -86,9 +90,9 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         showFragment(productFragment, true)
     }
 
-    override fun sendShoppingInfo(name: String, phone: String) {
+    override fun sendShoppingInfo(name: String, market: Market) {
         shoppingCar.consumerName = name
-        shoppingCar.marketNumber = phone
+        shoppingCar.currentMarket = market
     }
 
     override fun sendMessage(intent: Intent) {

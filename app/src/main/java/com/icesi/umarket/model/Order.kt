@@ -7,5 +7,7 @@ class Order(
     var totalPrice: Int = 0,
     val imageID: String="",
     val idMarket: String="",
-    val idProduct: String =""
+    val idProduct: String ="",
+    var idOrder: String ="",
+    var orderFlag: String =""
 )

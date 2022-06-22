@@ -14,12 +14,14 @@ import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
 import com.icesi.umarket.model.*
 import com.icesi.umarket.model.adapters.MarketAdapter
+import com.icesi.umarket.util.Util
 
 
 class ConsumerMainOverviewFragment : Fragment() {
 
     private var _binding: FragmentConsumerMainOverviewBinding? = null
     private val binding get() = _binding!!
+
     lateinit var currentUser: User
     lateinit var onSellerObserver: SellerObserver
 
@@ -33,29 +35,21 @@ class ConsumerMainOverviewFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentConsumerMainOverviewBinding.inflate(inflater,container,false)
         adapter.onSellerObserver = onSellerObserver
-        getMarket()
+
+        getMarkets()
         getUserData()
-        val marketRecyclerView = binding.recyclerView
-        marketRecyclerView.setHasFixedSize(true)
-        marketRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        marketRecyclerView.adapter = adapter
+        Util.initRecycler(binding.recyclerView, requireActivity(), LinearLayoutManager.VERTICAL,).adapter = adapter
 
         return binding.root
     }
 
+
     fun getUserData(){
         binding.consumerName.text = currentUser.name
-        loadProfileImg(currentUser.img)
+        Util.loadImage(currentUser.img,binding.consumerProfile,"profile" )
     }
 
-    fun loadProfileImg(imageID: String){
-        Firebase.storage.reference.child("profile").child(imageID).downloadUrl
-            .addOnSuccessListener{
-                Glide.with(binding.consumerProfile).load(it).into(binding.consumerProfile)
-            }
-    }
-
-    fun getMarket(){
+    fun getMarkets() {
         Firebase.firestore.collection("markets").get()
             .addOnCompleteListener { market ->
                 adapter.clear()
@@ -75,7 +69,7 @@ class ConsumerMainOverviewFragment : Fragment() {
         fun sendMarket(market: Market)
         fun sendProduct(product: Product)
         fun loadOrder(order: Order)
-        fun sendShoppingInfo(name:String, phone:String)
+        fun sendShoppingInfo(name:String, market:Market)
         fun sendMessage(intent: Intent)
         fun backToMarkets()
         fun backToMarketBlank()

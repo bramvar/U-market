@@ -44,13 +44,4 @@ class ProductAdapter: RecyclerView.Adapter<ProductViewHolder>() {
         products.add(product)
         notifyItemInserted(products.size-1)
     }
-
-    private fun setImageBitmap(image: String?): Bitmap? {
-        val file = image?.let { File(it) }
-        val bitmap = BitmapFactory.decodeFile(file?.path)
-        val thumpnail = Bitmap.createScaledBitmap(bitmap, bitmap.width/4, bitmap.height/4, true)
-
-        return thumpnail
-    }
-
 }

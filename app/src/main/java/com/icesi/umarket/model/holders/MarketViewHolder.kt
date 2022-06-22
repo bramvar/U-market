@@ -10,17 +10,18 @@ import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.consumer.ConsumerMainOverviewFragment
 import com.icesi.umarket.R
 import com.icesi.umarket.model.Market
+import com.icesi.umarket.util.Util
 
 class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
 
     //STATE
     var market: Market? = null
     lateinit var onSellerObserver: ConsumerMainOverviewFragment.SellerObserver
+
     //UI controllers
     var marketName: TextView = itemView.findViewById(R.id.marketNameRowTextView)
     var marketImageRow: ImageView = itemView.findViewById(R.id.marketRowImage)
     var descriptMarket: TextView = itemView.findViewById(R.id.descriptMarket)
-
 
     /**
      * Envia en patron observer el nombre y la descripcion
@@ -29,19 +30,12 @@ class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
         marketImageRow.setOnClickListener {
             onSellerObserver.sendMarket(Market(market!!.id,"", marketName.text.toString(),descriptMarket.text.toString(), market!!.imageID, market!!.phoneNumber))
         }
+    }
 
+    fun bindMarket(market: Market) {
+        this.market = market
+        marketName.text = market.marketName
+        descriptMarket.text = market.marketDescription
+        Util.loadImage(market.imageID.toString(), marketImageRow, "market-image-profile")
     }
-        //state
-        fun bindMarket(market: Market) {
-            this.market = market
-            marketName.text = market.marketName
-            descriptMarket.text = market.marketDescription
-            if (market.imageID != "") {
-                Firebase.storage.reference.child("market-image-profile")
-                    .child(market.imageID!!).downloadUrl
-                    .addOnSuccessListener {
-                        Glide.with(marketImageRow).load(it).into(marketImageRow)
-                    }
-            }
-        }
-    }
+}

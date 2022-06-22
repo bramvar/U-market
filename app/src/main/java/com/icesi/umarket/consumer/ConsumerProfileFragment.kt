@@ -14,12 +14,12 @@ import com.google.gson.Gson
 import com.icesi.umarket.MainActivity
 import com.icesi.umarket.databinding.FragmentConsumerProfileBinding
 import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Util
 
 class ConsumerProfileFragment : Fragment() {
 
     private var _binding: FragmentConsumerProfileBinding? = null
     private val binding get() = _binding!!
-
     lateinit var currentUser: User
 
     override fun onCreateView(
@@ -50,14 +50,7 @@ class ConsumerProfileFragment : Fragment() {
         binding.nameConsumer.text = currentUser?.name
         binding.emailConsumer.text = currentUser?.email
         binding.phoneConsumer.text = currentUser?.phone
-        loadProfileImg(currentUser!!.img)
-    }
-
-    private fun loadProfileImg(imageID: String){
-        Firebase.storage.reference.child("profile").child(imageID).downloadUrl
-            .addOnSuccessListener{
-                Glide.with(binding.profilePhotoConsumer).load(it).into(binding.profilePhotoConsumer)
-            }
+        Util.loadImage(currentUser!!.img, binding.profilePhotoConsumer, "profile")
     }
 
     override fun onDestroyView() {

@@ -16,35 +16,30 @@ import com.icesi.umarket.databinding.FragmentConsumerShoppingBinding
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.adapters.OrderAdapter
 import com.icesi.umarket.model.User
-
+import com.icesi.umarket.util.Util
 
 
 class ConsumerShoppingFragment : Fragment() {
 
     lateinit var currentUser: User
     var itHasOrders: Boolean = false
+
     private lateinit var _binding: FragmentConsumerShoppingBinding
     private val binding get() = _binding!!
-     val adapter = OrderAdapter()
+
+    val adapter = OrderAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentConsumerShoppingBinding.inflate(inflater,container,false)
-        var orderRecyclerView = _binding.ordersRecyclerView
-        orderRecyclerView.setHasFixedSize(true)
-        orderRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        orderRecyclerView.adapter = adapter
+        Util.initRecycler(_binding.ordersRecyclerView, requireActivity(),LinearLayoutManager.VERTICAL ).adapter = adapter
 
-        val prefs = requireActivity().getSharedPreferences("u-market", Context.MODE_PRIVATE)
-        val json = Gson().fromJson(prefs.getString("user",""), User::class.java)
-        _binding.consumerNameShopping.text = json.name
+        _binding.consumerNameShopping.text = currentUser.name
+        Util.loadImage(currentUser.img,_binding.consumerProfileShopping, "profile")
 
         loadOrders()
-        loadProfileImg(json.img)
-
-        // Inflate the layout for this fragment
         return _binding.root
     }
 
@@ -64,16 +59,7 @@ class ConsumerShoppingFragment : Fragment() {
                 if(itHasOrders){
                     adapter.showOrders()
                     binding.infoTxt.setText("")
-                }else{
-
                 }
-            }
-    }
-
-    fun loadProfileImg(imageID: String){
-        Firebase.storage.reference.child("profile").child(imageID).downloadUrl
-            .addOnSuccessListener{
-                Glide.with(_binding.consumerProfileShopping).load(it).into(_binding.consumerProfileShopping)
             }
     }
 }

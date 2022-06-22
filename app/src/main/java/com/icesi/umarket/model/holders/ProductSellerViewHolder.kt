@@ -10,6 +10,7 @@ import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.R
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.seller.SellerMainOverviewFragment
+import com.icesi.umarket.util.Util
 
 class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
 
@@ -21,7 +22,6 @@ class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) 
     var producImageRow: ImageView = itemView.findViewById(R.id.marketRowImage)
     var productNameRow: TextView = itemView.findViewById(R.id.marketNameRowTextView)
     var productPriceRow: TextView = itemView.findViewById(R.id.descriptMarket)
-    //state
 
     init {
         producImageRow.setOnClickListener {
@@ -33,12 +33,6 @@ class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) 
         this.product = product
         productNameRow.text = product.name
         productPriceRow.text = product.price.toString()
-
-        if(product.imageID != ""){
-            Firebase.storage.reference.child("product-images").child(product.imageID!!).downloadUrl
-                .addOnSuccessListener {
-                    Glide.with(producImageRow).load(it).into(producImageRow)
-                }
-        }
+        Util.loadImage(product.imageID.toString(),producImageRow,"product-images" )
     }
 }

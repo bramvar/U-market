@@ -7,5 +7,5 @@ data class Seller(
     val password: String="",
     val phone: String="",
     val role:String="",
-    val marketID:String=""
+    var marketID:String=""
 )

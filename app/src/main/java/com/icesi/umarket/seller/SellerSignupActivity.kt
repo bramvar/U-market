@@ -7,7 +7,9 @@ import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivitySellerSignupBinding
+import com.icesi.umarket.model.Seller
 
 class SellerSignupActivity : AppCompatActivity() {
 
@@ -41,13 +43,8 @@ class SellerSignupActivity : AppCompatActivity() {
                 Firebase.auth.createUserWithEmailAndPassword(email,password)
                     .addOnSuccessListener {
                         val id = Firebase.auth.currentUser?.uid
-
-                        i.putExtra("ID",id)
-                        i.putExtra("PHONE",phone)
-                        i.putExtra("SELLER_NAME",sellerName)
-                        i.putExtra("EMAIL",email)
-                        i.putExtra("PASSWORD",password)
-
+                        var user = Seller(id.toString(), sellerName, email, password, phone, "seller")
+                        i.putExtra("currentUser", Gson().toJson(user))
                         startActivity(i)
                     }.addOnFailureListener {
                         Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()
@@ -59,7 +56,6 @@ class SellerSignupActivity : AppCompatActivity() {
             Toast.makeText(this.baseContext,"Faltan campos por diligenciar", Toast.LENGTH_LONG).show()
 
         }
-
     }
 
     private fun verifyBlankSignupFields(

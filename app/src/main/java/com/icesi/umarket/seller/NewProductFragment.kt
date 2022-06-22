@@ -1,6 +1,5 @@
 package com.icesi.umarket.seller
 
-import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -20,25 +19,21 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentNewProductBinding
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Util
 import java.io.File
 import java.util.*
 
 class NewProductFragment : Fragment() {
 
-    val STRING_LENGTH = 10
-    val ALPHANUMERIC_REGEX = "[a-zA-Z0-9]+"
-
     private var _binding: FragmentNewProductBinding? = null
     private val binding get() = _binding!!
+    private lateinit var user: Seller
 
     private var file: File? = null
     private lateinit var productImageUri: Uri
-    private lateinit var user: Seller
 
     var listener: OnNewProductListener? = null
 
@@ -46,80 +41,54 @@ class NewProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentNewProductBinding.inflate(inflater, container, false)
 
-        val camLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onCameraResult)
-        val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
-
-        user = loadUser()!!
-
-        requestPermissions(arrayOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ),1)
-
-
         binding.newProductImage.setOnClickListener {
-            val myAlertDialog = AlertDialog.Builder(this.context)
-            myAlertDialog.setTitle("Upload Pictures Option")
-            myAlertDialog.setMessage("How do you want to set your picture?")
-
-            myAlertDialog.setPositiveButton("Gallery") { arg0, arg1 ->
-                    val intent = Intent(Intent.ACTION_GET_CONTENT)
-                    intent.type = "image/*"
-                    galleryLauncher.launch(intent)
-                }
-
-            myAlertDialog.setNegativeButton("Camera") { arg0, arg1 ->
-                val STRING_LENGTH = 10
-                val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-                val randomString = (1..STRING_LENGTH)
-                    .map { i -> kotlin.random.Random.nextInt(0, charPool.size) }
-                    .map(charPool::get)
-                    .joinToString("");
-                    val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    file = File("${activity?.getExternalFilesDir(null)}/"+randomString+".png")
-                    val uri = FileProvider.getUriForFile(requireActivity(), "com.icesi.umarket", file!!)
-                    productImageUri = uri
-                    i.putExtra(MediaStore.EXTRA_OUTPUT,uri)
-                    camLauncher.launch(i)
-                }
-            myAlertDialog.show()
+            loadImage()
         }
 
         binding.postNewProductBtn.setOnClickListener {
-
-            val productID = UUID.randomUUID().toString()
-            val productName = binding.nameNewProductTextFiled.text.toString()
-            val productPrice = binding.priceNewProductTextField.text.toString()
-            val productDescription = binding.descriptionNewProductTextField.text.toString()
-            val ImageID = UUID.randomUUID().toString()
-
-            if( productName.isBlank() or productPrice.isBlank() or productDescription.isBlank()){
-                Toast.makeText(activity,"Faltan campos por completar", Toast.LENGTH_LONG).show()
-            }else{
-                //it.onNewProduct(UUID.randomUUID().toString(),productName,productPrice.toInt(),productDescription,productImage!!)
-                val product = Product(productID,productName,productPrice.toInt(),productDescription,ImageID)
-                Firebase.firestore.collection("markets").document(user.marketID).collection("products").document(productID).set(product)
-                    .addOnSuccessListener {
-                        Firebase.storage.getReference().child("product-images").child(ImageID).putFile(productImageUri)
-                            .addOnSuccessListener {
-                                clearNewProductFields()
-                                Toast.makeText(activity,"producto publicado", Toast.LENGTH_LONG).show()
-                            }.addOnFailureListener{
-                                Toast.makeText(activity,it.message, Toast.LENGTH_LONG).show()
-                            }
-                    }.addOnFailureListener{
-                        Toast.makeText(activity,it.message, Toast.LENGTH_LONG).show()
-                    }
-
-            }
-
-
+            uploadProduct()
         }
 
         return binding.root
+    }
+
+    private fun uploadProduct() {
+        val product = buildProduct()
+        if (checkFields(product)) {
+            Firebase.firestore.collection("markets")
+                .document(user.marketID)
+                .collection("products")
+                .document(product.id)
+                .set(product)
+                .addOnSuccessListener {
+                    if (Util.sendImg(product.imageID, "product-images", productImageUri)){
+                        clearNewProductFields()
+                        Toast.makeText(activity, "Producto publicado", Toast.LENGTH_LONG).show()
+                    }
+                }.addOnFailureListener {
+                    Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
+    private fun buildProduct(): Product{
+        val productID = UUID.randomUUID().toString()
+        val productName = binding.nameNewProductTextFiled.text.toString()
+        val productPrice = Integer.parseInt(binding.priceNewProductTextField.text.toString())
+        val productDescription = binding.descriptionNewProductTextField.text.toString()
+        val imageID = UUID.randomUUID().toString()
+        return Product(productID,productName,productPrice,productDescription,imageID)
+    }
+
+    private fun checkFields(product: Product): Boolean{
+        var flag = true
+        if (product.name == "" || product.price == 0 || product.description == ""){
+            Toast.makeText(activity,"Campos invalidos", Toast.LENGTH_LONG).show()
+            flag=false
+        }
+        return flag
     }
 
     private fun clearNewProductFields(){
@@ -134,7 +103,6 @@ class NewProductFragment : Fragment() {
             val bitmap = BitmapFactory.decodeFile(file?.path)
             val thumpnail = Bitmap.createScaledBitmap(bitmap, bitmap.width/4, bitmap.height/4, true)
             binding.newProductImage.setImageBitmap(thumpnail)
-
         }
     }
 
@@ -145,15 +113,39 @@ class NewProductFragment : Fragment() {
         }
     }
 
-    fun loadUser(): Seller?{
-        val sp = this.context?.getSharedPreferences("u-market", AppCompatActivity.MODE_PRIVATE)
-        val json = sp?.getString("user","NO_USER")
+    private fun loadImage(){
+        val camLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onCameraResult)
+        val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
 
-        if(json == "NO_USER"){
-            return null
-        } else{
-            return Gson().fromJson(json, Seller::class.java)
+        val myAlertDialog = AlertDialog.Builder(this.context)
+        myAlertDialog.setTitle("Upload Pictures Option")
+        myAlertDialog.setMessage("How do you want to set your picture?")
+
+        myAlertDialog.setPositiveButton("Gallery") { arg0, arg1 ->
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            galleryLauncher.launch(intent)
         }
+
+        myAlertDialog.setNegativeButton("Camera") { arg0, arg1 ->
+            val STRING_LENGTH = 10
+            val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+            val randomString = (1..STRING_LENGTH)
+                .map { i -> kotlin.random.Random.nextInt(0, charPool.size) }
+                .map(charPool::get)
+                .joinToString("")
+            val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            file = File("${activity?.getExternalFilesDir(null)}/"+randomString+".png")
+            val uri = FileProvider.getUriForFile(requireActivity(), "com.icesi.umarket", file!!)
+            productImageUri = uri
+            i.putExtra(MediaStore.EXTRA_OUTPUT,uri)
+            camLauncher.launch(i)
+        }
+        myAlertDialog.show()
+    }
+
+    fun setUser(user: Seller){
+        this.user = user
     }
 
     override fun onDestroyView() {

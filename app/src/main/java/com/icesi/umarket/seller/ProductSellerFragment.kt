@@ -10,38 +10,35 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.databinding.FragmentProductSellerBinding
 import com.icesi.umarket.model.Product
+import com.icesi.umarket.util.Util
 
 class ProductSellerFragment : Fragment() {
     private lateinit var _binding: FragmentProductSellerBinding
     private val binding get() = _binding!!
-    lateinit var product: Product
-    lateinit var onProductSellerObserver: SellerMainOverviewFragment.onProductsOnSellerObserver
+    private lateinit var product: Product
+    lateinit var onProductSellerObserver: SellerMainOverviewFragment.OnProductsOnSellerObserver
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProductSellerBinding.inflate(inflater,container,false)
-        _binding.productNameSeller.text = product.name
-        _binding.productInfoSeller.text = product.description
-        _binding.priceProductSeller.text = "$" + product.price.toString()
-        loadImage()
-
+        buildProduct()
         _binding.productSellerBackBtn.setOnClickListener {
             onProductSellerObserver.backToOverview()
         }
-
         return _binding.root
     }
 
-    fun loadImage() {
-        if (product.imageID != "") {
-            Firebase.storage.reference.child("product-images")
-                .child(product.imageID!!).downloadUrl
-                .addOnSuccessListener {
-                    Glide.with(_binding.productSellerImg).load(it).into(_binding.productSellerImg)
-                }
-        }
+    private fun buildProduct(){
+        _binding.productNameSeller.text = product.name
+        _binding.productInfoSeller.text = product.description
+        _binding.priceProductSeller.text = "$" + product.price.toString()
+        Util.loadImage(product.imageID,_binding.productSellerImg,"product-images" )
+    }
+
+    fun setCurrentProduct(product: Product){
+        this.product = product
     }
 
     companion object {

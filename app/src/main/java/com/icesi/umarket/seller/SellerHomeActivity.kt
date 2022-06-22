@@ -12,28 +12,29 @@ import com.icesi.umarket.SellerOrderOverviewFragment
 import com.icesi.umarket.databinding.ActivitySellerHomeBinding
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Util
 
 class SellerHomeActivity : AppCompatActivity(),
-    SellerMainOverviewFragment.onProductsOnSellerObserver,
-    SellerOrderOverviewFragment.onConfirmOrderListener {
+    SellerMainOverviewFragment.OnProductsOnSellerObserver,
+    SellerOrderOverviewFragment.OnConfirmOrderListener {
 
     private var newProductFragment = NewProductFragment.newInstance()
     private var sellerMainOverviewFragment = SellerMainOverviewFragment.newInstance()
     private var productSellerFragment = ProductSellerFragment.newInstance()
     private var sellerOrderOverviewFragment = SellerOrderOverviewFragment.newInstance()
-    private lateinit var user: Seller
 
+    private lateinit var user: Seller
     private lateinit var binding:ActivitySellerHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySellerHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        user = loadUser()!!
-        sellerMainOverviewFragment.adapter.onProductSellerObserver = this
-        sellerOrderOverviewFragment.adapterOrder.onOrderConfirmObserver = this
-        newProductFragment.listener = sellerMainOverviewFragment
 
+        user = Util.getExtras(intent, "currentUser", Seller::class.java) as Seller
+
+        loadUser()
+        loadAdapters()
         showFragment(sellerMainOverviewFragment)
 
         binding.sellerNavigator.setOnItemSelectedListener { menuItem->
@@ -46,18 +47,29 @@ class SellerHomeActivity : AppCompatActivity(),
         }
     }
 
+    private fun loadUser(){
+        newProductFragment.setUser(user)
+        sellerMainOverviewFragment.setUser(user)
+        sellerOrderOverviewFragment.setUser(user)
+    }
+
+    private fun loadAdapters(){
+        sellerMainOverviewFragment.adapter.onProductSellerObserver = this
+        sellerOrderOverviewFragment.adapterOrder.onOrderConfirmObserver = this
+        newProductFragment.listener = sellerMainOverviewFragment
+    }
+
     override fun onBackPressed() {
     }
 
-
-    fun showFragment(fragment: Fragment){
+    private fun showFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.sellerFragmentContainer,fragment)
         transaction.commit()
     }
 
     override fun sendProduct(product: Product) {
-        productSellerFragment.product = product
+        productSellerFragment.setCurrentProduct(product)
         productSellerFragment.onProductSellerObserver = this
         showFragment(productSellerFragment)
     }
@@ -82,22 +94,11 @@ class SellerHomeActivity : AppCompatActivity(),
 
     }
 
-    fun changeFlag(valueFlag:String, idOrder: String ){
+    private fun changeFlag(valueFlag:String, idOrder: String ){
         Firebase.firestore.collection("markets")
             .document(user.marketID)
             .collection("orders")
             .document(idOrder)
             .update("orderFlag", valueFlag)
-    }
-
-    fun loadUser(): Seller?{
-        val sp = getSharedPreferences("u-market", AppCompatActivity.MODE_PRIVATE)
-        val json = sp?.getString("user","NO_USER")
-
-        if(json == "NO_USER"){
-            return null
-        } else{
-            return Gson().fromJson(json, Seller::class.java)
-        }
     }
 }

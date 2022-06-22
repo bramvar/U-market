@@ -20,6 +20,7 @@ import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.Seller
 import com.icesi.umarket.model.adapters.SellerOrdersToConfirmAdapter
+import com.icesi.umarket.util.Util
 
 class SellerOrderOverviewFragment : Fragment() {
 
@@ -33,31 +34,23 @@ class SellerOrderOverviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentSellerOrderOverviewBinding.inflate(inflater,container,false)
-        user = loadUser()!!
+        _binding = FragmentSellerOrderOverviewBinding.inflate(inflater, container, false)
         getMarket()
         initOrdersRecyclerView(binding.ordersToConfirmRecycler)
         return binding.root
     }
 
-    fun loadUser(): Seller?{
-        val sp = this.context?.getSharedPreferences("u-market", AppCompatActivity.MODE_PRIVATE)
-        val json = sp?.getString("user","NO_USER")
-
-        if(json == "NO_USER"){
-            return null
-        } else{
-            return Gson().fromJson(json, Seller::class.java)
-        }
+    fun setUser(user: Seller) {
+        this.user = user
     }
 
-    private fun initOrdersRecyclerView(recycler: RecyclerView){
+    private fun initOrdersRecyclerView(recycler: RecyclerView) {
         recycler.setHasFixedSize(true)
-        recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = adapterOrder
     }
 
-    fun getOrdersToConfirm(marketID: String) {
+    private fun getOrdersToConfirm(marketID: String) {
         Firebase.firestore.collection("markets").document(marketID).collection("orders").get()
             .addOnCompleteListener { order ->
                 for (doc in order.result!!) {
@@ -67,25 +60,16 @@ class SellerOrderOverviewFragment : Fragment() {
             }
     }
 
-    fun getMarket(){
+    private fun getMarket() {
         adapterOrder.clear()
         Firebase.firestore.collection("markets").document(user.marketID).get()
             .addOnSuccessListener {
                 val currentMarket = it.toObject(Market::class.java)
                 val marketName = currentMarket?.marketName
-                val marketImage = currentMarket?.imageID
-
                 binding.marketNameTextView.text = marketName
-                downloadMarketProfileImage(marketImage)
-                getOrdersToConfirm(user.marketID)
-            }
-    }
 
-    fun downloadMarketProfileImage(imageID: String?){
-        if(imageID == null) return
-        Firebase.storage.reference.child("market-image-profile").child(imageID).downloadUrl
-            .addOnSuccessListener{
-                Glide.with(binding.marketProfileImage).load(it).into(binding.marketProfileImage)
+                Util.loadImage(currentMarket!!.imageID!!, binding.marketProfileImage, "market-image-profile")
+                getOrdersToConfirm(user.marketID)
             }
     }
 
@@ -94,7 +78,7 @@ class SellerOrderOverviewFragment : Fragment() {
         fun newInstance() = SellerOrderOverviewFragment()
     }
 
-    interface onConfirmOrderListener{
+    interface OnConfirmOrderListener{
         fun confirmOrder(orderID: String)
         fun cancelOrder(orderID: String)
         fun editOrder(orderID: String)

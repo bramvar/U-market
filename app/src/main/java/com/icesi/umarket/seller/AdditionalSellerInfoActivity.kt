@@ -12,18 +12,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityAdditionalSellerInfoBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Util
 import com.icesi.umarket.util.UtilDomi
 import java.util.*
 
 class AdditionalSellerInfoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdditionalSellerInfoBinding
-    private lateinit var imageUri: Uri
+    private lateinit var currentUser: Seller
     private lateinit var idImg: String
-    private lateinit var idMarket: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,43 +32,12 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
-
-        val id =intent.getStringExtra("ID")
-        val phone = intent.getStringExtra("PHONE")
-        val sellerName = intent.getStringExtra("SELLER_NAME")
-        val email = intent.getStringExtra("EMAIL")
-        val password = intent.getStringExtra("PASSWORD")
+        currentUser = Util.getExtras(intent,"currentUser", Seller::class.java) as Seller
 
         binding.sellerSignupBtn.setOnClickListener {
-            val i = Intent(this, SellerLoginActivity::class.java)
-
-            val marketID = UUID.randomUUID().toString()
-            idMarket = marketID
-            val marketName = binding.signUpMarketNameTextField.text.toString()
-            val marketDescription = binding.sellerInfoDescriptionTextField.text.toString()
-            //val fileName = UUID.randomUUID().toString()
-
-            if(verifyBlankAdditionalInfoFields(marketName,marketDescription)){
-                val seller = Seller(id!!,sellerName!!,email!!,password!!,phone!!,"Seller",marketID)
-
-                var market = Market(marketID,id,marketName,marketDescription,"",phone)
-
-                Firebase.firestore.collection("users").document(id).set(seller).addOnSuccessListener {
-                    Firebase.firestore.collection("markets").document(marketID).set(market).addOnSuccessListener {
-                        loadImgToMarket()
-                        //Firebase.storage.getReference().child("market-image-profile").child("fileName").putFile(imageUri)
-                        Toast.makeText(this.baseContext,"Usuario registrado. Inicie sesión", Toast.LENGTH_LONG).show()
-                        startActivity(i)
-
-                    }.addOnFailureListener {
-                        Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            }else {
-                Toast.makeText(this.baseContext,"Faltan campos por diligenciar", Toast.LENGTH_LONG).show()
-            }
+            sendSeller()
         }
-        ////binding.newMarketImage.setOnClickListener { val intent = Intent(Intent.ACTION_GET_CONTENT) intent.type = "image/*" galleryLauncher.launch(intent) }
+
         binding.sellerAdditionalInfoBackBtn.setOnClickListener {
             finish()
         }
@@ -79,27 +49,47 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
         }
     }
 
+    private fun sendSeller(){
+        val i = Intent(this, SellerLoginActivity::class.java)
+        val marketName = binding.signUpMarketNameTextField.text.toString()
+        val marketDescription = binding.sellerInfoDescriptionTextField.text.toString()
+        currentUser.marketID = UUID.randomUUID().toString()
+
+        if(verifyBlankAdditionalInfoFields(marketName,marketDescription)){
+            var market = Market(currentUser.marketID,currentUser.id,marketName,marketDescription,"",currentUser.phone)
+
+            Firebase.firestore.collection("users").document(currentUser.id).set(currentUser).addOnSuccessListener {
+                Firebase.firestore.collection("markets").document(currentUser.marketID).set(market).addOnSuccessListener {
+                    loadImgToMarket()
+                    Toast.makeText(this.baseContext,"Usuario registrado. Inicie sesión", Toast.LENGTH_LONG).show()
+                    startActivity(i)
+                }.addOnFailureListener {
+                    Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }else {
+            Toast.makeText(this.baseContext,"Faltan campos por diligenciar", Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun onGalleryResult(activityResult: ActivityResult){
         if(activityResult.resultCode == RESULT_OK) {
             val uri = activityResult.data?.data!!
-            val pathI = UtilDomi.getPath(applicationContext, uri!!)
-            val bitmap = BitmapFactory.decodeFile(pathI)
             binding.cardView2.setContentPadding(10, 10, 10, 10)
             binding.MarketImageProfile.setImageURI(uri)
             idImg = UUID.randomUUID().toString()
-            Log.e("id Img:", idImg)
-            Firebase.storage.reference.child("market-image-profile").child(idImg)
-                .putFile(uri!!)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Imagen cargada", Toast.LENGTH_LONG).show()
-                }
+
+           if(Util.sendImg(idImg,"market-image-profile", uri)){
+               Toast.makeText(this, "Imagen cargada", Toast.LENGTH_LONG).show()
+           }
+
         }else{
             Toast.makeText(this, "No carga la imagen", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun loadImgToMarket(){
-        Firebase.firestore.collection("markets").document(idMarket).update("imageID", idImg)
+        Firebase.firestore.collection("markets").document(currentUser.marketID).update("imageID", idImg)
     }
 
     private fun verifyBlankAdditionalInfoFields(

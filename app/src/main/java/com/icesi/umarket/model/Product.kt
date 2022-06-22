@@ -5,5 +5,5 @@ data class Product(
     var name: String = "",
     var price: Int = 0,
     var description: String = "",
-    var imageID:String? = null
+    var imageID:String = ""
 )

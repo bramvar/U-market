@@ -1,25 +1,20 @@
 package com.icesi.umarket.seller
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentSellerMainOverviewBinding
-import com.icesi.umarket.model.*
+import com.icesi.umarket.model.Market
+import com.icesi.umarket.model.Product
+import com.icesi.umarket.model.Seller
 import com.icesi.umarket.model.adapters.ProductSellerAdapter
-import com.icesi.umarket.model.adapters.SellerOrdersToConfirmAdapter
-import java.util.*
+import com.icesi.umarket.util.Util
 
 class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductListener {
 
@@ -36,14 +31,10 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentSellerMainOverviewBinding.inflate(inflater,container,false)
-
-        user = loadUser()!!
         getMarket()
         initProductsRecyclerView(binding.productsRecycler)
-
         return binding.root
     }
-
 
     private fun  initProductsRecyclerView(recycler: RecyclerView){
         recycler.setHasFixedSize(true)
@@ -51,58 +42,30 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
         recycler.adapter = adapter
     }
 
-    fun getMarket(){
+    private fun getMarket(){
         Firebase.firestore.collection("markets").document(user.marketID).get()
             .addOnSuccessListener {
                 val currentMarket = it.toObject(Market::class.java)
                 val marketName = currentMarket?.marketName
-                val marketImage = currentMarket?.imageID
-
                 binding.marketNameTextView.text = marketName
-
-                downloadMarketProfileImage(marketImage)
-
+                Util.loadImage(user.marketID,binding.marketProfileImage,"market-image-profile" )
                 getProducts(user.marketID)
             }
     }
 
-    fun getProducts(marketID: String){
+    private fun getProducts(marketID: String) {
         Firebase.firestore.collection("markets").document(marketID).collection("products").get()
             .addOnCompleteListener { product ->
                 adapter.clear()
-                for(doc in product.result!!){
-                    val prod =doc.toObject(Product::class.java)
+                for (doc in product.result!!) {
+                    val prod = doc.toObject(Product::class.java)
                     adapter.addProduct(prod)
                 }
             }
     }
 
-    fun downloadMarketProfileImage(imageID: String?){
-        if(imageID == null) return
-        Firebase.storage.reference.child("market-image-profile").child(imageID).downloadUrl
-            .addOnSuccessListener{
-                Glide.with(binding.marketProfileImage).load(it).into(binding.marketProfileImage)
-            }
-    }
-
-    fun loadUser(): Seller?{
-        val sp = this.context?.getSharedPreferences("u-market", AppCompatActivity.MODE_PRIVATE)
-        val json = sp?.getString("user","NO_USER")
-
-        if(json == "NO_USER"){
-            return null
-        } else{
-            return Gson().fromJson(json, Seller::class.java)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = SellerMainOverviewFragment()
+    fun setUser(user: Seller){
+        this.user = user
     }
 
     override fun onNewProduct(
@@ -116,7 +79,16 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
         adapter.addProduct(product)
     }
 
-    interface onProductsOnSellerObserver{
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = SellerMainOverviewFragment()
+    }
+
+    interface OnProductsOnSellerObserver{
         fun sendProduct(product: Product)
         fun backToOverview()
     }

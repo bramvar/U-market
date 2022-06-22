@@ -14,7 +14,7 @@ import java.io.File
 class ProductSellerAdapter: RecyclerView.Adapter<ProductSellerViewHolder>() {
 
     private val products = ArrayList<Product>()
-    lateinit var onProductSellerObserver: SellerMainOverviewFragment.onProductsOnSellerObserver
+    lateinit var onProductSellerObserver: SellerMainOverviewFragment.OnProductsOnSellerObserver
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductSellerViewHolder {
         val inflater = LayoutInflater.from(parent.context)

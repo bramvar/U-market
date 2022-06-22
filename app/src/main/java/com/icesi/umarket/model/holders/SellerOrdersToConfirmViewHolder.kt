@@ -18,7 +18,7 @@ class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(i
 
     //STATE
     lateinit var order: Order
-    lateinit var onOrderConfirmObserver:  SellerOrderOverviewFragment.onConfirmOrderListener
+    lateinit var onOrderConfirmObserver:  SellerOrderOverviewFragment.OnConfirmOrderListener
     lateinit var onChangesInOrderListener:  SellerOrdersToConfirmViewHolder.OnChangesInOrderListener
 
     var productImg: ImageView = itemView.findViewById(R.id.product_img_order)

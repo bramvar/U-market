@@ -24,7 +24,6 @@ class SellerLoginActivity : AppCompatActivity() {
 
         binding.signUpHyperLink.setOnClickListener {
             var userType = intent.extras?.getString("userType","")
-
             if(userType=="consumer"){
                 startActivity(Intent(this, ConsumerSignupActivity::class.java))
             }else{

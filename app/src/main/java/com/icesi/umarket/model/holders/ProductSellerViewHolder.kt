@@ -16,7 +16,7 @@ class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) 
 
     //STATE
     var product: Product? = null
-    lateinit var onProductSellerObserver : SellerMainOverviewFragment.onProductsOnSellerObserver
+    lateinit var onProductSellerObserver : SellerMainOverviewFragment.OnProductsOnSellerObserver
 
     //UI controllers
     var producImageRow: ImageView = itemView.findViewById(R.id.marketRowImage)

@@ -14,7 +14,7 @@ import com.icesi.umarket.seller.SellerMainOverviewFragment
 class SellerOrdersToConfirmAdapter: RecyclerView.Adapter<SellerOrdersToConfirmViewHolder>(),
     SellerOrdersToConfirmViewHolder.OnChangesInOrderListener {
 
-    lateinit var onOrderConfirmObserver:  SellerOrderOverviewFragment.onConfirmOrderListener
+    lateinit var onOrderConfirmObserver:  SellerOrderOverviewFragment.OnConfirmOrderListener
     private val orders = ArrayList<Order>()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SellerOrdersToConfirmViewHolder {

@@ -12,7 +12,6 @@ import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityConsumerEditProfileBinding
 import com.icesi.umarket.model.User
 import com.icesi.umarket.util.Util
-import com.icesi.umarket.util.Util.getExtras
 
 class ConsumerEditProfile : AppCompatActivity() {
     private lateinit var binding: ActivityConsumerEditProfileBinding
@@ -23,15 +22,7 @@ class ConsumerEditProfile : AppCompatActivity() {
         binding = ActivityConsumerEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /**
-         * currentUser = Gson().fromJson(
-        intent.extras?.getString("currentUser",""),
-        User::class.java
-        )
-         *
-         */
-
-        getExtras(intent, "currentUser",  User::class.java)
+        currentUser = Gson().fromJson(intent.extras?.getString("currentUser",""), User::class.java)
         loadInformation(currentUser)
 
         binding.editDoneBtn.setOnClickListener{

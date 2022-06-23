@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
@@ -42,9 +43,11 @@ class NewProductFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNewProductBinding.inflate(inflater, container, false)
-
+        val camLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onCameraResult)
+        val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
         binding.newProductImage.setOnClickListener {
-            loadImage()
+
+            loadImage(camLauncher, galleryLauncher)
         }
 
         binding.postNewProductBtn.setOnClickListener {
@@ -113,10 +116,10 @@ class NewProductFragment : Fragment() {
         }
     }
 
-    private fun loadImage(){
-        val camLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onCameraResult)
-        val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
-
+    private fun loadImage(
+        camLauncher: ActivityResultLauncher<Intent>,
+        galleryLauncher: ActivityResultLauncher<Intent>
+    ) {
         val myAlertDialog = AlertDialog.Builder(this.context)
         myAlertDialog.setTitle("Upload Pictures Option")
         myAlertDialog.setMessage("How do you want to set your picture?")

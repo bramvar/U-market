@@ -1,6 +1,7 @@
 package com.icesi.umarket
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,12 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.consumer.ConsumerMainOverviewFragment
 import com.icesi.umarket.databinding.FragmentProductBinding
-import com.icesi.umarket.model.Market
-import com.icesi.umarket.model.Order
-import com.icesi.umarket.model.Product
-import com.icesi.umarket.model.ShoppingCar
+import com.icesi.umarket.model.*
 
 class ProductFragment : Fragment() {
     private lateinit var _binding: FragmentProductBinding
     private val binding get() = _binding!!
+    private lateinit var currentUser: User
     lateinit var currentMarket: Market
     lateinit var product: Product
     lateinit var shoppingCar: ShoppingCar
@@ -30,7 +29,6 @@ class ProductFragment : Fragment() {
     ): View? {
 
         _binding = FragmentProductBinding.inflate(inflater,container,false)
-
         _binding.productName.text = product.name
         _binding.productInfo.text = product.description
         _binding.priceProduct.text = "$" + product.price.toString()
@@ -54,11 +52,12 @@ class ProductFragment : Fragment() {
             var price = Integer.valueOf(_binding.priceProduct.text.toString().replace("$",""))
 
             if(amount > 0){
-                onOrderObserver.loadOrder(Order(amount,name,price, price*amount, product.imageID.toString(), currentMarket.id, product.id))
+                var currentOrder= Order(amount,name,price,price*amount, product.imageID, currentMarket.id, product.id,"", "pendiente", currentUser.id)
+                onOrderObserver.loadOrder(currentOrder)
+
             }else{
                 Toast.makeText(getActivity(),"Cantidad invalida", Toast.LENGTH_SHORT).show();
             }
-            ///startActivity(shoppingCar.sendMessage())
         }
         // Inflate the layout for this fragment
         return _binding.root
@@ -83,6 +82,11 @@ class ProductFragment : Fragment() {
                     Glide.with(_binding.productImg).load(it).into(_binding.productImg)
                 }
         }
+    }
+
+    fun setUser(user: User){
+        currentUser = user
+        Log.e("User ID en ProductFragment" , user.id)
     }
 
     companion object {

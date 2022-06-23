@@ -9,5 +9,10 @@ class Order(
     val idMarket: String="",
     val idProduct: String ="",
     var idOrder: String ="",
-    var orderFlag: String =""
+    var orderFlag: String ="",
+    var idUser: String =""
+)
+
+class AuxOrder(
+    var idOrder: String ="",
 )

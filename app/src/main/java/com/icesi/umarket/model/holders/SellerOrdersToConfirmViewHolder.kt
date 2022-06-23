@@ -35,17 +35,17 @@ class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(i
 
     init {
         accepted_btn.setOnClickListener{
-            onOrderConfirmObserver.confirmOrder(order.idOrder)
+            onOrderConfirmObserver.confirmOrder(order.idOrder, order.idUser)
             onChangesInOrderListener.deleteOrder(order)
         }
 
         declined_btn.setOnClickListener{
-            onOrderConfirmObserver.cancelOrder(order.idOrder)
+            onOrderConfirmObserver.cancelOrder(order.idOrder, order.idUser)
             onChangesInOrderListener.deleteOrder(order)
         }
 
         partially_btn.setOnClickListener{
-            onOrderConfirmObserver.editOrder(order.idOrder)
+            onOrderConfirmObserver.editOrder(order.idOrder, order.idUser)
         }
     }
 
@@ -56,7 +56,7 @@ class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(i
         amount.setText(order.amount.toString())
         price.setText("$" + order.totalPrice)
         orderId = order.idOrder
-        Util.loadImage(order.idOrder,productImg, "product-images")
+        Util.loadImage(order.imageID,productImg, "product-images")
 
     }
 

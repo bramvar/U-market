@@ -21,8 +21,8 @@ class ShoppingCar() {
 
     fun loadOrder(order: Order){
         orders.add(order)
-        Log.e("Size ",""+orders.size)
     }
+
     fun generateConfirmText(): String{
         var msg =""
         for(order in orders){
@@ -49,19 +49,48 @@ class ShoppingCar() {
         val intent = Intent(Intent.ACTION_VIEW)
         val uri = "whatsapp://send?phone=$completeNumber&text=$msj"
         intent.data = Uri.parse(uri)
-        loadOrders()
+        loadOrders2()
         return intent
     }
 
     fun loadOrders(){
         for(order in orders){
-            order.orderFlag = "none"
             order.idOrder = UUID.randomUUID().toString()
             Firebase.firestore.collection("markets")
                 .document(currentMarket.id)
                 .collection("orders")
                 .document(order.idOrder)
                 .set(order)
+
+                Firebase.firestore.collection("users")
+                    .document(order.idUser)
+                    .collection("orders")
+                    .document(order.idOrder)
+                    .set(order)
+            loadOrders2()
+        }
+    }
+
+    fun loadOrders2(){
+        for(order in orders){
+            order.idOrder = UUID.randomUUID().toString()
+            var auxOrder = AuxOrder(order.idOrder)
+
+            Firebase.firestore.collection("orders")
+                .document(order.idOrder)
+                .set(order)
+
+            Firebase.firestore.collection("users")
+                .document(order.idUser)
+                .collection("orders")
+                .document(order.idOrder)
+                .set(auxOrder)
+
+            Firebase.firestore.collection("markets")
+                .document(currentMarket.id)
+                .collection("orders")
+                .document(order.idOrder)
+                .set(auxOrder)
         }
     }
 }

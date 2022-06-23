@@ -12,7 +12,6 @@ import com.icesi.umarket.SellerOrderOverviewFragment
 import com.icesi.umarket.databinding.ActivitySellerHomeBinding
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
-import com.icesi.umarket.util.Util
 
 class SellerHomeActivity : AppCompatActivity(),
     SellerMainOverviewFragment.OnProductsOnSellerObserver,
@@ -31,8 +30,7 @@ class SellerHomeActivity : AppCompatActivity(),
         binding = ActivitySellerHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        user = Util.getExtras(intent, "currentUser", Seller::class.java) as Seller
-
+        user = Gson().fromJson(intent.extras?.getString("currentUser",""), Seller::class.java)
         loadUser()
         loadAdapters()
         showFragment(sellerMainOverviewFragment)
@@ -78,25 +76,30 @@ class SellerHomeActivity : AppCompatActivity(),
         showFragment(sellerMainOverviewFragment)
     }
 
-    override fun confirmOrder(idOrder: String){
-        Log.e("Confirma orden ", idOrder)
-        changeFlag("confirm", idOrder)
+    override fun confirmOrder(idOrder: String, idUser: String){
+        changeFlag("exitosa", idOrder, idUser)
     }
 
-    override fun cancelOrder(idOrder: String){
-        Log.e("Cancela orden ", idOrder)
-        changeFlag("cancel", idOrder)
+    override fun cancelOrder(idOrder: String, idUser: String){
+        changeFlag("cancelada", idOrder, idUser)
     }
 
-    override fun editOrder(idOrder: String){
-        Log.e("Edita orden ", idOrder)
-        changeFlag("edit", idOrder)
-
+    override fun editOrder(idOrder: String, idUser: String){
+        changeFlag("editada", idOrder, idUser)
     }
 
-    private fun changeFlag(valueFlag:String, idOrder: String ){
+    private fun changeFlag(valueFlag:String, idOrder: String, idUser: String){
         Firebase.firestore.collection("markets")
             .document(user.marketID)
+            .collection("orders")
+            .document(idOrder)
+            .update("orderFlag", valueFlag)
+            .addOnSuccessListener {
+                sellerOrderOverviewFragment.reloadOrders()
+            }
+
+        Firebase.firestore.collection("users")
+            .document(idUser)
             .collection("orders")
             .document(idOrder)
             .update("orderFlag", valueFlag)

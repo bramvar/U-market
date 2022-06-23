@@ -35,9 +35,8 @@ object Util {
         return recycler
     }
 
-
     fun sendImg(id: String, path: String , uri: Uri): Boolean{
-        var sended: Boolean = false;
+        var sended: Boolean = true;
         Firebase.storage.reference.child(path).child(id)
             .putFile(uri)
             .addOnSuccessListener {
@@ -45,18 +44,4 @@ object Util {
             }
         return sended
     }
-
-    fun getExtras(intent: Intent, extraString: String, classs: Class<*>): Any{
-        return Gson().fromJson(
-            intent.extras?.getString(extraString,""),
-            classs
-        )
-    }
-
-    fun setExtras(context: Context, activityToGo: Class<*>, extraString: Any, extraName:String): Any{
-        var intent = Intent(context, activityToGo)
-        intent.putExtra(extraName, Gson().toJson(extraString))
-        return intent
-    }
-
 }

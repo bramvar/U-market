@@ -1,6 +1,7 @@
 package com.icesi.umarket.seller
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,8 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
                 val currentMarket = it.toObject(Market::class.java)
                 val marketName = currentMarket?.marketName
                 binding.marketNameTextView.text = marketName
-                Util.loadImage(user.marketID,binding.marketProfileImage,"market-image-profile" )
+                Log.e("img",currentMarket!!.imageID)
+                Util.loadImage(currentMarket!!.imageID,binding.marketProfileImage,"market-image-profile" )
                 getProducts(user.marketID)
             }
     }

@@ -19,6 +19,7 @@ import com.icesi.umarket.databinding.FragmentSellerOrderOverviewBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.model.adapters.SellerOrdersHistoryAdapter
 import com.icesi.umarket.model.adapters.SellerOrdersToConfirmAdapter
 import com.icesi.umarket.util.Util
 
@@ -27,7 +28,9 @@ class SellerOrderOverviewFragment : Fragment() {
     private var _binding: FragmentSellerOrderOverviewBinding? = null
     private val binding get() = _binding!!
     private lateinit var user: Seller
+    private lateinit var market: Market
     val adapterOrder = SellerOrdersToConfirmAdapter()
+    val adapterOrderHistory = SellerOrdersHistoryAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +39,8 @@ class SellerOrderOverviewFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentSellerOrderOverviewBinding.inflate(inflater, container, false)
         getMarket()
-        initOrdersRecyclerView(binding.ordersToConfirmRecycler)
+        initOrdersRecyclerView(binding.ordersToConfirmRecycler).adapter = adapterOrder
+        initOrdersRecyclerView(binding.ordersHistoryRecycler).adapter = adapterOrderHistory
         return binding.root
     }
 
@@ -44,20 +48,30 @@ class SellerOrderOverviewFragment : Fragment() {
         this.user = user
     }
 
-    private fun initOrdersRecyclerView(recycler: RecyclerView) {
+    private fun initOrdersRecyclerView(recycler: RecyclerView): RecyclerView{
         recycler.setHasFixedSize(true)
         recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        recycler.adapter = adapterOrder
+        return recycler
     }
 
     private fun getOrdersToConfirm(marketID: String) {
+        adapterOrder.clear()
+        adapterOrderHistory.clear()
         Firebase.firestore.collection("markets").document(marketID).collection("orders").get()
             .addOnCompleteListener { order ->
                 for (doc in order.result!!) {
                     val order = doc.toObject(Order::class.java)
-                    adapterOrder.addOrder(order)
+                    if(order.orderFlag =="pendiente"){
+                        adapterOrder.addOrder(order)
+                    }else{
+                        adapterOrderHistory.addOrder(order)
+                    }
                 }
             }
+    }
+
+    fun reloadOrders(){
+        getOrdersToConfirm(user.marketID)
     }
 
     private fun getMarket() {
@@ -65,6 +79,7 @@ class SellerOrderOverviewFragment : Fragment() {
         Firebase.firestore.collection("markets").document(user.marketID).get()
             .addOnSuccessListener {
                 val currentMarket = it.toObject(Market::class.java)
+                market = currentMarket!!
                 val marketName = currentMarket?.marketName
                 binding.marketNameTextView.text = marketName
 
@@ -79,8 +94,8 @@ class SellerOrderOverviewFragment : Fragment() {
     }
 
     interface OnConfirmOrderListener{
-        fun confirmOrder(orderID: String)
-        fun cancelOrder(orderID: String)
-        fun editOrder(orderID: String)
+        fun confirmOrder(orderID: String, idUser: String)
+        fun cancelOrder(orderID: String, idUser: String)
+        fun editOrder(orderID: String, idUser: String)
     }
 }

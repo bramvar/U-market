@@ -16,6 +16,7 @@ import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityAdditionalSellerInfoBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.model.User
 import com.icesi.umarket.util.Util
 import com.icesi.umarket.util.UtilDomi
 import java.util.*
@@ -32,7 +33,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
-        currentUser = Util.getExtras(intent,"currentUser", Seller::class.java) as Seller
+        currentUser = Gson().fromJson(intent.extras?.getString("currentUser",""), Seller::class.java)
 
         binding.sellerSignupBtn.setOnClickListener {
             sendSeller()

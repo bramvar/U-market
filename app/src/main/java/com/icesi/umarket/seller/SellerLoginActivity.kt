@@ -50,7 +50,9 @@ class SellerLoginActivity : AppCompatActivity() {
                 Firebase.firestore.collection("users").document(currentUser!!.uid).get()
                     .addOnSuccessListener {
                         val user = it.toObject(Seller::class.java)
-                        var intent: Intent = Util.setExtras(this, SellerHomeActivity::class.java, "currentUser", Gson().toJson(user)) as Intent
+                        var intent = Intent(this, SellerHomeActivity::class.java).apply {
+                            putExtra("currentUser", Gson().toJson(user))
+                        }
                         startActivity(intent)
                         finish()
 

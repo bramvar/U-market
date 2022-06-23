@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.icesi.umarket.R
 import com.icesi.umarket.SellerOrderOverviewFragment
+import com.icesi.umarket.SellerProfileFragment
 import com.icesi.umarket.databinding.ActivitySellerHomeBinding
 import com.icesi.umarket.model.AuxOrder
 import com.icesi.umarket.model.Product
@@ -18,6 +19,7 @@ class SellerHomeActivity : AppCompatActivity(),
     SellerMainOverviewFragment.OnProductsOnSellerObserver,
     SellerOrderOverviewFragment.OnConfirmOrderListener {
 
+    private var sellerProfileFragment = SellerProfileFragment.newInstance()
     private var newProductFragment = NewProductFragment.newInstance()
     private var sellerMainOverviewFragment = SellerMainOverviewFragment.newInstance()
     private var productSellerFragment = ProductSellerFragment.newInstance()
@@ -41,6 +43,7 @@ class SellerHomeActivity : AppCompatActivity(),
                 R.id.homeItem ->  showFragment(sellerMainOverviewFragment)
                 R.id.addProductItem -> showFragment(newProductFragment)
                 R.id.ordersItem -> showFragment(sellerOrderOverviewFragment)
+                R.id.profileItem -> showFragment(sellerProfileFragment)
             }
             true
         }
@@ -50,6 +53,7 @@ class SellerHomeActivity : AppCompatActivity(),
         newProductFragment.setUser(user)
         sellerMainOverviewFragment.setUser(user)
         sellerOrderOverviewFragment.setUser(user)
+        sellerProfileFragment.setUser(user)
     }
 
     private fun loadAdapters(){

@@ -40,8 +40,9 @@ class ConsumerProfileFragment : Fragment() {
 
         binding.logoutBtn3.setOnClickListener {
             Firebase.auth.signOut()
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(activity, MainActivity::class.java))
+            requireActivity().finish()
+
         }
         return binding.root
     }

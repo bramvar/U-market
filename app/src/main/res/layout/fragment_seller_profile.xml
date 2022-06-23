@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-=======
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
->>>>>>> 739285fac66ca6eb057e970cd8d6f0b506547d29
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".consumer.ConsumerProfileFragment">
+    tools:context=".SellerProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/emailSellerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="342dp"
+        android:layout_height="56dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
@@ -34,20 +29,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
             android:id="@+id/emailSeller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            tools:text="mariana_toro15@gmail.com"
+            tools:text="hola@gmail.com"
             android:textColor="@color/purple_titles"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<<<<<<< HEAD
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/phoneSellerLayout"
         android:layout_width="match_parent"
@@ -69,34 +66,6 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-=======
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/sellerSettingsButton"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="24dp"
-                    app:cardBackgroundColor="#FAB057"
-                    app:cardCornerRadius="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:srcCompat="@drawable/setting_icon" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="75dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sellerAdditionalInfoBackBtn2">
->>>>>>> 739285fac66ca6eb057e970cd8d6f0b506547d29
 
         <TextView
             android:id="@+id/phoneSeller"
@@ -150,8 +119,7 @@
             app:iconGravity="top"
             app:iconPadding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -184,9 +152,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-<<<<<<< HEAD
     </androidx.constraintlayout.widget.ConstraintLayout>
-=======
->>>>>>> b3fd118ea8e2b0d19bc7c3a18bd028ee21981222
->>>>>>> 739285fac66ca6eb057e970cd8d6f0b506547d29
 </androidx.constraintlayout.widget.ConstraintLayout>

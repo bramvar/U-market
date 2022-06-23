@@ -16,17 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Umarket">
         <activity
-<<<<<<< HEAD
             android:name=".SellerEditProfileActivity"
-=======
-            android:name=".SellerChangePasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SellerSettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ConsumerHomeActivity"
->>>>>>> 739285fac66ca6eb057e970cd8d6f0b506547d29
             android:exported="false" />
         <activity
             android:name=".consumer.ConsumerHomeActivity"

@@ -49,29 +49,11 @@ class ShoppingCar() {
         val intent = Intent(Intent.ACTION_VIEW)
         val uri = "whatsapp://send?phone=$completeNumber&text=$msj"
         intent.data = Uri.parse(uri)
-        loadOrders2()
+        loadOrders()
         return intent
     }
 
     fun loadOrders(){
-        for(order in orders){
-            order.idOrder = UUID.randomUUID().toString()
-            Firebase.firestore.collection("markets")
-                .document(currentMarket.id)
-                .collection("orders")
-                .document(order.idOrder)
-                .set(order)
-
-                Firebase.firestore.collection("users")
-                    .document(order.idUser)
-                    .collection("orders")
-                    .document(order.idOrder)
-                    .set(order)
-            loadOrders2()
-        }
-    }
-
-    fun loadOrders2(){
         for(order in orders){
             order.idOrder = UUID.randomUUID().toString()
             var auxOrder = AuxOrder(order.idOrder)
@@ -88,7 +70,7 @@ class ShoppingCar() {
 
             Firebase.firestore.collection("markets")
                 .document(currentMarket.id)
-                .collection("orders")
+                .collection("pendentOrders")
                 .document(order.idOrder)
                 .set(auxOrder)
         }

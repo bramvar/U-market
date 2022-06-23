@@ -2,6 +2,7 @@ package com.icesi.umarket.consumer
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentConsumerShoppingBinding
+import com.icesi.umarket.model.AuxOrder
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.adapters.OrderAdapter
 import com.icesi.umarket.model.User
@@ -53,7 +56,12 @@ class ConsumerShoppingFragment : Fragment() {
             .addOnSuccessListener {
                 for(doc in it.documents){
                     itHasOrders = true
-                    adapter.addOrder(doc.toObject(Order::class.java)!!)
+                    var orderID = doc.toObject(Order::class.java)
+
+                    Firebase.firestore.collection("orders").document(orderID!!.idOrder).get()
+                        .addOnSuccessListener { order ->
+                            adapter.addOrder(order.toObject(Order::class.java)!!)
+                    }
                 }
 
                 if(itHasOrders){

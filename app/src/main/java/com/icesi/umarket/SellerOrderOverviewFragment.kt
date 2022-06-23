@@ -15,7 +15,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
+import com.google.gson.TypeAdapter
 import com.icesi.umarket.databinding.FragmentSellerOrderOverviewBinding
+import com.icesi.umarket.model.AuxOrder
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.Seller
@@ -54,24 +56,31 @@ class SellerOrderOverviewFragment : Fragment() {
         return recycler
     }
 
-    private fun getOrdersToConfirm(marketID: String) {
-        adapterOrder.clear()
+    private fun getOrders(marketID: String, typeOrder: String, typeAdapter: Boolean) {
         adapterOrderHistory.clear()
-        Firebase.firestore.collection("markets").document(marketID).collection("orders").get()
+        adapterOrder.clear()
+        Firebase.firestore.collection("markets").document(marketID).collection(typeOrder).get()
             .addOnCompleteListener { order ->
                 for (doc in order.result!!) {
-                    val order = doc.toObject(Order::class.java)
-                    if(order.orderFlag =="pendiente"){
-                        adapterOrder.addOrder(order)
-                    }else{
-                        adapterOrderHistory.addOrder(order)
-                    }
+                    val orderID = doc.toObject(AuxOrder::class.java)
+                    Firebase.firestore.collection("orders").document(orderID.idOrder).get()
+                        .addOnSuccessListener { orderReceived ->
+                            val order = orderReceived.toObject(Order::class.java)
+                            when (typeAdapter) {
+                                true -> adapterOrder.addOrder(order!!)
+                                false -> adapterOrderHistory.addOrder(order!!)
+                            }
+                        }
                 }
             }
     }
 
-    fun reloadOrders(){
-        getOrdersToConfirm(user.marketID)
+    fun reloadOrders(idOrder: String){
+        Firebase.firestore.collection("orders").document(idOrder).get()
+            .addOnSuccessListener { orderReceived ->
+                val order = orderReceived.toObject(Order::class.java)
+                adapterOrderHistory.addOrder(order!!)
+            }
     }
 
     private fun getMarket() {
@@ -84,7 +93,8 @@ class SellerOrderOverviewFragment : Fragment() {
                 binding.marketNameTextView.text = marketName
 
                 Util.loadImage(currentMarket!!.imageID!!, binding.marketProfileImage, "market-image-profile")
-                getOrdersToConfirm(user.marketID)
+                getOrders(user.marketID, "historyOrders", false)
+                getOrders(user.marketID, "pendentOrders", true)
             }
     }
 

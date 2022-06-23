@@ -10,6 +10,7 @@ import com.google.gson.Gson
 import com.icesi.umarket.R
 import com.icesi.umarket.SellerOrderOverviewFragment
 import com.icesi.umarket.databinding.ActivitySellerHomeBinding
+import com.icesi.umarket.model.AuxOrder
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
 
@@ -89,19 +90,24 @@ class SellerHomeActivity : AppCompatActivity(),
     }
 
     private fun changeFlag(valueFlag:String, idOrder: String, idUser: String){
+        Firebase.firestore.collection("orders")
+            .document(idOrder)
+            .update("orderFlag", valueFlag)
+
+
         Firebase.firestore.collection("markets")
             .document(user.marketID)
-            .collection("orders")
+            .collection("pendentOrders")
             .document(idOrder)
-            .update("orderFlag", valueFlag)
-            .addOnSuccessListener {
-                sellerOrderOverviewFragment.reloadOrders()
-            }
+            .delete()
 
-        Firebase.firestore.collection("users")
-            .document(idUser)
-            .collection("orders")
+        Firebase.firestore.collection("markets")
+            .document(user.marketID)
+            .collection("historyOrders")
             .document(idOrder)
-            .update("orderFlag", valueFlag)
+            .set(AuxOrder(idOrder))
+            .addOnSuccessListener {
+                sellerOrderOverviewFragment.reloadOrders(idOrder)
+            }
     }
 }

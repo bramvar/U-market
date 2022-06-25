@@ -1,6 +1,7 @@
 package com.icesi.umarket.consumer
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,7 +73,7 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
             Firebase.storage.reference.child("market-image-profile")
                 .child(currentMarket.imageID!!).downloadUrl
                 .addOnSuccessListener {
-                    Glide.with(_binding.MarketImageProfile).load(it).into(_binding.MarketImageProfile)
+                    Glide.with(_binding.marketImageProfile).load(it).into(_binding.marketImageProfile)
                 }
         }
     }

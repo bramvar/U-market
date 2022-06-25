@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#F6F6F6</color>
     <color name="dark_gray">#000000</color>
-    <color name="opacity">#16EFEFFF</color>
+    <color name="opacity">#08EDEDED</color>
     <color name="bGradient">#323131</color>
     <!--- Font @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap'); -->
 </resources>

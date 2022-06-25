@@ -100,7 +100,7 @@
 
         <Button
             android:id="@+id/accepted_btn"
-            android:layout_width="40dp"
+            android:layout_width="38dp"
             android:layout_height="48dp"
             android:layout_marginEnd="5dp"
             android:backgroundTint="@color/green_available"
@@ -122,7 +122,7 @@
 
         <Button
             android:id="@+id/declined_btn"
-            android:layout_width="40dp"
+            android:layout_width="38dp"
             android:layout_height="48dp"
             android:layout_marginEnd="5dp"
             android:backgroundTint="#EF1C0D"
@@ -144,7 +144,7 @@
 
         <Button
             android:id="@+id/partially_btn"
-            android:layout_width="40dp"
+            android:layout_width="38dp"
             android:layout_height="48dp"
             android:backgroundTint="@color/orange_main"
             app:cornerRadius="100dp"

@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/homeItem"
         android:icon="@drawable/home_icon"
-        android:title="home" />
+        android:iconTint="@color/white"
+        tools:ignore="MenuTitle" />
     <item
         android:id="@+id/ordersItem"
         android:icon="@drawable/bag_icon"
-        android:title="pedidos" />
+        android:iconTint="@color/white"
+        tools:ignore="MenuTitle" />
     <item
         android:id="@+id/profileItem"
         android:icon="@drawable/profile_icon"
-        android:title="perfil" />
+        android:iconTint="@color/white"
+        android:iconTintMode="add"
+        tools:ignore="MenuTitle" />
 </menu>

@@ -92,6 +92,9 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
 
     interface OnProductsOnSellerObserver{
         fun sendProduct(product: Product)
+        fun showEditProduct(product: Product)
+        fun deleteProduct(product: Product)
+        fun editProduct(product: Product)
         fun backToOverview()
     }
 

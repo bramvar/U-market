@@ -50,6 +50,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_product_row"></androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
@@ -76,6 +81,7 @@
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/marketNameRowTextView"
                     app:layout_constraintTop_toBottomOf="@+id/marketNameRowTextView" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

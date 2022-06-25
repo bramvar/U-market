@@ -40,7 +40,6 @@ class ConsumerEditProfile : AppCompatActivity() {
     fun loadInformation(user: User){
         binding.nameEdit.setText(user.name)
         binding.passEdit.setText(user.password)
-        binding.emailEdit.setText(user.email)
         binding.phoneEdit.setText(user.phone)
         Util.loadImage(user.img,binding.profilephotoedit,"profile")
     }
@@ -48,7 +47,6 @@ class ConsumerEditProfile : AppCompatActivity() {
     fun updateInformation(user: User){
         user.name = binding.nameEdit.text.toString()
         user.password = binding.passEdit.text.toString()
-        user.email = binding.emailEdit.text.toString()
         user.phone = binding.phoneEdit.text.toString()
     }
 }

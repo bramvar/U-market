@@ -53,11 +53,12 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
     private fun sendSeller(){
         val i = Intent(this, SellerLoginActivity::class.java)
         val marketName = binding.signUpMarketNameTextField.text.toString()
+        val marketShortDescription = binding.marketShortDescriptionTextField.text.toString()
         val marketDescription = binding.sellerInfoDescriptionTextField.text.toString()
         currentUser.marketID = UUID.randomUUID().toString()
 
         if(verifyBlankAdditionalInfoFields(marketName,marketDescription)){
-            var market = Market(currentUser.marketID,currentUser.id,marketName,marketDescription,"",currentUser.phone)
+            var market = Market(currentUser.marketID,currentUser.id,marketName,marketDescription,marketShortDescription,"",currentUser.phone)
 
             Firebase.firestore.collection("users").document(currentUser.id).set(currentUser).addOnSuccessListener {
                 Firebase.firestore.collection("markets").document(currentUser.marketID).set(market).addOnSuccessListener {
@@ -77,7 +78,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
         if(activityResult.resultCode == RESULT_OK) {
             val uri = activityResult.data?.data!!
             binding.cardView2.setContentPadding(10, 10, 10, 10)
-            binding.MarketImageProfile.setImageURI(uri)
+            binding.marketImageProfile.setImageURI(uri)
             idImg = UUID.randomUUID().toString()
 
            if(Util.sendImg(idImg,"market-image-profile", uri)){

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
@@ -46,7 +47,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
             when(menuItem.itemId){
                 R.id.homeItem -> showFragment(consumerMainOverviewFragment, true)
                 R.id.profileItem -> showFragment(consumerProfileFragment, true)
-                R.id.ordersItem -> showFragment(consumerShoppingFragment, false)
+                R.id.ordersItem -> showFragment(consumerShoppingFragment, true)
             }
             true
         }
@@ -68,10 +69,8 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         consumerShoppingFragment.currentUser = currentUser
     }
 
-    fun showFragment(fragment: Fragment, eraseOrders: Boolean){
-        if(eraseOrders){
-            consumerShoppingFragment.adapter.clear()
-        }
+    fun showFragment(fragment: Fragment, blockMenu: Boolean){
+        binding.menuConsumer.isVisible = blockMenu
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
         consumerShoppingFragment.adapter.clear()
@@ -84,12 +83,12 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
 
     override fun sendMarket(market: Market) {
         consumerMarketProfileFragment.currentMarket = market
-        showFragment(consumerMarketProfileFragment, true)
+        showFragment(consumerMarketProfileFragment, false)
     }
 
     override fun sendProduct(product: Product) {
         productFragment.product = product
-        showFragment(productFragment, true)
+        showFragment(productFragment, false)
     }
 
     override fun sendShoppingInfo(name: String, market: Market) {
@@ -124,6 +123,6 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     override fun loadOrder(order: Order) {
         shoppingCar.loadOrder(order)
         consumerMarketProfileFragment.shoppingCar = shoppingCar
-        showFragment(consumerMarketProfileFragment, true)
+        showFragment(consumerMarketProfileFragment, false)
     }
 }

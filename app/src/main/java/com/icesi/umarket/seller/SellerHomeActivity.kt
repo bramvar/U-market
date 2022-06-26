@@ -10,12 +10,10 @@ import androidx.fragment.app.FragmentManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
-import com.icesi.umarket.EditProductDialogFragment
-import com.icesi.umarket.R
-import com.icesi.umarket.SellerOrderOverviewFragment
-import com.icesi.umarket.SellerProfileFragment
+import com.icesi.umarket.*
 import com.icesi.umarket.databinding.ActivitySellerHomeBinding
 import com.icesi.umarket.model.AuxOrder
+import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
 
@@ -29,7 +27,7 @@ class SellerHomeActivity : AppCompatActivity(),
     private var productSellerFragment = ProductSellerFragment.newInstance()
     private var sellerOrderOverviewFragment = SellerOrderOverviewFragment.newInstance()
     private var editProductDialogFragment =  EditProductDialogFragment.newInstance()
-
+    private var editOrderSellerDialog =  EditOrderSellerDialogFragment.newInstance()
 
     private lateinit var user: Seller
     private lateinit var binding:ActivitySellerHomeBinding
@@ -69,6 +67,7 @@ class SellerHomeActivity : AppCompatActivity(),
         editProductDialogFragment.onProductSellerObserver = this
         sellerOrderOverviewFragment.adapterOrder.onOrderConfirmObserver = this
         newProductFragment.listener = sellerMainOverviewFragment
+        editOrderSellerDialog.onProductSellerObserver = this
     }
 
     override fun onBackPressed() {
@@ -117,22 +116,29 @@ class SellerHomeActivity : AppCompatActivity(),
     }
 
     override fun confirmOrder(idOrder: String, idUser: String){
-        changeFlag("exitosa", idOrder, idUser)
+        changeFlag("Exitosa", idOrder, idUser)
     }
 
     override fun cancelOrder(idOrder: String, idUser: String){
-        changeFlag("cancelada", idOrder, idUser)
+        changeFlag("Cancelada", idOrder, idUser)
     }
 
-    override fun editOrder(idOrder: String, idUser: String){
-        changeFlag("editada", idOrder, idUser)
+    override fun editOrder(currentOrder: Order){
+        editOrderSellerDialog.setOrder(currentOrder)
+        editOrderSellerDialog.show(supportFragmentManager,editOrderSellerDialog.tag)
+    }
+
+    override fun editOrderSuccessfull(currentOrder: Order){
+        changeFlag("Editada", currentOrder.idOrder, currentOrder.idUser)
+        Firebase.firestore.collection("orders")
+            .document(currentOrder.idOrder)
+            .set(currentOrder)
     }
 
     private fun changeFlag(valueFlag:String, idOrder: String, idUser: String){
         Firebase.firestore.collection("orders")
             .document(idOrder)
             .update("orderFlag", valueFlag)
-
 
         Firebase.firestore.collection("markets")
             .document(user.marketID)

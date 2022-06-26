@@ -106,6 +106,7 @@ class SellerOrderOverviewFragment : Fragment() {
     interface OnConfirmOrderListener{
         fun confirmOrder(orderID: String, idUser: String)
         fun cancelOrder(orderID: String, idUser: String)
-        fun editOrder(orderID: String, idUser: String)
+        fun editOrder(currentOrder: Order)
+        fun editOrderSuccessfull(currentOrder: Order)
     }
 }

@@ -45,7 +45,7 @@ class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(i
         }
 
         partially_btn.setOnClickListener{
-            onOrderConfirmObserver.editOrder(order.idOrder, order.idUser)
+            onOrderConfirmObserver.editOrder(order)
         }
     }
 

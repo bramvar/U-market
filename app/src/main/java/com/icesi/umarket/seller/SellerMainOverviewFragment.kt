@@ -12,6 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.databinding.FragmentSellerMainOverviewBinding
 import com.icesi.umarket.model.Market
+import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
 import com.icesi.umarket.model.adapters.ProductSellerAdapter
@@ -96,6 +97,7 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
         fun deleteProduct(product: Product)
         fun editProduct(product: Product)
         fun backToOverview()
+        fun editOrderSuccessfull(currentOrder: Order)
     }
 
 }

@@ -70,8 +70,6 @@ class SellerHomeActivity : AppCompatActivity(),
         editOrderSellerDialog.onProductSellerObserver = this
     }
 
-    override fun onBackPressed() {
-    }
 
     private fun showFragment(fragment: Fragment, showBar: Boolean){
         binding.sellerNavigator.isVisible = showBar
@@ -83,7 +81,7 @@ class SellerHomeActivity : AppCompatActivity(),
     override fun sendProduct(product: Product) {
         productSellerFragment.setCurrentProduct(product)
         productSellerFragment.onProductSellerObserver = this
-        showFragment(productSellerFragment, false)
+        showFragment(productSellerFragment, true)
     }
 
     override fun showEditProduct(product: Product) {
@@ -108,7 +106,6 @@ class SellerHomeActivity : AppCompatActivity(),
             .set(product)
         showFragment(sellerMainOverviewFragment, true)
         editProductDialogFragment.dismiss()
-        Log.e(" EDIT PRODUCT ", "entro")
     }
 
     override fun backToOverview() {
@@ -116,11 +113,11 @@ class SellerHomeActivity : AppCompatActivity(),
     }
 
     override fun confirmOrder(idOrder: String, idUser: String){
-        changeFlag("Exitosa", idOrder, idUser)
+        changeFlag("Exitosa", idOrder)
     }
 
     override fun cancelOrder(idOrder: String, idUser: String){
-        changeFlag("Cancelada", idOrder, idUser)
+        changeFlag("Cancelada", idOrder)
     }
 
     override fun editOrder(currentOrder: Order){
@@ -129,13 +126,17 @@ class SellerHomeActivity : AppCompatActivity(),
     }
 
     override fun editOrderSuccessfull(currentOrder: Order){
-        changeFlag("Editada", currentOrder.idOrder, currentOrder.idUser)
+        var status = "Editada"
+        currentOrder.orderFlag = status
+        changeFlag(status, currentOrder.idOrder)
+        Log.e(" Order in Editor Success: ", currentOrder.orderFlag)
+        sellerOrderOverviewFragment.adapterOrder.deleteOrder(currentOrder)
         Firebase.firestore.collection("orders")
             .document(currentOrder.idOrder)
             .set(currentOrder)
     }
 
-    private fun changeFlag(valueFlag:String, idOrder: String, idUser: String){
+    private fun changeFlag(valueFlag:String, idOrder: String){
         Firebase.firestore.collection("orders")
             .document(idOrder)
             .update("orderFlag", valueFlag)

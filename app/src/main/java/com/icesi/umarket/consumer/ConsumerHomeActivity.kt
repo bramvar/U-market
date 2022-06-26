@@ -16,12 +16,14 @@ import com.icesi.umarket.databinding.ActivityConsumerHomeBinding
 import com.icesi.umarket.model.*
 import com.icesi.umarket.util.Util
 
-class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.SellerObserver {
+class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.SellerObserver,
+    MarketProfileFragment.backButtonObserver{
 
     private lateinit var binding: ActivityConsumerHomeBinding
     private lateinit var menuConsumer:BottomNavigationView
     private lateinit var currentUser: User
     private var shoppingCar = ShoppingCar()
+    private var isInProductView: Boolean = false
 
     ////// Init the fragment
     private  var consumerMainOverviewFragment = ConsumerMainOverviewFragment.newInstance()
@@ -29,6 +31,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     private  var consumerShoppingFragment= ConsumerShoppingFragment.newInstance()
     private  var consumerMarketProfileFragment= MarketProfileFragment.newInstance()
     private  var productFragment = ProductFragment.newInstance()
+    val dialogFragment = ConfirmPurchaseDiaglogFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +61,8 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         consumerMainOverviewFragment.onSellerObserver = this
         consumerMarketProfileFragment.onProductObserver = this
         productFragment.onOrderObserver = this
+        consumerMarketProfileFragment.dialogFragment = dialogFragment
+        consumerMarketProfileFragment.dialogFragment.onConfirmPurchaseObserver = consumerMarketProfileFragment
     }
 
     fun loadUserInFragments(){
@@ -67,6 +72,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         consumerMainOverviewFragment.currentUser = currentUser
         consumerMarketProfileFragment.currentUser = currentUser
         consumerShoppingFragment.currentUser = currentUser
+        consumerMarketProfileFragment.dialogFragment = dialogFragment
     }
 
     fun showFragment(fragment: Fragment, blockMenu: Boolean){
@@ -77,9 +83,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         transaction.commit()
     }
 
-    override fun onBackPressed() {
-        // super.onBackPressed();
-    }
+
 
     override fun sendMarket(market: Market) {
         consumerMarketProfileFragment.currentMarket = market
@@ -88,6 +92,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
 
     override fun sendProduct(product: Product) {
         productFragment.product = product
+        isInProductView = true
         showFragment(productFragment, false)
     }
 
@@ -106,12 +111,13 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     }
 
     override fun backToTheMainMarket(){
-        showFragment(consumerMarketProfileFragment, true)
+        isInProductView = false
+        showFragment(consumerMarketProfileFragment, false)
     }
 
-
     override fun backToMarketBlank(){
-        showFragment(consumerMainOverviewFragment, true)
+        isInProductView = false
+        showFragment(consumerMainOverviewFragment, false)
     }
 
     override fun backToMarkets() {
@@ -124,5 +130,29 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         shoppingCar.loadOrder(order)
         consumerMarketProfileFragment.shoppingCar = shoppingCar
         showFragment(consumerMarketProfileFragment, false)
+    }
+
+    override fun askOrder(shoppingCar: ShoppingCar) {
+        if(shoppingCar.getAmountOfOrders() > 0) {
+            dialogFragment.orderText = shoppingCar.generateConfirmText()
+            dialogFragment.show(supportFragmentManager, "PurchaseConfirmationDialog")
+        }else{
+            backToMarkets()
+        }
+    }
+
+    override fun onBackPressed() {
+        when(isInProductView){
+            true ->  backToTheMainMarket()
+            false -> askOrder(consumerMarketProfileFragment.shoppingCar)
+        }
+    }
+
+    override fun backToMarket() {
+        TODO("Not yet implemented")
+    }
+
+    override fun backToMainMarket() {
+        TODO("Not yet implemented")
     }
 }

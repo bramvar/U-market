@@ -64,8 +64,6 @@ class EditProductDialogFragment : DialogFragment() {
 
     private fun loadData(){
         var price = Integer.parseInt(product.price.toString())
-        Log.e("Product in Dialog",product.name +" - "+product.description+" - "+product.price )
-        //binding.priceProductEditSeller.setText(price)
     }
 
     fun setProduct(product: Product) {

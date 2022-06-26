@@ -24,7 +24,8 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
     var shoppingCar: ShoppingCar = ShoppingCar()
     var adapter = ProductAdapter()
     lateinit var onProductObserver: ConsumerMainOverviewFragment.SellerObserver
-    val dialogFragment = ConfirmPurchaseDiaglogFragment.newInstance()
+    lateinit var dialogFragment : ConfirmPurchaseDiaglogFragment
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,21 +48,14 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
         loadProducts()
 
         _binding.sellerinfoBtn.setOnClickListener {
-            if(shoppingCar.getAmountOfOrders() > 0) {
-                dialogFragment.onConfirmPurchaseObserver = this
-                dialogFragment.orderText = shoppingCar.generateConfirmText()
-                dialogFragment.show(
-                    requireActivity().supportFragmentManager,
-                    "PurchaseConfirmationDialog"
-                );
-            }else{
-                onProductObserver.backToMarkets()
-            }
+
         }
 
         // Inflate the layout for this fragment
         return _binding.root
     }
+
+
 
     companion object {
         @JvmStatic
@@ -96,5 +90,12 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
     override fun discard() {
         dialogFragment.onDestroy()
         onProductObserver.backToMarkets()
+    }
+
+
+    interface backButtonObserver{
+        fun askOrder(shoppingCar: ShoppingCar)
+        fun backToMarket()
+        fun backToMainMarket()
     }
 }

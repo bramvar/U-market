@@ -42,7 +42,6 @@ class EditOrderSellerDialogFragment : DialogFragment(){
         _binding.cancelOrderEditBtn.setOnClickListener {
             this.dismiss()
         }
-
         return dialog
     }
 
@@ -59,5 +58,6 @@ class EditOrderSellerDialogFragment : DialogFragment(){
     companion object {
         @JvmStatic
         fun newInstance() = EditOrderSellerDialogFragment()
+        const val TAG = "EditOrderSellerDialogFragment"
     }
 }

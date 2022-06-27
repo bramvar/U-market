@@ -36,15 +36,9 @@ class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     }
 
     fun bindMarket(marketBind: Market) {
-
         market = marketBind
         marketName.text = market!!.marketName
         descriptMarket.text = market!!.marketShortDescription
         Util.loadImage(market!!.imageID.toString(), marketImageRow, "market-image-profile")
-
-        Log.e("Market Img en Bind: ",marketBind.imageID )
-        Log.e("Market Descrip Bind: ",marketBind.marketDescription )
-        Log.e("Market Short Bind: ",marketBind.marketShortDescription )
-
     }
 }

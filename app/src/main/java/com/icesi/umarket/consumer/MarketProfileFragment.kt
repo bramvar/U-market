@@ -24,8 +24,6 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
     var shoppingCar: ShoppingCar = ShoppingCar()
     var adapter = ProductAdapter()
     lateinit var onProductObserver: ConsumerMainOverviewFragment.SellerObserver
-    lateinit var dialogFragment : ConfirmPurchaseDiaglogFragment
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,12 +81,10 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
     }
 
     override fun confirm() {
-        dialogFragment.onDestroy()
         onProductObserver.sendMessage(shoppingCar.sendMessage())
     }
 
     override fun discard() {
-        dialogFragment.onDestroy()
         onProductObserver.backToMarkets()
     }
 

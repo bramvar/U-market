@@ -31,7 +31,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     private  var consumerShoppingFragment= ConsumerShoppingFragment.newInstance()
     private  var consumerMarketProfileFragment= MarketProfileFragment.newInstance()
     private  var productFragment = ProductFragment.newInstance()
-    val dialogFragment = ConfirmPurchaseDiaglogFragment.newInstance()
+    var dialogFragment = ConfirmPurchaseDiaglogFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +61,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         consumerMainOverviewFragment.onSellerObserver = this
         consumerMarketProfileFragment.onProductObserver = this
         productFragment.onOrderObserver = this
-        consumerMarketProfileFragment.dialogFragment = dialogFragment
-        consumerMarketProfileFragment.dialogFragment.onConfirmPurchaseObserver = consumerMarketProfileFragment
+        dialogFragment.onConfirmPurchaseObserver = consumerMarketProfileFragment
     }
 
     fun loadUserInFragments(){
@@ -72,7 +71,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         consumerMainOverviewFragment.currentUser = currentUser
         consumerMarketProfileFragment.currentUser = currentUser
         consumerShoppingFragment.currentUser = currentUser
-        consumerMarketProfileFragment.dialogFragment = dialogFragment
+
     }
 
     fun showFragment(fragment: Fragment, blockMenu: Boolean){
@@ -134,7 +133,8 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
 
     override fun askOrder(shoppingCar: ShoppingCar) {
         if(shoppingCar.getAmountOfOrders() > 0) {
-            dialogFragment.orderText = shoppingCar.generateConfirmText()
+            var orderText = shoppingCar.generateConfirmText()
+            dialogFragment.orderText = orderText
             dialogFragment.show(supportFragmentManager, "PurchaseConfirmationDialog")
         }else{
             backToMarkets()

@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.icesi.umarket">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,25 +16,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Umarket">
         <activity
-            android:name=".ConsumerHomeActivity"
+            android:name=".seller.SellerEditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".SellerHomeActivity"
+            android:name=".consumer.ConsumerHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".AdditionalSellerInfoActivity"
+            android:name=".seller.SellerHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".AdditionalConsumerInfoActivity"
+            android:name=".seller.AdditionalSellerInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".SellerSignupActivity"
+            android:name=".consumer.AdditionalConsumerInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".ConsumerSignupActivity"
+            android:name=".seller.SellerSignupActivity"
             android:exported="false" />
         <activity
-            android:name=".SellerLoginActivity"
+            android:name=".consumer.ConsumerSignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".seller.SellerLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".consumer.ConsumerEditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".consumer.ConsumerLoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -51,12 +60,13 @@
             android:resource="@array/preloaded_fonts" />
 
         <provider
-            android:authorities="com.icesi.umarket"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.icesi.umarket"
             android:exported="false"
             android:grantUriPermissions="true">
-
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/paths"/>
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" />
         </provider>
     </application>
 

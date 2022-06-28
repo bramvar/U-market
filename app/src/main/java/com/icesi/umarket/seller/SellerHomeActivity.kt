@@ -1,12 +1,8 @@
 package com.icesi.umarket.seller
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
@@ -16,21 +12,28 @@ import com.icesi.umarket.model.AuxOrder
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Constants
 
 class SellerHomeActivity : AppCompatActivity(),
     SellerMainOverviewFragment.OnProductsOnSellerObserver,
     SellerOrderOverviewFragment.OnConfirmOrderListener {
 
+    /// View
+    private lateinit var binding: ActivitySellerHomeBinding
+
+    /// Fragments
     private var sellerProfileFragment = SellerProfileFragment.newInstance()
     private var newProductFragment = NewProductFragment.newInstance()
     private var sellerMainOverviewFragment = SellerMainOverviewFragment.newInstance()
     private var productSellerFragment = ProductSellerFragment.newInstance()
     private var sellerOrderOverviewFragment = SellerOrderOverviewFragment.newInstance()
     private var editProductDialogFragment =  EditProductDialogFragment.newInstance()
+
+    /// Dialog Fragments
     private var editOrderSellerDialog =  EditOrderSellerDialogFragment()
 
+    /// Object
     private lateinit var user: Seller
-    private lateinit var binding:ActivitySellerHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +42,7 @@ class SellerHomeActivity : AppCompatActivity(),
 
         user = Gson().fromJson(intent.extras?.getString("currentUser",""), Seller::class.java)
         loadUser()
-        loadAdapters()
+        loadListeners()
         showFragment(sellerMainOverviewFragment)
 
         binding.sellerNavigator.setOnItemSelectedListener { menuItem->
@@ -62,15 +65,18 @@ class SellerHomeActivity : AppCompatActivity(),
         sellerOrderOverviewFragment.setUser(user)
         sellerProfileFragment.setUser(user)
         productSellerFragment.setUser(user)
-
     }
 
-    private fun loadAdapters(){
-        sellerMainOverviewFragment.adapter.onProductSellerObserver = this
+    private fun loadListeners(){
+        /// ProductSellerObserver
         editProductDialogFragment.onProductSellerObserver = this
-        sellerOrderOverviewFragment.adapterOrder.onOrderConfirmObserver = this
-        newProductFragment.listener = sellerMainOverviewFragment
         editOrderSellerDialog.onProductSellerObserver = this
+
+        /// Load Listeners into Adapters
+        sellerMainOverviewFragment.adapter.onProductSellerObserver = this
+        sellerOrderOverviewFragment.adapterOrder.onOrderConfirmObserver = this
+
+        newProductFragment.listener = sellerMainOverviewFragment
     }
 
 
@@ -92,18 +98,14 @@ class SellerHomeActivity : AppCompatActivity(),
     }
 
     override fun deleteProduct(product: Product) {
-        Firebase.firestore.collection("markets")
-            .document(user.marketID)
-            .collection("products")
+        Firebase.firestore.collection("markets").document(user.marketID).collection("products")
             .document(product.id)
             .delete()
         showFragment(sellerMainOverviewFragment)
     }
 
     override fun editProduct(product: Product) {
-        Firebase.firestore.collection("markets")
-            .document(user.marketID)
-            .collection("products")
+        Firebase.firestore.collection("markets").document(user.marketID).collection("products")
             .document(product.id)
             .set(product)
         showFragment(sellerMainOverviewFragment)
@@ -115,11 +117,11 @@ class SellerHomeActivity : AppCompatActivity(),
     }
 
     override fun confirmOrder(idOrder: String, idUser: String){
-        changeFlag("Exitosa", idOrder)
+        changeFlag(Constants.successFlag, idOrder)
     }
 
     override fun cancelOrder(idOrder: String, idUser: String){
-        changeFlag("Cancelada", idOrder)
+        changeFlag(Constants.cancelFlag, idOrder)
     }
 
     override fun editOrder(currentOrder: Order){
@@ -127,12 +129,11 @@ class SellerHomeActivity : AppCompatActivity(),
         editOrderSellerDialog.show(supportFragmentManager,editOrderSellerDialog.tag)
     }
 
-    override fun editOrderSuccessfull(currentOrder: Order){
-        var status = "Editada"
-        currentOrder.orderFlag = status
-        changeFlag(status, currentOrder.idOrder)
-        Log.e(" Order in Editor Success: ", currentOrder.orderFlag)
+    override fun editOrderSuccessful(currentOrder: Order){
+        currentOrder.orderFlag = Constants.editFlag
+        changeFlag(Constants.editFlag, currentOrder.idOrder)
         sellerOrderOverviewFragment.adapterOrder.deleteOrder(currentOrder)
+
         Firebase.firestore.collection("orders")
             .document(currentOrder.idOrder)
             .set(currentOrder)
@@ -145,13 +146,13 @@ class SellerHomeActivity : AppCompatActivity(),
 
         Firebase.firestore.collection("markets")
             .document(user.marketID)
-            .collection("pendentOrders")
+            .collection(Constants.pendentOrdersName)
             .document(idOrder)
             .delete()
 
         Firebase.firestore.collection("markets")
             .document(user.marketID)
-            .collection("historyOrders")
+            .collection(Constants.historyOrdersName)
             .document(idOrder)
             .set(AuxOrder(idOrder))
             .addOnSuccessListener {

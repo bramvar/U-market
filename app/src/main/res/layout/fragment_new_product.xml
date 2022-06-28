@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -33,6 +36,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="75dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,8 +46,8 @@
                 android:id="@+id/newProductImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:src="@tools:sample/avatars" />
+                android:scaleType="center"
+                tools:src="@drawable/ic_baseline_add_a_photo_24" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,7 +67,6 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Nombre del producto"
             android:inputType="text"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -89,7 +92,6 @@
             android:layout_height="107dp"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Añade una descripción a tu producto"
             android:inputType="textMultiLine"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -194,3 +196,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

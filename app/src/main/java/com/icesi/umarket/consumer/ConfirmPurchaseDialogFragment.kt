@@ -1,14 +1,13 @@
 package com.icesi.umarket.consumer
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.icesi.umarket.databinding.FragmentConfirmPurchaseDiaglogBinding
 
-class ConfirmPurchaseDiaglogFragment : DialogFragment() {
+class ConfirmPurchaseDialogFragment : DialogFragment() {
     private lateinit var _binding: FragmentConfirmPurchaseDiaglogBinding
     lateinit var orderText: String
     lateinit var onConfirmPurchaseObserver: ConfirmPurchaseObserver

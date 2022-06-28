@@ -1,11 +1,11 @@
 package com.icesi.umarket.consumer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.ktx.auth
@@ -17,6 +17,8 @@ import com.icesi.umarket.databinding.ActivityConsumerSignupBinding
 import com.icesi.umarket.model.User
 
 class ConsumerSignupActivity : AppCompatActivity() {
+
+    /// View
     private lateinit var  binding: ActivityConsumerSignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,23 +29,19 @@ class ConsumerSignupActivity : AppCompatActivity() {
         val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onResult)
         binding.consumerRegistButtom.setOnClickListener {
             if(validateData()){
-                var gson = Gson()
-                /*
-                Create the user class and use it to send the data
-                 */
                 var name: String = binding.consumerNameText.text.toString()
                 var email: String = binding.consumerEmailText.text.toString()
                 var password: String= binding.consumerPasswordText.text.toString()
 
                 Firebase.auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener{
                     var id = Firebase.auth.currentUser?.uid
-                    var user: User = User(id.toString(), name, email, password,"","","consumer")
+                    var user = User(id.toString(), name, email, password,"","","consumer")
 
                     Firebase.firestore.collection("users")
                         .document(user.id)
                         .set(user).addOnSuccessListener {
                             val intent = Intent(this, AdditionalConsumerInfoActivity::class.java)
-                                .putExtra("userObj", gson.toJson(user))
+                                .putExtra("currentUser", Gson().toJson(user))
                             startActivity(intent)
                         }
 
@@ -126,7 +124,7 @@ class ConsumerSignupActivity : AppCompatActivity() {
         binding.passwordMsg.isVisible = true
     }
 
-fun onResult(activityResult: ActivityResult?) {
+    private fun onResult(activityResult: ActivityResult?) {
 
-}
+    }
 }

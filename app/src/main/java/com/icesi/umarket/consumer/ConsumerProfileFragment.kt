@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import com.icesi.umarket.MainActivity
 import com.icesi.umarket.databinding.FragmentConsumerProfileBinding
@@ -18,16 +16,17 @@ import com.icesi.umarket.util.Util
 
 class ConsumerProfileFragment : Fragment() {
 
+    /// View
     private var _binding: FragmentConsumerProfileBinding? = null
     private val binding get() = _binding!!
-    lateinit var currentUser: User
+
+    /// Object
+    private lateinit var currentUser: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
         _binding = FragmentConsumerProfileBinding.inflate(inflater,container,false)
 
         loadUserData()
@@ -48,10 +47,14 @@ class ConsumerProfileFragment : Fragment() {
     }
 
     private fun loadUserData(){
-        binding.nameConsumer.text = currentUser?.name
-        binding.emailConsumer.text = currentUser?.email
-        binding.phoneConsumer.text = currentUser?.phone
-        Util.loadImage(currentUser!!.img, binding.profilePhotoConsumer, "profile")
+        binding.nameConsumer.text = currentUser.name
+        binding.emailConsumer.text = currentUser.email
+        binding.phoneConsumer.text = currentUser.phone
+        Util.loadImage(currentUser.img, binding.profilePhotoConsumer, "profile")
+    }
+
+    fun setUser(user: User){
+        currentUser = user
     }
 
     override fun onDestroyView() {

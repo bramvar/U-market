@@ -74,9 +74,8 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
             binding.phoneMsg.isVisible = true
             isCorrect = false
         }else{
-            var gson = Gson()
             ///Create method to save img in the Storage
-            userObj = gson.fromJson<User>(intent.extras?.getString("userObj","").toString(),User::class.java)
+            userObj =  Gson().fromJson(intent.extras?.getString("currentUser","").toString(),User::class.java)
             userObj.phone = phone
         }
         return isCorrect

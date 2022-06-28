@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".EditProductDialogFragment">
+    tools:context=".seller.EditProductDialogFragment">
 
     <TextView
         android:id="@+id/textView24"

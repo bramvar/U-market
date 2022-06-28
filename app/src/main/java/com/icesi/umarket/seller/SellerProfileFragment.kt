@@ -1,4 +1,4 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,21 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.auth.ktx.auth
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+import com.icesi.umarket.MainActivity
 import com.icesi.umarket.model.Seller
 import com.icesi.umarket.util.Util
-import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.databinding.FragmentSellerProfileBinding
 import com.icesi.umarket.model.Market
-import com.icesi.umarket.model.Product
 
 class SellerProfileFragment : Fragment() {
 
+    /// View
     private lateinit var _binding: FragmentSellerProfileBinding
     private val binding get() = _binding!!
+
+    /// Objects
     private lateinit var market: Market
     private lateinit var seller: Seller
 
@@ -29,7 +30,6 @@ class SellerProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentSellerProfileBinding.inflate(inflater, container, false)
         getMarketInfo()
 
@@ -52,9 +52,9 @@ class SellerProfileFragment : Fragment() {
 
     private fun getMarketInfo(){
         Util.loadImage(market.imageID, binding.profilePhotoSeller, "market-image-profile")
-        binding.nameMarket.setText(market.marketName)
-        binding.emailSeller.setText(seller.email)
-        binding.phoneSeller.setText(market.phoneNumber)
+        binding.nameMarket.text = market.marketName
+        binding.emailSeller.text = seller.email
+        binding.phoneSeller.text = market.phoneNumber
     }
 
     fun setUser(user: Seller) {
@@ -68,7 +68,5 @@ class SellerProfileFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = SellerProfileFragment()
-
     }
-
 }

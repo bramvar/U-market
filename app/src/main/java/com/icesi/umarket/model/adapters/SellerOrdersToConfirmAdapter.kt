@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.icesi.umarket.R
-import com.icesi.umarket.SellerOrderOverviewFragment
+import com.icesi.umarket.seller.SellerOrderOverviewFragment
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.holders.SellerOrdersToConfirmViewHolder
-import com.icesi.umarket.seller.SellerHomeActivity
-import com.icesi.umarket.seller.SellerMainOverviewFragment
 
 class SellerOrdersToConfirmAdapter: RecyclerView.Adapter<SellerOrdersToConfirmViewHolder>(),
     SellerOrdersToConfirmViewHolder.OnChangesInOrderListener {

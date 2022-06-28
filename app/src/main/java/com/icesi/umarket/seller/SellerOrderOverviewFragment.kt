@@ -1,22 +1,15 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import com.google.gson.Gson
-import com.google.gson.TypeAdapter
 import com.icesi.umarket.databinding.FragmentSellerOrderOverviewBinding
 import com.icesi.umarket.model.AuxOrder
 import com.icesi.umarket.model.Market
@@ -28,10 +21,15 @@ import com.icesi.umarket.util.Util
 
 class SellerOrderOverviewFragment : Fragment() {
 
+    /// View
     private var _binding: FragmentSellerOrderOverviewBinding? = null
     private val binding get() = _binding!!
+
+    /// Objects
     private lateinit var user: Seller
     private lateinit var market: Market
+
+    /// Adapters
     val adapterOrder = SellerOrdersToConfirmAdapter()
     val adapterOrderHistory = SellerOrdersHistoryAdapter()
 
@@ -39,9 +37,9 @@ class SellerOrderOverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentSellerOrderOverviewBinding.inflate(inflater, container, false)
         getMarket()
+
         initOrdersRecyclerView(binding.ordersToConfirmRecycler).adapter = adapterOrder
         initOrdersRecyclerView(binding.ordersHistoryRecycler).adapter = adapterOrderHistory
         return binding.root
@@ -87,16 +85,14 @@ class SellerOrderOverviewFragment : Fragment() {
     }
 
     private fun getMarket() {
-        Log.e("Datos en getMarket", user.marketID)
-
         adapterOrder.clear()
         Firebase.firestore.collection("markets").document(user.marketID).get()
             .addOnSuccessListener {
                 val currentMarket = it.toObject(Market::class.java)
                 market = currentMarket!!
-                val marketName = currentMarket?.marketName
+                val marketName = currentMarket.marketName
                 binding.marketNameTextView.text = marketName
-                Util.loadImage(currentMarket!!.imageID!!, binding.marketProfileImage, "market-image-profile")
+                Util.loadImage(currentMarket.imageID, binding.marketProfileImage, "market-image-profile")
             }
         getOrders(user.marketID, "historyOrders", false)
         getOrders(user.marketID, "pendentOrders", true)
@@ -111,6 +107,6 @@ class SellerOrderOverviewFragment : Fragment() {
         fun confirmOrder(orderID: String, idUser: String)
         fun cancelOrder(orderID: String, idUser: String)
         fun editOrder(currentOrder: Order)
-        fun editOrderSuccessfull(currentOrder: Order)
+        fun editOrderSuccessful(currentOrder: Order)
     }
 }

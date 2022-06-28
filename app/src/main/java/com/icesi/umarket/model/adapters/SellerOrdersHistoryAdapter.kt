@@ -1,14 +1,11 @@
 package com.icesi.umarket.model.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.icesi.umarket.R
-import com.icesi.umarket.SellerOrderOverviewFragment
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.holders.SellerOrdersHistoryViewHolder
-import com.icesi.umarket.model.holders.SellerOrdersToConfirmViewHolder
 
 class SellerOrdersHistoryAdapter: RecyclerView.Adapter<SellerOrdersHistoryViewHolder>(){
 

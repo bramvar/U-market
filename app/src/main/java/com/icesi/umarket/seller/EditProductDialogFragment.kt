@@ -1,28 +1,25 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.icesi.umarket.databinding.ActivityAdditionalConsumerInfoBinding.inflate
-import com.icesi.umarket.databinding.FragmentConfirmPurchaseDiaglogBinding
 import com.icesi.umarket.databinding.FragmentEditProductDialogBinding
 import com.icesi.umarket.model.Product
-import com.icesi.umarket.seller.SellerMainOverviewFragment
 
 class EditProductDialogFragment : DialogFragment() {
 
+    /// View
     private lateinit var _binding: FragmentEditProductDialogBinding
     private val binding get() = _binding!!
+
+    /// Objects
     private lateinit var product : Product
     private lateinit var newProduct : Product
+
+    /// Listeners
     lateinit var onProductSellerObserver: SellerMainOverviewFragment.OnProductsOnSellerObserver
 
     override fun onStart() {
@@ -32,7 +29,6 @@ class EditProductDialogFragment : DialogFragment() {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,14 +54,15 @@ class EditProductDialogFragment : DialogFragment() {
     }
 
     private fun checkData() : Boolean {
-        var name= binding.nameProductEditSeller.text.toString()
-        var description= binding.descriptProductEditSeller.text.toString()
-        var price= binding.priceProductEditSeller.text.toString()
-        var amount = binding.amountProductEdit.text.toString()
+        val name= binding.nameProductEditSeller.text.toString()
+        val description= binding.descriptProductEditSeller.text.toString()
+        val price= binding.priceProductEditSeller.text.toString()
+        val amount = binding.amountProductEdit.text.toString()
 
         if(name != "" && description != "" && price !="" && amount !=""){
-           var priceInt = Integer.parseInt(price)
-            newProduct = Product(product.id, name, priceInt,description, product.imageID , Integer.parseInt(amount))
+            val priceInt = Integer.parseInt(price)
+            val amountInt = Integer.parseInt(amount)
+            newProduct = Product(product.id, name, priceInt,description, product.imageID , amountInt)
             return true
         }else{
             return false

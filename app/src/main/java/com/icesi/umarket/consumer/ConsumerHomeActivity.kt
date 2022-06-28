@@ -2,36 +2,38 @@ package com.icesi.umarket.consumer
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
-import com.icesi.umarket.ProductFragment
 import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivityConsumerHomeBinding
 import com.icesi.umarket.model.*
-import com.icesi.umarket.util.Util
 
 class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.SellerObserver,
-    MarketProfileFragment.backButtonObserver{
+    MarketProfileFragment.BackButtonObserver{
 
+    /// View
     private lateinit var binding: ActivityConsumerHomeBinding
     private lateinit var menuConsumer:BottomNavigationView
+
+    /// Objects
     private lateinit var currentUser: User
     private var shoppingCar = ShoppingCar()
+
+    ///Flags
     private var isInProductView: Boolean = false
 
-    ////// Init the fragment
+    /// Fragments
     private  var consumerMainOverviewFragment = ConsumerMainOverviewFragment.newInstance()
     private  var consumerProfileFragment = ConsumerProfileFragment.newInstance()
     private  var consumerShoppingFragment= ConsumerShoppingFragment.newInstance()
     private  var consumerMarketProfileFragment= MarketProfileFragment.newInstance()
     private  var productFragment = ProductFragment.newInstance()
-    var dialogFragment = ConfirmPurchaseDiaglogFragment()
+
+    /// Dialog Fragments
+    var dialogFragment = ConfirmPurchaseDialogFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,6 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         setContentView(binding.root)
 
         currentUser = Gson().fromJson(intent.extras?.getString("currentUser",""), User::class.java)
-        ///currentUser = Gson().fromJson(intent.extras?.getString("currentUser",""), User::class.java)
 
         loadUserInFragments()
         loadListeners()
@@ -56,26 +57,30 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         }
     }
 
-    fun loadListeners(){
-        ////// Load the listener
+    private fun loadListeners(){
+        /// SellerObserver
         consumerMainOverviewFragment.onSellerObserver = this
+
+        /// ProductObserver
         consumerMarketProfileFragment.onProductObserver = this
         consumerMarketProfileFragment.onPurchaseObserver = this
+
+        /// OrderObserver
         productFragment.onOrderObserver = this
+
+        /// ConfirmPurchaseObserver
         dialogFragment.onConfirmPurchaseObserver = consumerMarketProfileFragment
     }
 
-    fun loadUserInFragments(){
-        ///// Init the currentUser in the fragments
+    private fun loadUserInFragments(){
         productFragment.setUser(currentUser)
-        consumerProfileFragment.currentUser = currentUser
-        consumerMainOverviewFragment.currentUser = currentUser
-        consumerMarketProfileFragment.currentUser = currentUser
-        consumerShoppingFragment.currentUser = currentUser
-
+        consumerProfileFragment.setUser(currentUser)
+        consumerMainOverviewFragment.setUser(currentUser)
+        consumerMarketProfileFragment.setUser(currentUser)
+        consumerShoppingFragment.setUser(currentUser)
     }
 
-    fun showFragment(fragment: Fragment, blockMenu: Boolean){
+    private fun showFragment(fragment: Fragment, blockMenu: Boolean){
         binding.menuConsumer.isVisible = blockMenu
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
@@ -83,17 +88,19 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         transaction.commit()
     }
 
-
-
     override fun sendMarket(market: Market) {
-        consumerMarketProfileFragment.currentMarket = market
+        consumerMarketProfileFragment.setMarket(market)
         showFragment(consumerMarketProfileFragment, false)
     }
 
     override fun sendProduct(product: Product) {
-        productFragment.product = product
+        productFragment.setProduct(product)
         isInProductView = true
         showFragment(productFragment, false)
+    }
+
+    override fun sendMarketInfo(market: Market){
+        productFragment.setMarket(market)
     }
 
     override fun sendShoppingInfo(name: String, market: Market) {
@@ -102,12 +109,8 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     }
 
     override fun sendMessage(intent: Intent) {
-                backToMarkets()
-                startActivity(intent)
-    }
-
-    override fun sendMarketInfo(market: Market){
-        productFragment.currentMarket = market
+        backToMarkets()
+        startActivity(intent)
     }
 
     override fun backToTheMainMarket(){
@@ -122,19 +125,19 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
 
     override fun backToMarkets() {
         shoppingCar = ShoppingCar()
-        consumerMarketProfileFragment.shoppingCar = shoppingCar
+        consumerMarketProfileFragment.setShoppingCar(shoppingCar)
         showFragment(consumerMainOverviewFragment, true)
     }
 
     override fun loadOrder(order: Order) {
         shoppingCar.loadOrder(order)
-        consumerMarketProfileFragment.shoppingCar = shoppingCar
+        consumerMarketProfileFragment.setShoppingCar(shoppingCar)
         showFragment(consumerMarketProfileFragment, false)
     }
 
     override fun askOrder(shoppingCar: ShoppingCar) {
         if(shoppingCar.getAmountOfOrders() > 0) {
-            var orderText = shoppingCar.generateConfirmText()
+            val orderText = shoppingCar.generateConfirmText()
             dialogFragment.orderText = orderText
             dialogFragment.show(supportFragmentManager, "PurchaseConfirmationDialog")
         }else{
@@ -145,15 +148,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     override fun onBackPressed() {
         when(isInProductView){
             true ->  backToTheMainMarket()
-            false -> askOrder(consumerMarketProfileFragment.shoppingCar)
+            false -> askOrder(consumerMarketProfileFragment.getShoppingCar())
         }
-    }
-
-    override fun backToMarket() {
-        TODO("Not yet implemented")
-    }
-
-    override fun backToMainMarket() {
-        TODO("Not yet implemented")
     }
 }

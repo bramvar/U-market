@@ -1,8 +1,6 @@
 package com.icesi.umarket.seller
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,20 +9,22 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityAdditionalSellerInfoBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Seller
-import com.icesi.umarket.model.User
 import com.icesi.umarket.util.Util
-import com.icesi.umarket.util.UtilDomi
 import java.util.*
 
 class AdditionalSellerInfoActivity : AppCompatActivity() {
 
+    /// View
     private lateinit var binding: ActivityAdditionalSellerInfoBinding
+
+    /// Object
     private lateinit var currentUser: Seller
+
+    /// Variable
     private lateinit var idImg: String
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,18 +1,14 @@
 package com.icesi.umarket.model.holders
 
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.R
-import com.icesi.umarket.SellerOrderOverviewFragment
+import com.icesi.umarket.seller.SellerOrderOverviewFragment
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.User
 import com.icesi.umarket.util.Util

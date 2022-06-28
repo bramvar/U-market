@@ -5,7 +5,7 @@
     android:id="@+id/editOrderSellerLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".EditOrderSellerDialogFragment">
+    tools:context=".seller.EditOrderSellerDialogFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

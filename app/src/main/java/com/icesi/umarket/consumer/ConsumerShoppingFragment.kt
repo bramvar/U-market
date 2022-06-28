@@ -1,49 +1,48 @@
 package com.icesi.umarket.consumer
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import com.google.gson.Gson
 import com.icesi.umarket.databinding.FragmentConsumerShoppingBinding
-import com.icesi.umarket.model.AuxOrder
 import com.icesi.umarket.model.Order
-import com.icesi.umarket.model.adapters.OrderAdapter
 import com.icesi.umarket.model.User
+import com.icesi.umarket.model.adapters.OrderAdapter
 import com.icesi.umarket.util.Util
-
 
 class ConsumerShoppingFragment : Fragment() {
 
-    lateinit var currentUser: User
-    var itHasOrders: Boolean = false
-
+    /// View
     private lateinit var _binding: FragmentConsumerShoppingBinding
     private val binding get() = _binding!!
-
     val adapter = OrderAdapter()
+
+    /// Object
+    private lateinit var currentUser: User
+
+    /// Variable
+    private var itHasOrders: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentConsumerShoppingBinding.inflate(inflater,container,false)
-        Util.initRecycler(_binding.ordersRecyclerView, requireActivity(),LinearLayoutManager.VERTICAL ).adapter = adapter
+        Util.initRecycler(binding.ordersRecyclerView, requireActivity(),LinearLayoutManager.VERTICAL ).adapter = adapter
 
-        _binding.consumerNameShopping.text = currentUser.name
+        binding.consumerNameShopping.text = currentUser.name
         Util.loadImage(currentUser.img,_binding.consumerProfileShopping, "profile")
 
         loadOrders()
         return _binding.root
+    }
+
+    fun setUser(user: User){
+        currentUser = user
     }
 
     companion object {
@@ -51,20 +50,20 @@ class ConsumerShoppingFragment : Fragment() {
         fun newInstance() = ConsumerShoppingFragment()
     }
 
-    fun loadOrders() {
+    private fun loadOrders() {
         Firebase.firestore.collection("users").document(currentUser.id).collection("orders").get()
             .addOnSuccessListener {
-                for(doc in it.documents){
+                for (doc in it.documents) {
                     itHasOrders = true
-                    var orderID = doc.toObject(Order::class.java)
+                    val orderID = doc.toObject(Order::class.java)
 
                     Firebase.firestore.collection("orders").document(orderID!!.idOrder).get()
                         .addOnSuccessListener { order ->
                             adapter.addOrder(order.toObject(Order::class.java)!!)
-                    }
+                        }
                 }
 
-                if(itHasOrders){
+                if (itHasOrders) {
                     adapter.showOrders()
                 }
             }

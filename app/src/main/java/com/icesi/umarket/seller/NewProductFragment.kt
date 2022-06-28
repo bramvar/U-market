@@ -29,13 +29,16 @@ import java.util.*
 
 class NewProductFragment : Fragment() {
 
+    /// View
     private var _binding: FragmentNewProductBinding? = null
     private val binding get() = _binding!!
+
+    /// Object
     private lateinit var user: Seller
-
-    private var file: File? = null
     private lateinit var productImageUri: Uri
+    private var file: File? = null
 
+    /// Listener
     var listener: OnNewProductListener? = null
 
     override fun onCreateView(
@@ -45,8 +48,8 @@ class NewProductFragment : Fragment() {
         _binding = FragmentNewProductBinding.inflate(inflater, container, false)
         val camLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onCameraResult)
         val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
-        binding.newProductImage.setOnClickListener {
 
+        binding.newProductImage.setOnClickListener {
             loadImage(camLauncher, galleryLauncher)
         }
 

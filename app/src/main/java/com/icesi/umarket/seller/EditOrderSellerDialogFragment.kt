@@ -1,26 +1,25 @@
-package com.icesi.umarket
+package com.icesi.umarket.seller
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.icesi.umarket.databinding.FragmentConfirmPurchaseDiaglogBinding
 import com.icesi.umarket.databinding.FragmentEditOrderSellerDialogBinding
-import com.icesi.umarket.databinding.FragmentEditProductDialogBinding
 import com.icesi.umarket.model.Order
-import com.icesi.umarket.model.Product
-import com.icesi.umarket.seller.SellerMainOverviewFragment
 
 class EditOrderSellerDialogFragment : DialogFragment(){
+
+    /// View
     private lateinit var _binding: FragmentEditOrderSellerDialogBinding
     private val binding get() = _binding!!
+
+    /// Object
     private lateinit var currentOrder : Order
-    lateinit var onProductSellerObserver: SellerMainOverviewFragment.OnProductsOnSellerObserver
+
+    /// Listener
+    lateinit var onProductSellerObserver: SellerOrderOverviewFragment.OnConfirmOrderListener
 
     override fun onStart() {
         super.onStart()
@@ -29,6 +28,7 @@ class EditOrderSellerDialogFragment : DialogFragment(){
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +39,7 @@ class EditOrderSellerDialogFragment : DialogFragment(){
         _binding.acceptOrderEditBtn.setOnClickListener {
             if(binding.editAmountOrderText.text.toString() !="" ){
                 calculateTotalPrice()
-                onProductSellerObserver.editOrderSuccessfull(currentOrder)
+                onProductSellerObserver.editOrderSuccessful(currentOrder)
                 dismiss()
             }else{
                 Toast.makeText(requireContext(), "Escribe una cantidad valida", Toast.LENGTH_SHORT).show()
@@ -53,7 +53,7 @@ class EditOrderSellerDialogFragment : DialogFragment(){
     }
 
 
-    fun calculateTotalPrice(){
+    private fun calculateTotalPrice(){
         currentOrder.amount = Integer.parseInt(binding.editAmountOrderText.text.toString())
         currentOrder.totalPrice = currentOrder.amount * currentOrder.unitPrice
     }

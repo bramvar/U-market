@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Umarket">
         <activity
-            android:name=".SellerEditProfileActivity"
+            android:name=".seller.SellerEditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".consumer.ConsumerHomeActivity"

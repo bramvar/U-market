@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.databinding.FragmentSellerMainOverviewBinding
 import com.icesi.umarket.model.Market
-import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
 import com.icesi.umarket.model.adapters.ProductSellerAdapter
@@ -20,28 +18,22 @@ import com.icesi.umarket.util.Util
 
 class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductListener {
 
+    /// View
     private var _binding: FragmentSellerMainOverviewBinding? = null
     private val binding get() = _binding!!
-    private lateinit var user: Seller
-
-    //STATE
     val adapter = ProductSellerAdapter()
+
+    /// Object
+    private lateinit var user: Seller
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentSellerMainOverviewBinding.inflate(inflater,container,false)
         getMarket()
-        initProductsRecyclerView(binding.productsRecycler)
+        Util.initRecycler(binding.productsRecycler, requireActivity(), LinearLayoutManager.VERTICAL).adapter = adapter
         return binding.root
-    }
-
-    private fun  initProductsRecyclerView(recycler: RecyclerView){
-        recycler.setHasFixedSize(true)
-        recycler.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
-        recycler.adapter = adapter
     }
 
     private fun getMarket(){
@@ -50,7 +42,6 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
                 val currentMarket = it.toObject(Market::class.java)
                 val marketName = currentMarket?.marketName
                 binding.marketNameTextView.text = marketName
-                Log.e("img",currentMarket!!.imageID)
                 Util.loadImage(currentMarket!!.imageID,binding.marketProfileImage,"market-image-profile" )
                 getProducts(user.marketID)
             }
@@ -61,8 +52,7 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
             .addOnCompleteListener { product ->
                 adapter.clear()
                 for (doc in product.result!!) {
-                    val prod = doc.toObject(Product::class.java)
-                    adapter.addProduct(prod)
+                    adapter.addProduct(doc.toObject(Product::class.java)!!)
                 }
             }
     }
@@ -71,15 +61,8 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
         this.user = user
     }
 
-    override fun onNewProduct(
-        id: String,
-        productName: String,
-        productPrice: Int,
-        productDescription:String,
-        productImage: String
-    ) {
-        val product = Product(id,productName,productPrice,productDescription,productImage)
-        adapter.addProduct(product)
+    override fun onNewProduct(id: String, productName: String, productPrice: Int, productDescription:String, productImage: String) {
+        adapter.addProduct(Product(id,productName,productPrice,productDescription,productImage))
     }
 
     override fun onDestroyView() {
@@ -97,7 +80,5 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
         fun deleteProduct(product: Product)
         fun editProduct(product: Product)
         fun backToOverview()
-        fun editOrderSuccessfull(currentOrder: Order)
     }
-
 }

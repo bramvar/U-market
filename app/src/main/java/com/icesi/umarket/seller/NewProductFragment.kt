@@ -80,14 +80,15 @@ class NewProductFragment : Fragment() {
         val productID = UUID.randomUUID().toString()
         val productName = binding.nameNewProductTextFiled.text.toString()
         val productPrice = Integer.parseInt(binding.priceNewProductTextField.text.toString())
+        val productAmount = Integer.parseInt(binding.amountNewProductText.text.toString())
         val productDescription = binding.descriptionNewProductTextField.text.toString()
         val imageID = UUID.randomUUID().toString()
-        return Product(productID,productName,productPrice,productDescription,imageID)
+        return Product(productID,productName,productPrice,productDescription,imageID,productAmount)
     }
 
     private fun checkFields(product: Product): Boolean{
         var flag = true
-        if (product.name == "" || product.price == 0 || product.description == ""){
+        if (product.name == "" || product.price == 0 || product.description == "" || product.amount==0){
             Toast.makeText(activity,"Campos invalidos", Toast.LENGTH_LONG).show()
             flag=false
         }
@@ -97,6 +98,7 @@ class NewProductFragment : Fragment() {
     private fun clearNewProductFields(){
         binding.nameNewProductTextFiled.text.clear()
         binding.priceNewProductTextField.text.clear()
+        binding.amountNewProductText.text.clear()
         binding.descriptionNewProductTextField.text.clear()
         binding.newProductImage.setImageURI(null)
     }
@@ -121,16 +123,16 @@ class NewProductFragment : Fragment() {
         galleryLauncher: ActivityResultLauncher<Intent>
     ) {
         val myAlertDialog = AlertDialog.Builder(this.context)
-        myAlertDialog.setTitle("Upload Pictures Option")
-        myAlertDialog.setMessage("How do you want to set your picture?")
+        myAlertDialog.setTitle("Subir imagen")
+        myAlertDialog.setMessage("Como quieres subir tu imagen?")
 
-        myAlertDialog.setPositiveButton("Gallery") { arg0, arg1 ->
+        myAlertDialog.setPositiveButton("Galeria") { arg0, arg1 ->
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             galleryLauncher.launch(intent)
         }
 
-        myAlertDialog.setNegativeButton("Camera") { arg0, arg1 ->
+        myAlertDialog.setNegativeButton("Camara") { arg0, arg1 ->
             val STRING_LENGTH = 10
             val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
             val randomString = (1..STRING_LENGTH)

@@ -60,6 +60,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         ////// Load the listener
         consumerMainOverviewFragment.onSellerObserver = this
         consumerMarketProfileFragment.onProductObserver = this
+        consumerMarketProfileFragment.onPurchaseObserver = this
         productFragment.onOrderObserver = this
         dialogFragment.onConfirmPurchaseObserver = consumerMarketProfileFragment
     }

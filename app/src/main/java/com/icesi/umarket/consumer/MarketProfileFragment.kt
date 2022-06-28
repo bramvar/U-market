@@ -24,6 +24,7 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
     var shoppingCar: ShoppingCar = ShoppingCar()
     var adapter = ProductAdapter()
     lateinit var onProductObserver: ConsumerMainOverviewFragment.SellerObserver
+    lateinit var onPurchaseObserver: MarketProfileFragment.backButtonObserver
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,13 +47,12 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDiaglogFragment.Confirm
         loadProducts()
 
         _binding.sellerinfoBtn.setOnClickListener {
-
+            onPurchaseObserver.askOrder(shoppingCar)
         }
 
         // Inflate the layout for this fragment
         return _binding.root
     }
-
 
 
     companion object {

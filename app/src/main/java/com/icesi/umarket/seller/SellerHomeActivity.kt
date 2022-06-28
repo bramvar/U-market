@@ -27,7 +27,7 @@ class SellerHomeActivity : AppCompatActivity(),
     private var productSellerFragment = ProductSellerFragment.newInstance()
     private var sellerOrderOverviewFragment = SellerOrderOverviewFragment.newInstance()
     private var editProductDialogFragment =  EditProductDialogFragment.newInstance()
-    private var editOrderSellerDialog =  EditOrderSellerDialogFragment.newInstance()
+    private var editOrderSellerDialog =  EditOrderSellerDialogFragment()
 
     private lateinit var user: Seller
     private lateinit var binding:ActivitySellerHomeBinding
@@ -40,17 +40,20 @@ class SellerHomeActivity : AppCompatActivity(),
         user = Gson().fromJson(intent.extras?.getString("currentUser",""), Seller::class.java)
         loadUser()
         loadAdapters()
-        showFragment(sellerMainOverviewFragment, true)
+        showFragment(sellerMainOverviewFragment)
 
         binding.sellerNavigator.setOnItemSelectedListener { menuItem->
             when(menuItem.itemId){
-                R.id.homeItem ->  showFragment(sellerMainOverviewFragment, true)
-                R.id.addProductItem -> showFragment(newProductFragment, true)
-                R.id.ordersItem -> showFragment(sellerOrderOverviewFragment, true)
-                R.id.profileItem -> showFragment(sellerProfileFragment, true)
+                R.id.homeItem ->  showFragment(sellerMainOverviewFragment)
+                R.id.addProductItem -> showFragment(newProductFragment)
+                R.id.ordersItem -> showFragment(sellerOrderOverviewFragment)
+                R.id.profileItem -> showFragment(sellerProfileFragment)
             }
             true
         }
+    }
+
+    override fun onBackPressed() {
     }
 
     private fun loadUser(){
@@ -71,8 +74,7 @@ class SellerHomeActivity : AppCompatActivity(),
     }
 
 
-    private fun showFragment(fragment: Fragment, showBar: Boolean){
-        binding.sellerNavigator.isVisible = showBar
+    private fun showFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.sellerFragmentContainer,fragment)
         transaction.commit()
@@ -81,7 +83,7 @@ class SellerHomeActivity : AppCompatActivity(),
     override fun sendProduct(product: Product) {
         productSellerFragment.setCurrentProduct(product)
         productSellerFragment.onProductSellerObserver = this
-        showFragment(productSellerFragment, true)
+        showFragment(productSellerFragment)
     }
 
     override fun showEditProduct(product: Product) {
@@ -95,7 +97,7 @@ class SellerHomeActivity : AppCompatActivity(),
             .collection("products")
             .document(product.id)
             .delete()
-        showFragment(sellerMainOverviewFragment, true)
+        showFragment(sellerMainOverviewFragment)
     }
 
     override fun editProduct(product: Product) {
@@ -104,12 +106,12 @@ class SellerHomeActivity : AppCompatActivity(),
             .collection("products")
             .document(product.id)
             .set(product)
-        showFragment(sellerMainOverviewFragment, true)
+        showFragment(sellerMainOverviewFragment)
         editProductDialogFragment.dismiss()
     }
 
     override fun backToOverview() {
-        showFragment(sellerMainOverviewFragment, false)
+        showFragment(sellerMainOverviewFragment)
     }
 
     override fun confirmOrder(idOrder: String, idUser: String){

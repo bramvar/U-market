@@ -48,6 +48,7 @@ class ProductSellerFragment : Fragment() {
         binding.productNameSeller.text = product.name
         binding.productInfoSeller.text = product.description
         binding.priceProductSeller.text = "$" + product.price.toString()
+        binding.amoutOfProductSellerView.text = product.amount.toString()
         Util.loadImage(product.imageID,_binding.productSellerImg,"product-images" )
     }
 

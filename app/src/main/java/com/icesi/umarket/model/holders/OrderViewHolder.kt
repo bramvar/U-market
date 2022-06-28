@@ -6,8 +6,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.R
 import com.icesi.umarket.model.Order
+import com.icesi.umarket.model.User
 import com.icesi.umarket.util.Util
 
 class OrderViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
@@ -33,9 +36,12 @@ class OrderViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     }
 
     private fun orderFlagColor(orderFlag: String) {
-        when(orderFlag){
-            "exitosa" -> statusProductOrder.setTextColor(Color.rgb(139,195,74))
-            "cancelada" ->statusProductOrder.setTextColor(Color.rgb(255,51,51))
+        if(orderFlag == "Exitosa"){
+            statusProductOrder.setTextColor(Color.rgb(139,195,74))
+        }else if(orderFlag == "Cancelada"){
+            statusProductOrder.setTextColor(Color.rgb(255,51,51))
+        }else if(orderFlag == "Editada"){
+            statusProductOrder.setTextColor(Color.rgb(103,58,183))
         }
         statusProductOrder.text = orderFlag
     }

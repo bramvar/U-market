@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.icesi.umarket.databinding.ActivityAdditionalConsumerInfoBinding.inflate
+import com.icesi.umarket.databinding.FragmentConfirmPurchaseDiaglogBinding
 import com.icesi.umarket.databinding.FragmentEditProductDialogBinding
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.seller.SellerMainOverviewFragment
@@ -24,13 +25,21 @@ class EditProductDialogFragment : DialogFragment() {
     private lateinit var newProduct : Product
     lateinit var onProductSellerObserver: SellerMainOverviewFragment.OnProductsOnSellerObserver
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _binding = FragmentEditProductDialogBinding.inflate(LayoutInflater.from(context))
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+    }
 
-        var dialog = AlertDialog.Builder(requireContext())
-            .setView(_binding.root)
-            .create()
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentEditProductDialogBinding.inflate(inflater, container, false)
         loadData()
 
         _binding.acceptChangesButton.setOnClickListener {
@@ -42,20 +51,21 @@ class EditProductDialogFragment : DialogFragment() {
         }
 
         _binding.cancelChangesButton.setOnClickListener {
-            this.dismiss()
+            dismiss()
         }
 
-        return dialog
+        return binding.root
     }
 
     private fun checkData() : Boolean {
         var name= binding.nameProductEditSeller.text.toString()
         var description= binding.descriptProductEditSeller.text.toString()
         var price= binding.priceProductEditSeller.text.toString()
+        var amount = binding.amountProductEdit.text.toString()
 
-        if(name != "" && description != "" && price !=""){
+        if(name != "" && description != "" && price !="" && amount !=""){
            var priceInt = Integer.parseInt(price)
-            newProduct = Product(product.id, name, priceInt,description, product.imageID)
+            newProduct = Product(product.id, name, priceInt,description, product.imageID , Integer.parseInt(amount))
             return true
         }else{
             return false
@@ -63,7 +73,8 @@ class EditProductDialogFragment : DialogFragment() {
     }
 
     private fun loadData(){
-        var price = Integer.parseInt(product.price.toString())
+        binding.nameProductEditSeller.setText(product.name)
+        binding.descriptProductEditSeller.setText(product.description)
     }
 
     fun setProduct(product: Product) {

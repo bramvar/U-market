@@ -5,9 +5,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.R
 import com.icesi.umarket.SellerOrderOverviewFragment
 import com.icesi.umarket.model.Order
+import com.icesi.umarket.model.User
 import com.icesi.umarket.util.Util
 
 class SellerOrdersHistoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -26,12 +29,20 @@ class SellerOrdersHistoryViewHolder(itemView: View): RecyclerView.ViewHolder(ite
 
     fun bindProduct(order: Order) {
         this.order = order
+        findUser()
         productName.setText(order.name)
-        username.setText(order.name)
         amount.setText(order.amount.toString())
         price.setText("$" + order.totalPrice)
         orderId = order.idOrder
         status.setText(order.orderFlag)
         Util.loadImage(order.imageID,productImg,"product-images")
+    }
+
+    private fun findUser() {
+        Firebase.firestore.collection("users").document(order.idUser).get()
+            .addOnSuccessListener {
+                var currentUser = it.toObject(User::class.java)!!
+                username.setText(currentUser.name)
+            }
     }
 }

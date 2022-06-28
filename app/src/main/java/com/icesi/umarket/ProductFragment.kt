@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.firebase.Timestamp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.consumer.ConsumerMainOverviewFragment
@@ -20,7 +21,6 @@ class ProductFragment : Fragment() {
     private lateinit var currentUser: User
     lateinit var currentMarket: Market
     lateinit var product: Product
-    lateinit var shoppingCar: ShoppingCar
     lateinit var onOrderObserver: ConsumerMainOverviewFragment.SellerObserver
 
     override fun onCreateView(
@@ -32,11 +32,8 @@ class ProductFragment : Fragment() {
         _binding.productName.text = product.name
         _binding.productInfo.text = product.description
         _binding.priceProduct.text = "$" + product.price.toString()
+        _binding.amoutStockProduct.text  = product.amount.toString()
         loadImage()
-
-        _binding.productBackBtn.setOnClickListener {
-            onOrderObserver.backToTheMainMarket()
-        }
 
         _binding.moreText.setOnClickListener {
             changeAmountText(true)
@@ -52,7 +49,7 @@ class ProductFragment : Fragment() {
             var price = Integer.valueOf(_binding.priceProduct.text.toString().replace("$",""))
 
             if(amount > 0){
-                var currentOrder= Order(amount,name,price,price*amount, product.imageID, currentMarket.id, product.id,"", "pendiente", currentUser.id)
+                var currentOrder= Order(amount,name,price,price*amount, product.imageID, currentMarket.id, product.id,"", "Pendiente", currentUser.id, Timestamp.now())
                 onOrderObserver.loadOrder(currentOrder)
 
             }else{
@@ -65,8 +62,10 @@ class ProductFragment : Fragment() {
 
     fun changeAmountText(state: Boolean){
         var amount = Integer.parseInt(_binding.amountText.text.toString())
-        if(state){
-            amount++
+        if(state ){
+            if(amount<product.amount){
+                amount++
+            }
         }else if(amount>1){
             amount--
         }
@@ -86,7 +85,6 @@ class ProductFragment : Fragment() {
 
     fun setUser(user: User){
         currentUser = user
-        Log.e("User ID en ProductFragment" , user.id)
     }
 
     companion object {

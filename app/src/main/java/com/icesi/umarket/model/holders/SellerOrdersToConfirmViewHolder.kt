@@ -7,11 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.R
 import com.icesi.umarket.SellerOrderOverviewFragment
 import com.icesi.umarket.model.Order
+import com.icesi.umarket.model.User
 import com.icesi.umarket.util.Util
 
 class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -51,13 +54,21 @@ class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(i
 
     fun bindProduct(order: Order) {
         this.order = order
+        findUser()
         productName.setText(order.name)
-        username.setText(order.name)
         amount.setText(order.amount.toString())
         price.setText("$" + order.totalPrice)
         orderId = order.idOrder
         Util.loadImage(order.imageID,productImg, "product-images")
 
+    }
+
+    private fun findUser() {
+        Firebase.firestore.collection("users").document(order.idUser).get()
+            .addOnSuccessListener {
+                var currentUser = it.toObject(User::class.java)!!
+                username.setText(currentUser.name)
+        }
     }
 
     interface OnChangesInOrderListener{

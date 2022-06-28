@@ -66,7 +66,6 @@ class ConsumerShoppingFragment : Fragment() {
 
                 if(itHasOrders){
                     adapter.showOrders()
-                    binding.infoTxt.setText("")
                 }
             }
     }

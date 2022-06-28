@@ -31,7 +31,8 @@ class ProductViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
                     productNameRow.text.toString(),
                     Integer.parseInt(productPriceRow.text.toString()),
                     product!!.description,
-                    product!!.imageID)
+                    product!!.imageID,
+                    product!!.amount)
             )
         }
     }

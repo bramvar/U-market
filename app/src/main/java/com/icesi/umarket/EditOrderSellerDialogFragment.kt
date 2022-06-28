@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.icesi.umarket.databinding.FragmentConfirmPurchaseDiaglogBinding
 import com.icesi.umarket.databinding.FragmentEditOrderSellerDialogBinding
 import com.icesi.umarket.databinding.FragmentEditProductDialogBinding
 import com.icesi.umarket.model.Order
@@ -21,28 +22,34 @@ class EditOrderSellerDialogFragment : DialogFragment(){
     private lateinit var currentOrder : Order
     lateinit var onProductSellerObserver: SellerMainOverviewFragment.OnProductsOnSellerObserver
 
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        _binding = FragmentEditOrderSellerDialogBinding.inflate(LayoutInflater.from(context))
-
-        var dialog = AlertDialog.Builder(requireContext())
-            .setView(_binding.root)
-            .create()
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentEditOrderSellerDialogBinding.inflate(inflater, container, false)
 
         _binding.acceptOrderEditBtn.setOnClickListener {
             if(binding.editAmountOrderText.text.toString() !="" ){
                 calculateTotalPrice()
                 onProductSellerObserver.editOrderSuccessfull(currentOrder)
-                this.dismiss()
+                dismiss()
             }else{
                 Toast.makeText(requireContext(), "Escribe una cantidad valida", Toast.LENGTH_SHORT).show()
             }
         }
         _binding.cancelOrderEditBtn.setOnClickListener {
-            this.dismiss()
+            dismiss()
         }
-        return dialog
+
+        return _binding.root
     }
 
 

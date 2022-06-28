@@ -56,7 +56,7 @@ class ShoppingCar() {
     fun loadOrders(){
         for(order in orders){
             order.idOrder = UUID.randomUUID().toString()
-            var auxOrder = AuxOrder(order.idOrder)
+            var auxOrder = AuxOrder(order.idOrder, order.date)
 
             Firebase.firestore.collection("orders")
                 .document(order.idOrder)

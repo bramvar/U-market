@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -59,7 +60,9 @@ class SellerOrderOverviewFragment : Fragment() {
     private fun getOrders(marketID: String, typeOrder: String, typeAdapter: Boolean) {
         adapterOrderHistory.clear()
         adapterOrder.clear()
-        Firebase.firestore.collection("markets").document(marketID).collection(typeOrder).get()
+        Firebase.firestore.collection("markets").document(marketID).collection(typeOrder)
+            .orderBy("date", Query.Direction.DESCENDING)
+            .get()
             .addOnCompleteListener { order ->
                 for (doc in order.result!!) {
                     val orderID = doc.toObject(AuxOrder::class.java)
@@ -84,6 +87,8 @@ class SellerOrderOverviewFragment : Fragment() {
     }
 
     private fun getMarket() {
+        Log.e("Datos en getMarket", user.marketID)
+
         adapterOrder.clear()
         Firebase.firestore.collection("markets").document(user.marketID).get()
             .addOnSuccessListener {
@@ -91,11 +96,10 @@ class SellerOrderOverviewFragment : Fragment() {
                 market = currentMarket!!
                 val marketName = currentMarket?.marketName
                 binding.marketNameTextView.text = marketName
-
                 Util.loadImage(currentMarket!!.imageID!!, binding.marketProfileImage, "market-image-profile")
-                getOrders(user.marketID, "historyOrders", false)
-                getOrders(user.marketID, "pendentOrders", true)
             }
+        getOrders(user.marketID, "historyOrders", false)
+        getOrders(user.marketID, "pendentOrders", true)
     }
 
     companion object {

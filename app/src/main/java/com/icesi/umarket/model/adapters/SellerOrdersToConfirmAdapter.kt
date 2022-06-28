@@ -42,7 +42,7 @@ class SellerOrdersToConfirmAdapter: RecyclerView.Adapter<SellerOrdersToConfirmVi
         }
 
         fun addOrder(order: Order){
-            if(order.orderFlag=="pendiente"){
+            if(order.orderFlag=="Pendiente"){
                 orders.add(order)
                 notifyItemInserted(orders.size-1)
             }

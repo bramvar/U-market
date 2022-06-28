@@ -68,9 +68,9 @@
                     android:gravity="center"
                     android:isScrollContainer="false"
                     app:cornerRadius="24dp"
-                    app:icon="@drawable/back_arrow_icon"
-                    app:iconGravity="top"
-                    app:iconPadding="16dp"
+                    app:icon="@drawable/ic_baseline_shopping_cart_24"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="SpeakableTextPresentCheck" />

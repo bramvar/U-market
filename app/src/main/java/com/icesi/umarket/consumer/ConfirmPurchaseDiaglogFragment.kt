@@ -27,6 +27,7 @@ class ConfirmPurchaseDiaglogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentConfirmPurchaseDiaglogBinding.inflate(inflater, container, false)
+        _binding.orderTextConsumer.text = orderText
         _binding.acceptOrderConsumerBtn.setOnClickListener {
             onConfirmPurchaseObserver.confirm()
             dismiss()

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5A51CE"
-    tools:context=".SellerSignupActivity">
+    tools:context=".seller.SellerSignupActivity">
 
     <Button
         android:id="@+id/sellerSignupGoBackBtn"
@@ -90,7 +90,7 @@
         android:id="@+id/signUpSellerEmailTextField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
         android:hint="Correo"
@@ -132,31 +132,37 @@
         app:layout_constraintStart_toStartOf="@+id/signUpSellerRepPasswdTextField"
         app:layout_constraintTop_toBottomOf="@+id/signUpSellerRepPasswdTextField" />
 
-    <TextView
-        android:id="@+id/moreText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/manrope_semibold"
-        android:text="¿Ya tienes cuenta?"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sellerLogInHyperLink"
-        app:layout_constraintEnd_toStartOf="@+id/sellerLogInHyperLink"
-        app:layout_constraintTop_toTopOf="@+id/sellerLogInHyperLink" />
-
-    <TextView
-        android:id="@+id/sellerLogInHyperLink"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="70dp"
-        android:fontFamily="@font/manrope_semibold"
-        android:text="Inicia sesión"
-        android:textColor="#FAB057"
-        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/nextSellerBtn"
-        app:layout_constraintTop_toBottomOf="@+id/nextSellerBtn" />
+        app:layout_constraintStart_toStartOf="@+id/nextSellerBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nextSellerBtn">
+
+        <TextView
+            android:id="@+id/moreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_semibold"
+            android:text="¿Ya tienes cuenta?"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sellerLogInHyperLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/manrope_semibold"
+            android:text="Inicia sesión"
+            android:textColor="#FAB057"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/moreText"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageView4"

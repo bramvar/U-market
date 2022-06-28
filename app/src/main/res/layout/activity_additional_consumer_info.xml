@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5A51CE"
-    tools:context=".AdditionalConsumerInfoActivity">
+    tools:context=".consumer.AdditionalConsumerInfoActivity">
 
     <TextView
         android:id="@+id/moreText"
@@ -84,6 +84,7 @@
             android:id="@+id/consumerProfileImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             tools:srcCompat="@drawable/add_img" />
 
     </androidx.cardview.widget.CardView>

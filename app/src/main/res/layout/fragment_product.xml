@@ -73,25 +73,6 @@
                     tools:src="@tools:sample/backgrounds/scenic" />
             </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/productBackBtn"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/shape_circle"
-                android:backgroundTint="#FAB057"
-                android:foregroundGravity="center"
-                android:gravity="center"
-                android:isScrollContainer="false"
-                app:cornerRadius="24dp"
-                app:icon="@drawable/back_arrow_icon"
-                app:iconGravity="top"
-                app:iconPadding="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
-
             <TextView
                 android:id="@+id/productInfo"
                 android:layout_width="0dp"
@@ -135,6 +116,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
+                    android:autoSizeTextType="uniform"
                     android:background="@drawable/circle"
                     android:text="-"
                     android:textAlignment="center"
@@ -150,10 +132,11 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
+                    android:autoSizeTextType="uniform"
                     android:background="@drawable/circle"
                     android:text="+"
                     android:textAlignment="center"
-                    android:textSize="34sp"
+                    android:textSize="40dp"
                     app:layout_constraintBottom_toBottomOf="@+id/amountText"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/amountText" />
@@ -174,6 +157,24 @@
                     app:layout_constraintStart_toEndOf="@+id/lessText"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stock: "
+                android:textColor="@color/purple_titles"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout8"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout8" />
+
+            <TextView
+                android:id="@+id/amoutStockProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintStart_toEndOf="@+id/textView28"
+                app:layout_constraintTop_toTopOf="@+id/textView28" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

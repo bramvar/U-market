@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5A51CE"
-    tools:context=".SellerLoginActivity">
+    tools:context=".seller.SellerLoginActivity">
 
     <Button
         android:id="@+id/sellerLoginGoBackBtn"
@@ -56,7 +56,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
-        android:hint="Nombre de suario"
+        android:hint="Correo electrónico"
         android:inputType="textPersonName"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -68,10 +68,10 @@
         android:id="@+id/logInPasswdTextField"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/shaping_plain_text"
         android:ems="10"
-        android:hint="Constraseña"
+        android:hint="Contraseña"
         android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -80,28 +80,34 @@
         app:layout_constraintStart_toStartOf="@+id/logInUserNameTextField"
         app:layout_constraintTop_toBottomOf="@+id/logInUserNameTextField" />
 
-    <TextView
-        android:id="@+id/amountText"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="¿No tienes cuenta?"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/signUpHyperLink"
-        app:layout_constraintEnd_toStartOf="@+id/signUpHyperLink"
-        app:layout_constraintTop_toTopOf="@+id/signUpHyperLink" />
-
-    <TextView
-        android:id="@+id/signUpHyperLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="70dp"
-        android:text="Registrate"
-        android:textColor="#FAB057"
-        android:textSize="16sp"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="@+id/loginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+        app:layout_constraintStart_toStartOf="@+id/loginBtn"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn">
+
+        <TextView
+            android:id="@+id/amountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿No tienes cuenta?"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/signUpHyperLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Registrate"
+            android:textColor="#FAB057"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/amountText"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

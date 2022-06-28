@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/product_img_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/username_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Matilda"
+            android:textColor="@color/purple_titles"
+            android:textColorLink="@color/purple_titles"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/productname_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="@+id/username_text"
+            app:layout_constraintTop_toBottomOf="@+id/username_text"
+            tools:text="Chocolate" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cantidad: "
+            android:textColor="@color/purple_200"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="@+id/productname_text"
+            app:layout_constraintTop_toBottomOf="@+id/productname_text" />
+
+        <TextView
+            android:id="@+id/amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView16"
+            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintTop_toTopOf="@+id/textView16"
+            tools:text="5" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio: "
+            android:textColor="@color/green_available"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <TextView
+            android:id="@+id/price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="@+id/textView18"
+            tools:text="$100" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Button
+            android:id="@+id/accepted_btn"
+            android:layout_width="38dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/green_available"
+            app:cornerRadius="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/declined_btn"
+            app:layout_constraintEnd_toStartOf="@+id/declined_btn"
+            app:layout_constraintTop_toTopOf="@+id/declined_btn" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/accepted_btn"
+            app:layout_constraintEnd_toEndOf="@+id/accepted_btn"
+            app:layout_constraintStart_toStartOf="@+id/accepted_btn"
+            app:layout_constraintTop_toTopOf="@+id/accepted_btn"
+            app:srcCompat="@drawable/ic_baseline_check_24" />
+
+        <Button
+            android:id="@+id/declined_btn"
+            android:layout_width="38dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="#EF1C0D"
+            app:cornerRadius="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/partially_btn"
+            app:layout_constraintEnd_toStartOf="@+id/partially_btn"
+            app:layout_constraintTop_toTopOf="@+id/partially_btn" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/declined_btn"
+            app:layout_constraintEnd_toEndOf="@+id/declined_btn"
+            app:layout_constraintStart_toStartOf="@+id/declined_btn"
+            app:layout_constraintTop_toTopOf="@+id/declined_btn"
+            app:srcCompat="@drawable/ic_baseline_clear_24" />
+
+        <Button
+            android:id="@+id/partially_btn"
+            android:layout_width="38dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/orange_main"
+            app:cornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/partially_btn"
+            app:layout_constraintEnd_toEndOf="@+id/partially_btn"
+            app:layout_constraintStart_toStartOf="@+id/partially_btn"
+            app:layout_constraintTop_toTopOf="@+id/partially_btn"
+            app:srcCompat="@drawable/ic_baseline_edit_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
